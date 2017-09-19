@@ -20,7 +20,9 @@ Work in progress
 
 Request for Comments (RFC)
 
-https://riot.im/develop/#/room/#toi:matrix.org
+Join the discussion on riot:
+
+https://riot.im/app/#/room/#rcp:matrix.org
 
 ## Endianess
 
