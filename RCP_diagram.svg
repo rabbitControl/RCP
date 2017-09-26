@@ -42,7 +42,7 @@
     </g>
     <g font-size="14px" stroke-linecap="butt" transform="matrix(1,0,0,1,-131,-82)" text-rendering="geometricPrecision" font-family="sans-serif" shape-rendering="geometricPrecision" stroke-miterlimit="1.45">
       <text x="273.73" xml:space="preserve" y="345.4655" clip-path="url(#clipPath2)" stroke="none">Host Application</text>
-      <text x="202.1885" xml:space="preserve" y="361.9538" clip-path="url(#clipPath2)" stroke="none">c++, C#, Java, vvvv, openFrameworks</text>
+      <text x="189.8564" xml:space="preserve" y="361.9538" clip-path="url(#clipPath2)" stroke="none">C++, C#, Java, vvvv, openFrameworks, ...</text>
       <text x="327.7852" xml:space="preserve" y="378.4421" clip-path="url(#clipPath2)" stroke="none"> </text>
       <text x="196.8735" xml:space="preserve" y="394.9304" clip-path="url(#clipPath2)" stroke="none">(uses RCP Library to expose Parameter)</text>
     </g>
