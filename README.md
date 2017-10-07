@@ -143,26 +143,26 @@ A ParameterGroup allows to structure your parameters and can be used to discover
 | uint32 | 0x16	(22) | 4 |
 | int64 | 0x17 (23) | 8 |
 | uint64 | 0x18	(24) | 8 |
-| float32 | 0x19 (25) |
-| float64 | 0x1a (26) |
-| Vector2i8 | 0x1b |
-| Vector2i16 | 0x1c |
-| Vector2i32 | 0x1d |
-| Vector2i64 | 0x1e |
-| Vector2f32 | 0x1f |
-| Vector2f64 | 0x20 |
-| Vector3i8 | 0x21 |
-| Vector3i16 | 0x22 |
-| Vector3i32 | 0x23 |
-| Vector3i64 | 0x24 |
-| Vector3f32 | 0x25 |
-| Vector3f64 | 0x26 |
-| Vector4i8 | 0x27 |
-| Vector4i16 | 0x28 |
-| Vector4i32 | 0x29 |
-| Vector4i64 | 0x2a |
-| Vector4f32 | 0x2b |
-| Vector4f64 | 0x2c |
+| float32 | 0x19 (25) | 4 |
+| float64 | 0x1a (26) | 8 |
+| Vector2i8 | 0x1b | 2 x 1 |
+| Vector2i16 | 0x1c | 2 x 2 |
+| Vector2i32 | 0x1d | 2 x 4 |
+| Vector2i64 | 0x1e | 2 x 8 |
+| Vector2f32 | 0x1f | 2 x 4 |
+| Vector2f64 | 0x20 | 2 x 8 |
+| Vector3i8 | 0x21 | 3 x 1 |
+| Vector3i16 | 0x22 | 3 x 2 |
+| Vector3i32 | 0x23 | 3 x 4 |
+| Vector3i64 | 0x24 | 3 x 8 |
+| Vector3f32 | 0x25 | 3 x 4 |
+| Vector3f64 | 0x26 | 3 x 8 |
+| Vector4i8 | 0x27 | 4 x 1 |
+| Vector4i16 | 0x28 | 4 x 2 |
+| Vector4i32 | 0x29 | 4 x 4 |
+| Vector4i64 | 0x2a | 4 x 8 |
+| Vector4f32 | 0x2b | 4 x 4 |
+| Vector4f64 | 0x2c | 4 x 8 |
 | String-tiny | 0x2d |
 | String-short | 0x2e |
 | String | 0x2f |
