@@ -16,7 +16,7 @@ enums:
     0x03: add
     0x04: update
     0x05: remove
-    0x06: update_value
+    0x06: updatevalue
 
   metadata:
     0x1a: version
@@ -33,42 +33,42 @@ enums:
     0x26: userdata
 
   boolean_property:
-    0x30: defaultvalue
+    0x30: default
 
   number_property:
-    0x30: defaultvalue
-    0x31: min
-    0x32: max
-    0x33: mult
+    0x30: default
+    0x31: minimum
+    0x32: maximum
+    0x33: multipleof
     0x34: scale
     0x35: unit
 
   vector_property:
-    0x30: defaultvalue
-    0x31: min
-    0x32: max
-    0x33: mult
+    0x30: default
+    0x31: minimum
+    0x32: maximum
+    0x33: multipleof
     0x34: scale
     0x35: unit
 
   string_property:
-    0x30: defaultvalue
+    0x30: default
 
   color_property:
-    0x30: defaultvalue
+    0x30: default
 
   enum_property:
-    0x30: defaultvalue
+    0x30: default
     0x31: entries
 
   fixed_array_property:
-    0x30: defaultvalue
+    0x30: default
 
   dynamic_array_property:
-    0x30: defaultvalue
+    0x30: default
 
   compound_property:
-    0x30: defaultvalue
+    0x30: default
 
   datatype:
     0x10: boolean
@@ -115,8 +115,8 @@ enums:
     0x3a: compound
 
   number_scale:
-    0x00: lin
-    0x01: log
+    0x00: linear
+    0x01: logarithmic
     0x02: exp2
 
   widget:
