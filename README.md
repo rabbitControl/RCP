@@ -125,14 +125,14 @@ A ParameterGroup allows to structure your parameters and can be used to discover
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **type-id** | - |  uint8 (see type-table) | 0x2f | n | type of value
+| **datatype** | - |  uint8 (see datatype table) | 0x2f | n | type of value
 | ... type options... | | ||||
 | **terminator** | 0 | uint8 | 0 | n | terminator
 
 
-### type-table: (1byte)
+### Datatypes: (1byte)
 
-| typename   | hex (dec)   | length (bytes)   |
+| datatype   | hex (dec)   | length (bytes)   |
 | -----------|-------------|------------------|
 | boolean | 0x10 (16) | 1 |
 | int8 | 0x11 (17) | 1 |
@@ -348,8 +348,8 @@ to optimize the update of the value of a parameter, there is a specialized updat
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | command       | 0x06         | uint8          | -               | n | updateValue command
 | parameter id  |              | uint32          | 0               | n | parameter id
-| type id       |              | uint8          | 0               | n | type-id
-| value         |              | type of type-id  | ?               | n | the value
+| datatype      |              | uint8          | 0               | n | datatype
+| value         |              | type of datatype  | ?               | n | the value
 
 this reduces the amount of data to be sent for a simple value udpate.
 
