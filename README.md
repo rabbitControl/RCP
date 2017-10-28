@@ -348,8 +348,8 @@ to optimize the update of the value of a parameter, there is a specialized updat
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | command       | 0x06         | uint8          | -               | n | updateValue command
 | parameter id  |              | uint32          | 0               | n | parameter id
-| type id       |              | uint8          | 0               | n | type-id
-| value         |              | type of type-id  | ?               | n | the value
+| datatype      |              | uint8          | 0               | n | datatype
+| value         |              | type of datatype  | ?               | n | the value
 
 this reduces the amount of data to be sent for a simple value udpate.
 
