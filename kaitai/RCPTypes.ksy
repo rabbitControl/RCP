@@ -180,7 +180,3 @@ types:
         type: u4
       - id: data
         size: my_len
-
-instances:
-  terminator:
-    value: 0x00
