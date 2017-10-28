@@ -5,7 +5,6 @@ meta:
 
 enums:
   packet:
-    0x00: terminator
     0x10: id
     0x11: timestamp
     0x12: data
@@ -33,18 +32,10 @@ enums:
     0x25: widget
     0x26: userdata
 
-  type_definition:
+  boolean_property:
     0x30: defaultvalue
 
-  type_number:
-    0x30: defaultvalue
-    0x31: min
-    0x32: max
-    0x33: mult
-    0x34: scale
-    0x35: unit
-
-  type_vector:
+  number_property:
     0x30: defaultvalue
     0x31: min
     0x32: max
@@ -52,21 +43,35 @@ enums:
     0x34: scale
     0x35: unit
 
-  type_enum:
+  vector_property:
+    0x30: defaultvalue
+    0x31: min
+    0x32: max
+    0x33: mult
+    0x34: scale
+    0x35: unit
+
+  string_property:
+    0x30: defaultvalue
+
+  color_property:
+    0x30: defaultvalue
+
+  enum_property:
     0x30: defaultvalue
     0x31: entries
 
-  type_fixed_array:
+  fixed_array_property:
     0x30: defaultvalue
 
-  type_dynamic_array:
+  dynamic_array_property:
     0x30: defaultvalue
 
-  type_compound:
+  compound_property:
     0x30: defaultvalue
 
   datatype:
-    0x10: bool
+    0x10: boolean
     0x11: int8
     0x12: uint8
     0x13: int16
@@ -95,8 +100,8 @@ enums:
     0x2a: vector4i64
     0x2b: vector4f32
     0x2c: vector4f64
-    0x2d: tstring # tiny string
-    0x2e: sstring # short string
+    0x2d: tiny_string # tiny string
+    0x2e: short_string # short string
     0x2f: string # long string
     0x30: rgb
     0x31: rgba
@@ -120,7 +125,7 @@ enums:
     0x52: visible
     0x53: label_visible
     0x54: value_visible
-    0x55: labe_position
+    0x55: label_position
 
   label_position:
     0x00: left
@@ -175,3 +180,7 @@ types:
         type: u4
       - id: data
         size: my_len
+
+instances:
+  terminator:
+    value: 0x00
