@@ -8,7 +8,7 @@ Remote Control Protocol
 A binary data-format definition to describe data values and user interface elements.
 It is intended to expose parameters (values) from a host application to a client in a defined way. It was created with UI clients in mind which update values at the host application. It can also be used in a non-UI case.
 
-https://github.com/rabbitControl/RCP/wiki/F.A.Q.
+[F.A.Q.](https://github.com/rabbitControl/RCP/wiki/F.A.Q.)
 
 ## RCP Levels:
 - __Value__: Number, String, Color, … This is the value without visual representation
@@ -67,9 +67,7 @@ note: we may want to send id/timestamp before the data, to decide if packet is v
 | add | 0x03 | Parameter |
 | update | 0x04 |	Parameter
 | remove | 0x05 | Parameter
-| updateValue | 0x06 | specialized smallest update value format
-| set layout? | 0x07 | Layout data
-| set style? | 0x08 | Style data
+| updateValue | 0x06 | specialized smallest update-value format
 
 
 - data provider ususally send: version, add, update, remove
@@ -102,10 +100,10 @@ note: we may want to send id/timestamp before the data, to decide if packet is v
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **id** | - | uint32 | 0 | n | unique identifier
-| **type** |	- | TypeDefinition | - | n | typedefinition of value
+| **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value
 | value | 0x20 (32) | known from typedefinition | ? | y |	value (length is known by type!)
 | label | 0x21 (33)	| string-tiny | "" | y | Human readable identifier
-| desc | 0x22 (34) | string-short | "" | y | can be shown as a tooltip
+| description | 0x22 (34) | string-short | "" | y | can be shown as a tooltip
 | order | 0x23 (35)	|	int32 | 0 | y | allows for most simple layout
 | parent | 0x24 (36)	|	uint32 | 0 | y | specifies another parameterGroup as parent.
 | widget | 0x25 (37) | widget data | text-input-widget | y | if not specified a default widget is used
@@ -201,8 +199,8 @@ see type-table for all number-types.
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | of type | 0 | y | default value
-| min | 0x31 (49) | of type | 0 | y | min value
-| max | 0x32 (50) | of type | 0 | y | max value
+| minimum | 0x31 (49) | of type | 0 | y | min value
+| maximum | 0x32 (50) | of type | 0 | y | max value
 | multipleof | 0x33 (51) | of type | 0 | y | multiple of value
 | scale | 0x34 (52) | uint8 | 0 | < | one of these (0x00, 0x01, 0x02)
 | unit | 0x35 (53) | string-tiny | "" | y | the unit of value
@@ -220,8 +218,8 @@ see type-table for a full list of available Vector-types.
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | X times Y | 0 | y | default value
-| min | 0x31 (49) | X times Y | 0 | y | min value
-| max | 0x32 (50) | X times Y | 0 | y | max value
+| minimum | 0x31 (49) | X times Y | 0 | y | min value
+| maximum | 0x32 (50) | X times Y | 0 | y | max value
 | multipleof | 0x33 (51) | X times Y | 0 | y | multiple of value
 | scale | 0x34 (52) | uint8 | 0 | < | one of these (0x00, 0x01, 0x02)
 | unit | 0x35 (53) | string-tiny | "" | y | the unit of value
