@@ -4,7 +4,7 @@ meta:
   endian: be
 
 enums:
-  packet:
+  packet_options:
     0x10: id
     0x11: timestamp
     0x12: data
@@ -18,12 +18,12 @@ enums:
     0x05: remove
     0x06: updatevalue
 
-  metadata:
+  metadata_options:
     0x1a: version
     0x1b: capabilities
     0x1c: commands
 
-  parameter:
+  parameter_options:
     0x20: value
     0x21: label
     0x22: description
@@ -32,18 +32,10 @@ enums:
     0x25: widget
     0x26: userdata
 
-  boolean_property:
+  boolean_options:
     0x30: default
 
-  number_property:
-    0x30: default
-    0x31: minimum
-    0x32: maximum
-    0x33: multipleof
-    0x34: scale
-    0x35: unit
-
-  vector_property:
+  number_options:
     0x30: default
     0x31: minimum
     0x32: maximum
@@ -51,23 +43,31 @@ enums:
     0x34: scale
     0x35: unit
 
-  string_property:
+  vector_options:
+    0x30: default
+    0x31: minimum
+    0x32: maximum
+    0x33: multipleof
+    0x34: scale
+    0x35: unit
+
+  string_options:
     0x30: default
 
-  color_property:
+  color_options:
     0x30: default
 
-  enum_property:
+  enum_options:
     0x30: default
     0x31: entries
 
-  fixed_array_property:
+  fixed_array_options:
     0x30: default
 
-  dynamic_array_property:
+  dynamic_array_options:
     0x30: default
 
-  compound_property:
+  compound_options:
     0x30: default
 
   datatype:
@@ -119,7 +119,7 @@ enums:
     0x01: logarithmic
     0x02: exp2
 
-  widget:
+  widget_options:
     0x50: type
     0x51: enabled
     0x52: visible
@@ -134,7 +134,7 @@ enums:
     0x03: bottom
     0x04: center
 
-  widget_type:
+  widgettype:
     0x10: textbox
     0x11: numberbox
     0x12: button
