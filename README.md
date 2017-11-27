@@ -56,7 +56,9 @@ of interest. use a:
 | data | 0x12(18) | - | - | y | package data. type depends on command |
 | **terminator** | 0 | uint8 | 0 | n | package terminator |
 
-note: we may want to send id/timestamp before the data, to decide if packet is valid (udp case), prefix the value with data-id. otherwise we need to parse data to get to id/timestamp
+note: we may want to send id/timestamp before the data, to decide if packet is valid (udp case), prefix the value with data-id. otherwise we need to parse the data before to get id/timestamp
+
+chaining Parameters: data can contain more than one Parameter.
 
 ### command table:
 
