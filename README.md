@@ -165,7 +165,7 @@ A ParameterGroup allows to structure your parameters and can be used to discover
 | Vector4f64 | 0x2c | 4 x 8 |
 | String-tiny | 0x2d |
 | String-short | 0x2e |
-| String | 0x2f |
+| String | 0x2f | size prefixed
 | RGB | 0x30 (48) |
 | RGBA | 0x31 (49) |
 | Enum | 0x32 |
@@ -177,9 +177,8 @@ A ParameterGroup allows to structure your parameters and can be used to discover
 | timetag | 0x38 | 8 |
 | group | 0x39 | 0 |
 | compound | 0x3a | ? |
-| bin8? | |
-| bin16? | |
-| bin32? | |
+| URI | 0x3b | size prefixed
+| IP | 0x3c | 4 | 16
 
 
 
@@ -241,6 +240,7 @@ size-prefixed UTF-8 string
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | string (-tiny, -short) | 0 - | y | default value
+| regular expression | 0x31 (49) | rcp string | "" | y | regular expression to define the form. e.g. limit amount of newlines in text: "\\A(?>[^\r\n]*(?>\r\n?|\n)){0,3}[^\r\n]*\\z"
 
 
 ## Typedefinition Color: RGB, RGBA
@@ -298,6 +298,24 @@ A compound type is a combination of other known types.
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **subtypes** | - | dynamic array of TypeDefinition | 0 | n | TypeDefintion of array elements
 | default | 0x30 (48) | listing of values defined by subtypes | - | y | default value
+
+
+## URI:
+
+size-prefixed UTF-8 string forming an URI
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| default | 0x30 (48) | string | 0 - | y | default value
+
+
+## IP:
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| **ipv6** | - | uint8 | 0 | n | flag to define if ip is representated as ipv6
+| default | 0x30 (48) | 4 or 16 bytes | - | y | default value
+
 
 
 ## Widget (0x24):
