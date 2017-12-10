@@ -50,11 +50,11 @@ of interest. use a:
 
 | Name          | ID hex/dec   | Value           | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **command** | - | uint8 | - | n | command of package |
-| id | 0x10(16) | uint32 | 0 | y | optional packet id |
+| **command** | - | byte | - | n | command of package |
+| id | 0x10(16) | int32 | 0 | y | optional packet id |
 | timestamp | 0x11(17) | uint64 | 0 | y | optional timestamp |
 | data | 0x12(18) | - | - | y | package data. type depends on command |
-| **terminator** | 0 | uint8 | 0 | n | package terminator |
+| **terminator** | 0 | byte | 0 | n | package terminator |
 
 note: we may want to send id/timestamp before the data, to decide if packet is valid (udp case), prefix the value with data-id. otherwise we need to parse the data before to get id/timestamp
 
@@ -101,13 +101,13 @@ chaining Parameters: data can contain more than one Parameter.
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **id** | - | uint32 | 0 | n | unique identifier
+| **id** | - | int32 | 0 | n | unique identifier
 | **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value
 | value | 0x20 (32) | known from typedefinition | ? | y |	value (length is known by type!)
 | label | 0x21 (33)	| string-tiny | "" | y | Human readable identifier
 | description | 0x22 (34) | string-short | "" | y | can be shown as a tooltip
 | order | 0x23 (35)	|	int32 | 0 | y | allows for most simple layout
-| parent | 0x24 (36)	|	uint32 | 0 | y | specifies another parameterGroup as parent.
+| parent | 0x24 (36)	|	int32 | 0 | y | specifies another parameterGroup as parent.
 | widget | 0x25 (37) | widget data | text-input-widget | y | if not specified a default widget is used
 | userdata | 0x26 (38) | size of value (uint32) followed by userdata | - | y | various user-data. e.g.: metadata, tags, ...
 | terminator | 0 | 1 byte | 0 | n | terminator
@@ -125,9 +125,9 @@ A ParameterGroup allows to structure your parameters and can be used to discover
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **datatype** | - |  uint8 (see datatype table) | 0x2f | n | type of value
+| **datatype** | - |  byte (see datatype table) | 0x2f | n | type of value
 | ... type options... | | ||||
-| **terminator** | 0 | uint8 | 0 | n | terminator
+| **terminator** | 0 | byte | 0 | n | terminator
 
 
 ### Datatypes: (1byte)
@@ -184,13 +184,13 @@ A ParameterGroup allows to structure your parameters and can be used to discover
 
 ## Typedefinition Boolean:
 
-uint8 value:
+byte value:
 - 0 == false
 - bigger than 0 == true
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | uint8 | 0 | y | default value
+| default | 0x30 (48) | byte | 0 | y | default value
 
 
 ## Typedefinition Numbers: uint8, int8, uint16, int16, ...
@@ -203,7 +203,7 @@ see type-table for all number-types.
 | minimum | 0x31 (49) | of type | 0 | y | min value
 | maximum | 0x32 (50) | of type | 0 | y | max value
 | multipleof | 0x33 (51) | of type | 0 | y | multiple of value
-| scale | 0x34 (52) | uint8 | 0 | < | one of these (0x00, 0x01, 0x02)
+| scale | 0x34 (52) | byte | 0 | < | one of these (0x00, 0x01, 0x02)
 | unit | 0x35 (53) | string-tiny | "" | y | the unit of value
 
 ## Typedefinition Vector: Vector2f32, Vector2i8, Vector4f32, ...
@@ -222,7 +222,7 @@ see type-table for a full list of available Vector-types.
 | minimum | 0x31 (49) | X times Y | 0 | y | min value
 | maximum | 0x32 (50) | X times Y | 0 | y | max value
 | multipleof | 0x33 (51) | X times Y | 0 | y | multiple of value
-| scale | 0x34 (52) | uint8 | 0 | < | one of these (0x00, 0x01, 0x02)
+| scale | 0x34 (52) | byte | 0 | < | one of these (0x00, 0x01, 0x02)
 | unit | 0x35 (53) | string-tiny | "" | y | the unit of value
 
 ### scale table
@@ -258,14 +258,14 @@ Blue: 0x00 0x00 0xFF 0xFF
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | uint32 | 0 | y | default value
+| default | 0x30 (48) | int32 | 0 | y | default value
 
 
 ## Typedefinition Enum
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | uint16 | 0 | y | default value (range: 0 .. 2^16 - 2)
+| default | 0x30 (48) | uint16 | 0 | y | default value (range: 0 .. 2^16 - 1)
 | entries | 0x31 (49) | uint16 (count) followed by count of string-tiny | 0 | y | list of enumerations
 
 
@@ -274,7 +274,7 @@ Blue: 0x00 0x00 0xFF 0xFF
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **subtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements
-| **length** | - | uint32 | 0 | n | length of fixed array
+| **length** | - | int32 | 0 | n | length of fixed array
 | default | 0x30 (48) | fixed array of subtype | - | y | default value
 
 
@@ -282,7 +282,7 @@ Blue: 0x00 0x00 0xFF 0xFF
 
 length-prefixed values of subtype.
 
-e.g.: <length uint32> value value value
+e.g.: <length int32> value value value
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
@@ -313,7 +313,7 @@ size-prefixed UTF-8 string forming an URI
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **ipv6** | - | uint8 | 0 | n | flag to define if ip is representated as ipv6
+| **ipv6** | - | byte | 0 | n | flag to define if ip is representated as ipv6. 0=ipv4, 1=ipv6
 | default | 0x30 (48) | 4 or 16 bytes | - | y | default value
 
 
@@ -323,12 +323,12 @@ size-prefixed UTF-8 string forming an URI
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | type | 0x50 (80) | uint16 | text input | y | type of widget.  see widget type-table
-| enabled | 0x51 (81) | uint8 | true | y | if widget allows user input
-| visible | 0x52 (82) |	uint8 | true | y | if widget is visible
-| label-visible | 0x53	(83) | uint8 | true | y | if label is visible
-| value-visible | 0x54 (84) | uint8 | true | y | if value is visible
-| label-position | 0x55 (85) | uint8 | 0 | y | see label-position table
-| **terminator** | 0 | uint8 | 0 | n | terminator
+| enabled | 0x51 (81) | byte | true | y | if widget allows user input
+| visible | 0x52 (82) |	byte | true | y | if widget is visible
+| label-visible | 0x53	(83) | byte | true | y | if label is visible
+| value-visible | 0x54 (84) | byte | true | y | if value is visible
+| label-position | 0x55 (85) | byte | 0 | y | see label-position table
+| **terminator** | 0 | byte | 0 | n | terminator
 
 ### Widget type table:
 
@@ -364,9 +364,9 @@ to optimize the update of the value of a parameter, there is a specialized updat
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| command       | 0x06         | uint8          | -               | n | updateValue command
-| parameter id  |              | uint32          | 0               | n | parameter id
-| datatype      |              | uint8          | 0               | n | datatype
+| command       | 0x06         | byte           | -               | n | updateValue command
+| parameter id  |              | int32          | 0               | n | parameter id
+| datatype      |              | byte           | 0               | n | datatype
 | value         |              | type of datatype  | ?               | n | the value
 
 this reduces the amount of data to be sent for a simple value udpate.
