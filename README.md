@@ -145,26 +145,12 @@ A ParameterGroup allows to structure your parameters and can be used to discover
 | uint64 | 0x18	(24) | 8 |
 | float32 | 0x19 (25) | 4 |
 | float64 | 0x1a (26) | 8 |
-| Vector2i8 | 0x1b | 2 x 1 |
-| Vector2i16 | 0x1c | 2 x 2 |
 | Vector2i32 | 0x1d | 2 x 4 |
-| Vector2i64 | 0x1e | 2 x 8 |
 | Vector2f32 | 0x1f | 2 x 4 |
-| Vector2f64 | 0x20 | 2 x 8 |
-| Vector3i8 | 0x21 | 3 x 1 |
-| Vector3i16 | 0x22 | 3 x 2 |
 | Vector3i32 | 0x23 | 3 x 4 |
-| Vector3i64 | 0x24 | 3 x 8 |
 | Vector3f32 | 0x25 | 3 x 4 |
-| Vector3f64 | 0x26 | 3 x 8 |
-| Vector4i8 | 0x27 | 4 x 1 |
-| Vector4i16 | 0x28 | 4 x 2 |
 | Vector4i32 | 0x29 | 4 x 4 |
-| Vector4i64 | 0x2a | 4 x 8 |
 | Vector4f32 | 0x2b | 4 x 4 |
-| Vector4f64 | 0x2c | 4 x 8 |
-| String-tiny | 0x2d |
-| String-short | 0x2e |
 | String | 0x2f | size prefixed
 | RGB | 0x30 (48) |
 | RGBA | 0x31 (49) |
@@ -172,9 +158,7 @@ A ParameterGroup allows to structure your parameters and can be used to discover
 | fixed Array | 0x33 |
 | dynamic Array | 0x34 |
 | Dict/Map | 0x35 |
-| Image | 0x36 | ? |
 | BANG | 0x37 | 0 |
-| timetag | 0x38 | 8 |
 | group | 0x39 | 0 |
 | compound | 0x3a | ? |
 | URI | 0x3b | size prefixed
@@ -261,6 +245,7 @@ Blue: 0x00 0x00 0xFF 0xFF
 | default | 0x30 (48) | int32 | 0 | y | default value
 
 
+
 ## Typedefinition Enum
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
@@ -269,25 +254,20 @@ Blue: 0x00 0x00 0xFF 0xFF
 | entries | 0x31 (49) | uint16 (count) followed by count of string-tiny | 0 | y | list of enumerations
 
 
-## Typedefinition fixed Array
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **subtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements
-| **length** | - | int32 | 0 | n | length of fixed array
-| default | 0x30 (48) | fixed array of subtype | - | y | default value
-
-
-## Typedefinition dynamic Array
+## Typedefinition Array
 
 length-prefixed values of subtype.
 
-e.g.: <length int32> value value value
+e.g.: \<length int32\> value value value
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **subtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements
-| default | 0x30 (48) | dynamic array of subtype | 0 - | y | default value
+| default | 0x30 (48) | length-prefix (int32) followed by values of subtype | 0 - | y | default value
+| fixed length | 0x31 | int32 | 0 | y | fixed size of array
+| minimum | 0x32 | int32 | 0 | y | minimum size of array
+| maximum | 0x33 | int32 | max int32 | y | maximum size of array
 
 
 ## Typedefinition Compound
@@ -296,7 +276,7 @@ A compound type is a combination of other known types.
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **subtypes** | - | dynamic array of TypeDefinition | 0 | n | TypeDefintion of array elements
+| **subtypes** | - | array of TypeDefinition | 0 | n | TypeDefintion of array elements
 | default | 0x30 (48) | listing of values defined by subtypes | - | y | default value
 
 
