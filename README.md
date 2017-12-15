@@ -356,7 +356,7 @@ to optimize the update of the value of a parameter, there is a specialized updat
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | command       | 0x06         | byte           | -               | n | updateValue command
 | parameter id  |              | int32          | 0               | n | parameter id
-| datatype      |              | byte           | 0               | n | datatype
+| mandatory part of datatype      |              | byte           | 0               | n | datatype
 | value         |              | type of datatype  | ?               | n | the value
 
 this reduces the amount of data to be sent for a simple value udpate.
