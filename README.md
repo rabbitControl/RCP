@@ -64,8 +64,8 @@ chaining Parameters: data can contain more than one Parameter.
 | command   | ID   | expected data | comment   |
 |-----------|------|---------------|-----------|
 | version | 0x01 | Version Data |
-| init | 0x02 | null or Init Data | if no data is sent: request for all parameters
-| add | 0x03 | Parameter |
+| init | 0x02 | null or ID Data | if no data is sent: request for all parameters
+| discover | 0x03 | null or ID Data | if no data is sent: request for all parameters. parameters are sent without typdedefinition-options, without value and userdata. discover only discovers on level, no subgroups are discovered.
 | update | 0x04 |	Parameter
 | remove | 0x05 | Parameter
 | updateValue | 0x06 | specialized smallest update-value format
@@ -74,7 +74,7 @@ chaining Parameters: data can contain more than one Parameter.
 - data provider ususally send: version, add, update, remove
 - data clients usually send: init, update
 
-## Init Data
+## ID Data
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
@@ -321,8 +321,9 @@ size-prefixed UTF-8 string forming an URI
 
 ### Widget type table:
 
-| typename   | hex   |
-|------------|-------|
+| typename   | hex   | description
+|------------|-------|--------------|
+| Info | 0x09 | For discovery: only shows datatype, label. groupsParameters are collapsable
 | Textbox | 0x10 |
 | Numberbox | 0x11 |
 | Button | 0x12 |
