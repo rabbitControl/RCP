@@ -64,7 +64,7 @@ chaining Parameters: data can contain more than one Parameter.
 | command   | ID   | expected data | comment   |
 |-----------|------|---------------|-----------|
 | version | 0x01 | Version Data |
-| init | 0x02 | - / Parameter | if no data is sent: request for all parameters, if a paramter is sent: request for one parameter
+| init | 0x02 | null or Init Data | if no data is sent: request for all parameters
 | add | 0x03 | Parameter |
 | update | 0x04 |	Parameter
 | remove | 0x05 | Parameter
@@ -73,6 +73,15 @@ chaining Parameters: data can contain more than one Parameter.
 
 - data provider ususally send: version, add, update, remove
 - data clients usually send: init, update
+
+## Init Data
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| **id**         | - | int32  | 0 | n | id of parameterGroup or Parameter
+| **terminator** | 0 | 1 byte | 0 | n | terminator
+
+
 
 ## Version Data
 
