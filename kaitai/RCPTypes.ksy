@@ -81,37 +81,24 @@ enums:
     0x18: uint64
     0x19: float32
     0x1a: float64
-    0x1b: vector2i8
-    0x1c: vector2i16
-    0x1d: vector2i32
-    0x1e: vector2i64
-    0x1f: vector2f32
-    0x20: vector2f64
-    0x21: vector3i8
-    0x22: vector3i16
-    0x23: vector3i32
-    0x24: vector3i64
-    0x25: vector3f32
-    0x26: vector3f64
-    0x27: vector4i8
-    0x28: vector4i16
-    0x29: vector4i32
-    0x2a: vector4i64
-    0x2b: vector4f32
-    0x2c: vector4f64
-    0x2d: tiny_string # tiny string
-    0x2e: short_string # short string
-    0x2f: string # long string
-    0x30: rgb
-    0x31: rgba
-    0x32: enum
-    0x33: fixed_array
-    0x34: dynamic_array
-    0x36: image
-    0x37: bang
-    0x38: time
-    0x39: group # parameter group
-    0x3a: compound
+    0x1b: vector2i32
+    0x1c: vector2f32
+    0x1d: vector3i32
+    0x1e: vector3f32
+    0x1f: vector4i32
+    0x20: vector4f32
+    0x21: string
+    0x22: rgb
+    0x23: rgba
+    0x24: enum
+    0x25: fixed_array
+    0x26: dynamic_array
+    0x27: bang
+    0x28: group # parameter group
+    0x29: compound
+    0x2a: uri
+    0x2b: ipv4
+    0x2c: ipv6
 
   number_scale:
     0x00: linear
