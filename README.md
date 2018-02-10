@@ -144,24 +144,24 @@ A ParameterGroup allows to structure your parameters and can be used to discover
 | uint64 | 0x18	(24) | 8 |
 | float32 | 0x19 (25) | 4 |
 | float64 | 0x1a (26) | 8 |
-| Vector2i32 | 0x1d | 2 x 4 |
-| Vector2f32 | 0x1f | 2 x 4 |
-| Vector3i32 | 0x23 | 3 x 4 |
-| Vector3f32 | 0x25 | 3 x 4 |
-| Vector4i32 | 0x29 | 4 x 4 |
-| Vector4f32 | 0x2b | 4 x 4 |
-| String | 0x2f | size prefixed
-| RGB | 0x30 (48) |
-| RGBA | 0x31 (49) |
-| Enum | 0x32 |
-| fixed Array | 0x33 |
-| dynamic Array | 0x34 |
-| Dict/Map | 0x35 |
-| BANG | 0x37 | 0 |
-| group | 0x39 | 0 |
-| compound | 0x3a | ? |
-| URI | 0x3b | size prefixed
-| IP | 0x3c | 4 | 16
+| Vector2i32 | 0x1b | 2 x 4 |
+| Vector2f32 | 0x1c | 2 x 4 |
+| Vector3i32 | 0x1d | 3 x 4 |
+| Vector3f32 | 0x1e | 3 x 4 |
+| Vector4i32 | 0x1f | 4 x 4 |
+| Vector4f32 | 0x20 | 4 x 4 |
+| String | 0x21 | size prefixed
+| RGB | 0x22 (34) |
+| RGBA | 0x23 (35) |
+| Enum | 0x24 (36) |
+| fixed Array | 0x25 (37) |
+| dynamic Array | 0x26 (38) |
+| BANG | 0x27 (39) | 0 |
+| group | 0x28 (40) | 0 |
+| compound | 0x29 (41) | ? |
+| URI | 0x2a (42) | size prefixed
+| IPv4 | 0x2b (43) | 4
+| IPv6 | 0x2c (44) | 16
 
 
 
@@ -298,13 +298,18 @@ size-prefixed UTF-8 string forming an URI
 | default | 0x30 (48) | string | 0 - | y | default value
 
 
-## IP:
+## IPv4:
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **ipv6** | - | byte | 0 | n | flag to define if ip is representated as ipv6. 0=ipv4, 1=ipv6
-| default | 0x30 (48) | 4 or 16 bytes | - | y | default value
+| default | 0x30 (48) | 4 bytes | - | y | default value
 
+
+## IPv6:
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| default | 0x30 (48) | 16 bytes | - | y | default value
 
 
 ## Widget (0x24):
