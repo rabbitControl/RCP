@@ -51,7 +51,6 @@ of interest. use a:
 | Name          | ID hex/dec   | Value           | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **command** | - | byte | - | n | command of package |
-| id | 0x10(16) | int32 | 0 | y | optional packet id |
 | timestamp | 0x11(17) | uint64 | 0 | y | optional timestamp |
 | data | 0x12(18) | - | - | y | package data. type depends on command |
 | **terminator** | 0 | byte | 0 | n | package terminator |
