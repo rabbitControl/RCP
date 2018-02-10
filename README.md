@@ -63,7 +63,7 @@ chaining Parameters: data can contain more than one Parameter.
 
 | command   | ID   | expected data | comment   |
 |-----------|------|---------------|-----------|
-| version | 0x01 | Meta Data |
+| version | 0x01 | Version Data |
 | init | 0x02 | - / Parameter | if no data is sent: request for all parameters, if a paramter is sent: request for one parameter
 | add | 0x03 | Parameter |
 | update | 0x04 |	Parameter
@@ -74,26 +74,12 @@ chaining Parameters: data can contain more than one Parameter.
 - data provider ususally send: version, add, update, remove
 - data clients usually send: init, update
 
-## Meta Data
+## Version Data
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **version** | 0x1a	(26) | tiny-string | "" | n | semver
-| **capabilities** | 0x1b (27) | 1-byte | 1 | n | capabilities of RCP
-| **commands** | 0x1c (28) | 1-byte | 0 | n | (max 8 commands enough?) |
+| version       | 0x1a	(26)   | tiny-string    | "" | y | semver
 | **terminator** | 0 | 1 byte | 0 | n | terminator
-
-### capabilities (0x1b) (1 byte)
-
-| Bit 7   | Bit 6   | Bit 5   | Bit 4   | Bit 3   | Bit 2   | Bit 1   | Bit 0   |
-|---------|---------|---------|---------|---------|---------|---------|---------|
-|-|-|-|-| Style | Layout | Widget | Value |
-
-### commands (0x1c) (1 byte)
-
-| Bit 7   | Bit 6   | Bit 5   | Bit 4   | Bit 3   | Bit 2   | Bit 1   | Bit 0   |
-|---------|---------|---------|---------|---------|---------|---------|---------|
-|-|-| updateValue | remove | update | add | init | version |
 
 
 ## Parameter:
