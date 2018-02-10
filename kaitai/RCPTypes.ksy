@@ -5,7 +5,6 @@ meta:
 
 enums:
   packet_options:
-    0x10: id
     0x11: timestamp
     0x12: data
 
