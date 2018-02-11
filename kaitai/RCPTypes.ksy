@@ -134,6 +134,13 @@ enums:
     0x1a: dropdown
     0x1f: xyfield
 
+  status:
+    0x10: no_transporter
+    0x11: not_connected
+    0x12: connected
+    0x13: initializing
+    0x13: version_missmatch
+    0x14: ok
 
 types:
   tiny_string:
