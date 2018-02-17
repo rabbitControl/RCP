@@ -74,11 +74,19 @@ chaining Parameters: data can contain more than one Parameter.
 - data provider ususally send: version, add, update, remove
 - data clients usually send: init, update
 
+### Parameter ID
+
+a parameter id is a 1-byte size-prefixed byte-array.
+
+e.g.:
+
+0x03 0x5F 0x69 0x64
+
 ## ID Data
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **id**         | - | int32  | 0 | n | id of parameterGroup or Parameter
+| **id**         | - | parameter-id  | 0 | n | id of parameterGroup or Parameter
 | **terminator** | 0 | 1 byte | 0 | n | terminator
 
 
@@ -95,13 +103,13 @@ chaining Parameters: data can contain more than one Parameter.
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **id** | - | int32 | 0 | n | unique identifier
+| **id** | - | parameter-id | 0 | n | unique identifier
 | **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value
 | value | 0x20 (32) | known from typedefinition | ? | y |	value (length is known by type!)
 | label | 0x21 (33)	| string-tiny | "" | y | Human readable identifier
 | description | 0x22 (34) | string-short | "" | y | can be shown as a tooltip
 | order | 0x23 (35)	|	int32 | 0 | y | allows for most simple layout
-| parent | 0x24 (36)	|	int32 | 0 | y | specifies another parameterGroup as parent.
+| parent | 0x24 (36)	|	parameter-id | 0 | y | specifies another parameterGroup as parent.
 | widget | 0x25 (37) | widget data | text-input-widget | y | if not specified a default widget is used
 | userdata | 0x26 (38) | size of value (uint32) followed by userdata | - | y | various user-data. e.g.: metadata, tags, ...
 | terminator | 0 | 1 byte | 0 | n | terminator
@@ -355,14 +363,14 @@ to optimize the update of the value of a parameter, there is a specialized updat
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | command       | 0x06         | byte           | -               | n | updateValue command
-| parameter id  |              | int32          | 0               | n | parameter id
-| mandatory part of datatype      |              | byte           | 0               | n | datatype
+| parameter id  |              | parameter-id          | 0               | n | parameter id
+| mandatory part of datatype   |              | byte           | 0               | n | datatype
 | value         |              | type of datatype  | ?               | n | the value
 
 this reduces the amount of data to be sent for a simple value udpate.
 
 e.g.:
 
-updating a int32 with id 01 to value 255:
+updating a int32 with id 0x01 to value 255:
 
-0x06 0x00 0x00 0x00 0x01 0x15 0x00 0x00 0x00 0xFF (10 bytes)
+0x06 0x01 0x01 0x15 0x00 0x00 0x00 0xFF (8 bytes)
