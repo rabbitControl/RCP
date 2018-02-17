@@ -74,7 +74,7 @@ chaining Parameters: data can contain more than one Parameter.
 - data provider ususally send: version, add, update, remove
 - data clients usually send: init, update
 
-### Parameter ID
+## Parameter ID
 
 a parameter id is a 1-byte size-prefixed byte-array.
 
