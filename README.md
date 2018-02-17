@@ -103,13 +103,13 @@ e.g.:
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **id** | - | parameter-id | 0 | n | unique identifier
+| **id** | - | parameter-id | - | n | unique identifier (can not be root-id. see: parent)
 | **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value
 | value | 0x20 (32) | known from typedefinition | ? | y |	value (length is known by type!)
 | label | 0x21 (33)	| string-tiny | "" | y | Human readable identifier
 | description | 0x22 (34) | string-short | "" | y | can be shown as a tooltip
 | order | 0x23 (35)	|	int32 | 0 | y | allows for most simple layout
-| parent | 0x24 (36)	|	parameter-id | 0 | y | specifies another parameterGroup as parent.
+| parent | 0x24 (36)	|	parameter-id | root-id | y | specifies another parameterGroup as parent.
 | widget | 0x25 (37) | widget data | text-input-widget | y | if not specified a default widget is used
 | userdata | 0x26 (38) | size of value (uint32) followed by userdata | - | y | various user-data. e.g.: metadata, tags, ...
 | terminator | 0 | 1 byte | 0 | n | terminator
@@ -120,6 +120,17 @@ e.g.:
 A ParameterGroup is a Parameter without value/defaultValue and a fixed TypeDefintion (group).
 
 A ParameterGroup allows to structure your parameters and can be used to discover parameters on different levels.
+
+
+## Root Parameter Group
+
+This parameter group is a virtual Parameter-group which does always exist.
+It defines the highes level in the hirarchy tree.
+
+It always is identified by a 0-sized byte-array, the root-id.
+
+No other Parameter is allowed to have this id.
+
 
 
 ## Typedefinition:
