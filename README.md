@@ -219,13 +219,13 @@ see type-table for a full list of available Vector-types.
 | Log | 0x01 |
 | exp2 | 0x02 |
 
-## Typedefinition String: string, string-tiny, string-short
+## Typedefinition String: string
 
-size-prefixed UTF-8 string
+4-byte size-prefixed UTF-8 string
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | string (-tiny, -short) | 0 - | y | default value
+| default | 0x30 (48) | rcp string | 0 - | y | default value
 | regular expression | 0x31 (49) | rcp string | "" | y | regular expression to define the form. e.g. limit amount of newlines in text: "\\A(?>[^\r\n]*(?>\r\n?|\n)){0,3}[^\r\n]*\\z"
 
 
@@ -284,13 +284,26 @@ e.g.: \<length int32\> value value value
 
 ## Typedefinition Compound
 
-A compound type is a combination of other known types.
+a compound type is a combination of other known types, known as the "elements" of the compound-type.
+
+the value of a compound-parameter is a byte-array, which contains the serialized elements in successive order.
+
+the size of that byte-array is therefore the sum of the sizes of the individual elements.
+
+e.g.:
+
+count: 3
+
+subtypes: uint_8, string, RGB
+
+value size = 1-byte (uint_8) + 4-byte (string-size-prefix) + xx-bytes (string) + 4-bytes (color)
+
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **subtypes** | - | array of TypeDefinition | 0 | n | TypeDefintion of array elements
-| default | 0x30 (48) | listing of values defined by subtypes | - | y | default value
-
+| **count** | - | element count | 0 | n | number of elements in compound
+| **subtypes** | - | listing of TypeDefinition | 0 | n | TypeDefinitions
+  
 
 ## URI:
 
