@@ -71,8 +71,8 @@ chaining Parameters: data can contain more than one Parameter.
 | updateValue | 0x06 | specialized smallest update-value format
 
 
-- data provider ususally send: version, add, update, remove
-- data clients usually send: discover, init, update
+- data provider ususally send: version, add, update, updateValue, remove
+- data clients usually send: discover, init, update, updateValue
 
 ## Parameter ID
 
