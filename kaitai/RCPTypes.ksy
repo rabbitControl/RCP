@@ -66,8 +66,16 @@ enums:
 
   dynamic_array_options:
     0x30: default
-
-  compound_options:
+    
+  uri_options:
+    0x30: default
+    0x31: filter
+    0x32: schema
+    
+  ipv4_options:
+    0x30: default
+   
+  ipv6_options:
     0x30: default
 
   datatype:
