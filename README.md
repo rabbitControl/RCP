@@ -173,7 +173,6 @@ No other Parameter is allowed to have this id.
 | dynamic Array | 0x26 (38) |
 | BANG | 0x27 (39) | 0 |
 | group | 0x28 (40) | 0 |
-| compound | 0x29 (41) | ? |
 | URI | 0x2a (42) | size prefixed
 | IPv4 | 0x2b (43) | 4
 | IPv6 | 0x2c (44) | 16
@@ -292,30 +291,7 @@ e.g.: \<length int32\> value value value
 | default | 0x30 (48) | length-prefix (int32) followed by values of subtype | 0 - | y | default value
 | minimum | 0x32 | int32 | 0 | y | minimum size of array
 | maximum | 0x33 | int32 | max int32 | y | maximum size of array
-
-
-## Typedefinition Compound
-
-a compound type is a combination of other known types, known as the "elements" of the compound-type.
-
-the value of a compound-parameter is a byte-array, which contains the serialized elements in successive order.
-
-the size of that byte-array is therefore the sum of the sizes of the individual elements.
-
-e.g.:
-
-count: 3
-
-subtypes: uint_8, string, RGB
-
-value size = 1-byte (uint_8) + 4-byte (string-size-prefix) + xx-bytes (string) + 4-bytes (color)
-
-
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **count** | - | element count | 0 | n | number of elements in compound
-| **subtypes** | - | listing of TypeDefinition | 0 | n | TypeDefinitions
-  
+ 
 
 ## URI:
 
