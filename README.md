@@ -108,10 +108,11 @@ e.g.:
 | value | 0x20 (32) | known from typedefinition | ? | y |	value (length is known by type!)
 | label | 0x21 (33)	| string-tiny | "" | y | Human readable identifier
 | description | 0x22 (34) | string-short | "" | y | can be shown as a tooltip
-| order | 0x23 (35)	|	int32 | 0 | y | allows for most simple layout
-| parent | 0x24 (36)	|	parameter-id | root-id | y | specifies another parameterGroup as parent.
-| widget | 0x25 (37) | widget data | text-input-widget | y | if not specified a default widget is used
-| userdata | 0x26 (38) | size of value (uint32) followed by userdata | - | y | various user-data. e.g.: metadata, tags, ...
+| tags | 0x23 (35)	|	string-tiny | "" | y | space separated list of tags
+| order | 0x24 (36)	|	int32 | 0 | y | allows for most simple layout
+| parentid | 0x25 (37)	|	parameter-id | root-id | y | specifies another parameterGroup as parent.
+| widget | 0x26 (38) | widget data | text-input-widget | y | if not specified a default widget is used
+| userdata | 0x27 (39) | size of value (uint32) followed by userdata | - | y | various user-data. e.g.: metadata, tags, ...
 | terminator | 0 | 1 byte | 0 | n | terminator
 
 
