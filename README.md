@@ -300,7 +300,7 @@ size-prefixed UTF-8 string forming an URI
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | string | 0 - | y | default value
-| filefilter | 0x31 (49) | string-tiny | - | y | file filter as define [here](https://msdn.microsoft.com/en-us/library/system.windows.forms.filedialog.filter(v=vs.110).aspx)
+| filter | 0x31 (49) | string-tiny | - | y | file filter as define [here](https://msdn.microsoft.com/en-us/library/system.windows.forms.filedialog.filter(v=vs.110).aspx)
 | schema | 0x32 (50) | string-tiny | - | y | space-seperated list with allowed schemas. e.g. "file ftp http https"
 
 
