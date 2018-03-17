@@ -122,6 +122,8 @@ A ParameterGroup is a Parameter without value/defaultValue and a fixed TypeDefin
 
 A ParameterGroup allows to structure your parameters and can be used to discover parameters on different levels.
 
+A Parameter can only be child of excactly one group.
+
 
 ## Root Parameter Group
 
