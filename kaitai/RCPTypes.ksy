@@ -96,7 +96,6 @@ enums:
     0x26: dynamic_array
     0x27: bang
     0x28: group # parameter group
-    0x29: compound
     0x2a: uri
     0x2b: ipv4
     0x2c: ipv6
