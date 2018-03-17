@@ -26,10 +26,11 @@ enums:
     0x20: value
     0x21: label
     0x22: description
-    0x23: order
-    0x24: parent
-    0x25: widget
-    0x26: userdata
+    0x23: tags
+    0x24: order
+    0x25: parentid
+    0x26: widget
+    0x27: userdata
 
   boolean_options:
     0x30: default
