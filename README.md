@@ -68,7 +68,7 @@ chaining Parameters: data can contain more than one Parameter.
 | discover | 0x03 | null or ID Data | if no data is sent: request for all parameters. parameters are sent without typdedefinition-options, without value and userdata. discover only discovers on level, no subgroups are discovered. sends update command(s) to client.
 | update | 0x04 |	Parameter
 | remove | 0x05 | Parameter
-| updateValue | 0x06 | specialized smallest update-value format
+| updatevalue | 0x06 | specialized smallest update-value format
 
 
 - data provider ususally send: version, add, update, updateValue, remove
