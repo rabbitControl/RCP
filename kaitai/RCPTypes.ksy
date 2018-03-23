@@ -11,7 +11,7 @@ enums:
   command:
     0x00: invalid
     0x01: version
-    0x02: init
+    0x02: initialize
     0x03: discover
     0x04: update
     0x05: remove
