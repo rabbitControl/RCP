@@ -103,7 +103,7 @@ chaining Parameters: data can contain more than one Parameter.
 | description | 0x22 (34) | string-short | "" | y | can be shown as a tooltip
 | tags | 0x23 (35)	|	string-tiny | "" | y | space separated list of tags
 | order | 0x24 (36)	|	int32 | 0 | y | allows for most simple layout
-| parentid | 0x25 (37)	|	parameter-id | root-id | y | specifies another parameterGroup as parent.
+| parentid | 0x25 (37)	|	int16 | 0 | y | specifies another parameterGroup as parent.
 | widget | 0x26 (38) | widget data | text-input-widget | y | if not specified a default widget is used
 | userdata | 0x27 (39) | size-prefixed bytearray | - | y | various user-data. e.g.: metadata, tags, ...
 | userid | 0x28 (40) | string-tiny | "" | y | user id
@@ -362,7 +362,7 @@ to optimize the update of the value of a parameter, there is a specialized updat
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | command       | 0x06         | byte           | -               | n | updateValue command
-| parameter id  |              | parameter-id          | 0               | n | parameter id
+| parameter id  |              | int16          | 0               | n | parameter id
 | mandatory part of datatype   |              | byte           | 0               | n | datatype
 | value         |              | type of datatype  | ?               | n | the value
 
