@@ -74,19 +74,12 @@ chaining Parameters: data can contain more than one Parameter.
 - data provider ususally send: version, add, update, updateValue, remove
 - data clients usually send: discover, initialize, update, updateValue
 
-## Parameter ID
-
-a parameter id is a 1-byte size-prefixed byte-array.
-
-e.g.:
-
-0x03 0x5F 0x69 0x64
 
 ## ID Data
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **id**         | - | parameter-id  | 0 | n | id of parameterGroup or Parameter
+| **id**         | - | int16  | 0 | n | id of parameterGroup or Parameter
 | **terminator** | 0 | 1 byte | 0 | n | terminator
 
 
@@ -103,7 +96,7 @@ e.g.:
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **id** | - | parameter-id | - | n | unique identifier (can not be root-id. see: parent)
+| **id** | - | int16 | - | n | unique identifier (can not be 0. see: parent)
 | **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value
 | value | 0x20 (32) | known from typedefinition | ? | y |	value (length is known by type!)
 | label | 0x21 (33)	| string-tiny | "" | y | Human readable identifier
@@ -112,7 +105,8 @@ e.g.:
 | order | 0x24 (36)	|	int32 | 0 | y | allows for most simple layout
 | parentid | 0x25 (37)	|	parameter-id | root-id | y | specifies another parameterGroup as parent.
 | widget | 0x26 (38) | widget data | text-input-widget | y | if not specified a default widget is used
-| userdata | 0x27 (39) | size of value (uint32) followed by userdata | - | y | various user-data. e.g.: metadata, tags, ...
+| userdata | 0x27 (39) | size-prefixed bytearray | - | y | various user-data. e.g.: metadata, tags, ...
+| userid | 0x28 (40) | string-tiny | "" | y | user id
 | terminator | 0 | 1 byte | 0 | n | terminator
 
 
@@ -130,7 +124,7 @@ A Parameter can only be child of excactly one group.
 This parameter group is a virtual Parameter-group which does always exist.
 It defines the highes level in the hirarchy tree.
 
-It always is identified by a 0-sized byte-array, the root-id.
+The id of the root-group is 0.
 
 No other Parameter is allowed to have this id.
 
@@ -202,7 +196,7 @@ see type-table for all number-types.
 | minimum | 0x31 (49) | of type | 0 | y | min value
 | maximum | 0x32 (50) | of type | 0 | y | max value
 | multipleof | 0x33 (51) | of type | 0 | y | multiple of value
-| scale | 0x34 (52) | byte | 0 | < | one of these (0x00, 0x01, 0x02)
+| scale | 0x34 (52) | byte | 0 | y | one of these (0x00, 0x01, 0x02)
 | unit | 0x35 (53) | string-tiny | "" | y | the unit of value
 
 ## Typedefinition Vector: Vector2f32, Vector2i8, Vector4f32, ...
@@ -221,7 +215,7 @@ see type-table for a full list of available Vector-types.
 | minimum | 0x31 (49) | X times Y | 0 | y | min value
 | maximum | 0x32 (50) | X times Y | 0 | y | max value
 | multipleof | 0x33 (51) | X times Y | 0 | y | multiple of value
-| scale | 0x34 (52) | byte | 0 | < | one of these (0x00, 0x01, 0x02)
+| scale | 0x34 (52) | byte | 0 | y | one of these (0x00, 0x01, 0x02)
 | unit | 0x35 (53) | string-tiny | "" | y | the unit of value
 
 ### scale table
