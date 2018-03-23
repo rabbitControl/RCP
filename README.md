@@ -274,23 +274,23 @@ Blue: 0x00 0x00 0xFF 0xFF
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **subtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements
+| **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements
 | **length** | - | int32 | 0 | n | length of fixed array
-| default | 0x30 (48) | fixed array of subtype | - | y | default value
+| default | 0x30 (48) | fixed array of elementtype | - | y | default value
 
 
 
 
 ## Typedefinition dynamic Array
 
-length-prefixed values of subtype.
+length-prefixed values of elementtype.
 
 e.g.: \<length int32\> value value value
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **subtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements
-| default | 0x30 (48) | length-prefix (int32) followed by values of subtype | 0 - | y | default value
+| **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements
+| default | 0x30 (48) | length-prefix (int32) followed by values of elementtype | 0 - | y | default value
 | minimum | 0x32 | int32 | 0 | y | minimum size of array
 | maximum | 0x33 | int32 | max int32 | y | maximum size of array
  
