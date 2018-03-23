@@ -72,7 +72,7 @@ chaining Parameters: data can contain more than one Parameter.
 
 
 - data provider ususally send: version, add, update, updateValue, remove
-- data clients usually send: discover, init, update, updateValue
+- data clients usually send: discover, initialize, update, updateValue
 
 ## Parameter ID
 
