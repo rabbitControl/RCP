@@ -31,6 +31,7 @@ enums:
     0x25: parentid
     0x26: widget
     0x27: userdata
+    0x28: userid
 
   boolean_options:
     0x30: default
