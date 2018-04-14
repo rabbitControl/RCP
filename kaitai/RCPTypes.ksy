@@ -180,9 +180,3 @@ types:
         type: u4
       - id: data
         size: my_len
-  id:
-    seq:
-      - id: my_len
-        type: u1
-      - id: data
-        size: my_len
