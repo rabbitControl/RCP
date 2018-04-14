@@ -45,6 +45,7 @@ of interest. use a:
 - string-tiny: prefixed with size [uint8] followed by [UTF-8 string-data]
 - string-short: prefixed with size [uint16] followed by [UTF-8 string-data]
 - string: prefixed with size [uint32] followed by [UTF-8 string-data]
+- multilanguage: list of: ISO 639-2 language-code followed by string-tiny, string-short or string. list is terminated with 0.
 
 ## Package
 
@@ -99,8 +100,8 @@ chaining Parameters: data can contain more than one Parameter.
 | **id** | - | int16 | - | n | unique identifier (can not be 0. see: parent)
 | **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value
 | value | 0x20 (32) | known from typedefinition | ? | y |	value (length is known by type!)
-| label | 0x21 (33)	| string-tiny | "" | y | Human readable identifier
-| description | 0x22 (34) | string-short | "" | y | can be shown as a tooltip
+| label | 0x21 (33)	| multilanguage string-tiny | "" | y | Human readable identifier
+| description | 0x22 (34) | multilanguage string-short | "" | y | can be shown as a tooltip
 | tags | 0x23 (35)	|	string-tiny | "" | y | space separated list of tags
 | order | 0x24 (36)	|	int32 | 0 | y | allows for most simple layout
 | parentid | 0x25 (37)	|	int16 | 0 | y | specifies another parameterGroup as parent.
