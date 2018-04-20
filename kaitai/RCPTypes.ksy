@@ -130,6 +130,7 @@ enums:
     0x04: center
 
   widgettype:
+    0x09: info
     0x10: textbox
     0x11: numberbox
     0x12: button
