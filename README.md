@@ -145,6 +145,7 @@ No other Parameter is allowed to have this id.
 
 | datatype   | hex (dec)   | length (bytes)   |
 | -----------|-------------|------------------|
+| custom type | 0x01 (1) | defined by typedef |
 | boolean | 0x10 (16) | 1 |
 | int8 | 0x11 (17) | 1 |
 | uint8 | 0x12 (18) | 1 |
@@ -176,7 +177,7 @@ No other Parameter is allowed to have this id.
 
 
 
-## Typedefinition Boolean:
+### Typedefinition Boolean:
 
 byte value:
 - 0 == false
@@ -187,7 +188,7 @@ byte value:
 | default | 0x30 (48) | byte | 0 | y | default value
 
 
-## Typedefinition Numbers: uint8, int8, uint16, int16, ...
+### Typedefinition Numbers: uint8, int8, uint16, int16, ...
 
 see type-table for all number-types.
 
@@ -200,7 +201,7 @@ see type-table for all number-types.
 | scale | 0x34 (52) | byte | 0 | y | one of these (0x00, 0x01, 0x02)
 | unit | 0x35 (53) | string-tiny | "" | y | the unit of value
 
-## Typedefinition Vector: Vector2f32, Vector2i8, Vector4f32, ...
+### Typedefinition Vector: Vector2f32, Vector2i8, Vector4f32, ...
 
 VectorXY
 
@@ -219,7 +220,7 @@ see type-table for a full list of available Vector-types.
 | scale | 0x34 (52) | byte | 0 | y | one of these (0x00, 0x01, 0x02)
 | unit | 0x35 (53) | string-tiny | "" | y | the unit of value
 
-### scale table
+#### scale table
 
 | Name   | hex   |
 |--------|-------|
@@ -227,7 +228,7 @@ see type-table for a full list of available Vector-types.
 | Log | 0x01 |
 | exp2 | 0x02 |
 
-## Typedefinition String: string
+### Typedefinition String: string
 
 4-byte size-prefixed UTF-8 string
 
@@ -237,7 +238,7 @@ see type-table for a full list of available Vector-types.
 | regular expression | 0x31 (49) | rcp string | "" | y | regular expression to define the form. e.g. limit amount of newlines in text: "\\A(?>[^\r\n]*(?>\r\n?|\n)){0,3}[^\r\n]*\\z"
 
 
-## Typedefinition Color: RGB, RGBA
+### Typedefinition Color: RGB, RGBA
 
 Colors are in byte-order with 8-bits per channel
 
@@ -256,7 +257,7 @@ Blue: 0x00 0x00 0xFF 0xFF
 
 
 
-## Typedefinition Enum
+### Typedefinition Enum
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
@@ -265,7 +266,7 @@ Blue: 0x00 0x00 0xFF 0xFF
 
 
 
-## Typedefinition fixed Array
+### Typedefinition fixed Array
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
@@ -276,7 +277,7 @@ Blue: 0x00 0x00 0xFF 0xFF
 
 
 
-## Typedefinition dynamic Array
+### Typedefinition dynamic Array
 
 length-prefixed values of elementtype.
 
@@ -290,7 +291,7 @@ e.g.: \<length int32\> value value value
 | maximum | 0x33 | int32 | max int32 | y | maximum size of array
  
 
-## URI:
+### URI:
 
 size-prefixed UTF-8 string forming an URI
 
@@ -301,18 +302,28 @@ size-prefixed UTF-8 string forming an URI
 | schema | 0x32 (50) | string-tiny | - | y | space-seperated list with allowed schemas. e.g. "file ftp http https"
 
 
-## IPv4:
+### IPv4:
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | 4 bytes | - | y | default value
 
 
-## IPv6:
+### IPv6:
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | 16 bytes | - | y | default value
+
+
+### Custom Type:
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| **size** | - | 16-bit | - | n | byte-length of type
+| default | 0x30 (48) | size-amount of bytes | - | y | default value
+| uuid | 0x31 (49) | UUID: 16 bytes  | - | y | UUID of this very custom type, must be unique
+| config | 0x32 (50) | 4-byte size-prefixed byte-array | - | y | custom config, can be anything
 
 
 ## Widget (0x24):
@@ -331,6 +342,7 @@ size-prefixed UTF-8 string forming an URI
 
 | typename   | hex   | description
 |------------|-------|--------------|
+| Custom Widget | 0x01 | a custom widget
 | Info | 0x09 | For discovery: only shows datatype, label. groupsParameters are collapsable
 | Textbox | 0x10 |
 | Numberbox | 0x11 |
@@ -354,6 +366,14 @@ size-prefixed UTF-8 string forming an URI
 | top | 0x02 |
 | bottom | 0x03 |
 | center | 0x04 |
+
+
+### Custom Widget:
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| uuid          | 0x56 (86) | UUID: 16-byte     | 0 | y | UUID of custom widget. this must be unique to avoid widget-conflicts. !0
+| config        | 0x57 (87) | 4-byte size-prefixed byte-array | - | y | custom config, can be anything
 
 
 ## updateValue
