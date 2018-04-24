@@ -320,7 +320,7 @@ size-prefixed UTF-8 string forming an URI
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **size** | - | 16-bit | - | n | byte-length of type
+| **size** | - | uint32 | - | n | byte-length of type
 | default | 0x30 (48) | size-amount of bytes | - | y | default value
 | uuid | 0x31 (49) | UUID: 16 bytes  | - | y | UUID of this very custom type, must be unique
 | config | 0x32 (50) | 4-byte size-prefixed byte-array | - | y | custom config, can be anything
