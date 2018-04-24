@@ -78,8 +78,14 @@ enums:
    
   ipv6_options:
     0x30: default
+    
+  customtype_options:
+    0x30: default
+    0x31: uuid
+    0x32: config
 
   datatype:
+    0x01: customtype
     0x10: boolean
     0x11: int8
     0x12: uint8
@@ -130,6 +136,7 @@ enums:
     0x04: center
 
   widgettype:
+    0x01: customwidget
     0x09: info
     0x10: textbox
     0x11: numberbox
