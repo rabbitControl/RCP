@@ -322,7 +322,7 @@ size-prefixed UTF-8 string forming an URI
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **size** | - | uint32 | - | n | byte-length of type
 | default | 0x30 (48) | size-amount of bytes | - | y | default value
-| uuid | 0x31 (49) | UUID: 16 bytes  | - | y | UUID of this very custom type, must be unique
+| uuid | 0x31 (49) | UUID: 16 bytes  | - | y | UUID of custom type. this must be unique to avoid widget-conflicts. !0
 | config | 0x32 (50) | 4-byte size-prefixed byte-array | - | y | custom config, can be anything
 
 
@@ -343,7 +343,7 @@ size-prefixed UTF-8 string forming an URI
 | typename   | hex   | description
 |------------|-------|--------------|
 | Custom Widget | 0x01 | a custom widget
-| Info | 0x09 | For discovery: only shows datatype, label. groupsParameters are collapsable
+| Info | 0x09 | For discovery: only shows datatype, label. groupParameters are collapsable
 | Textbox | 0x10 |
 | Numberbox | 0x11 |
 | Button | 0x12 |
