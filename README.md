@@ -261,7 +261,7 @@ Blue: 0x00 0x00 0xFF 0xFF
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | uint16 | 0 | y | default value (range: 0 .. 2^16 - 1)
+| default | 0x30 (48) | string-tiny | value 0 means: first-element | y | default value
 | entries | 0x31 (49) | list of string-tiny, terminated with 0 (0-length string-tiny) | 0 | y | list of enumerations
 
 
