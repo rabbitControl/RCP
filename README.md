@@ -360,9 +360,9 @@ size-prefixed UTF-8 string forming an URI
 | Filechooser | 0x001e |
 | Directorychooser | 0x001f |
 | IP | 0x0020 |
-| List | 0x8000 |
-| Listpage | 0x8001 |
-| Tabs | 0x8002 |
+| List | 0x8000 | Layouting Widget for Groups
+| Listpage | 0x8001 | Layouting Widget for Groups
+| Tabs | 0x8002 | Layouting Widget for Groups
 
 ### label-position table:
 
