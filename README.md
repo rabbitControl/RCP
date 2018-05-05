@@ -45,7 +45,7 @@ of interest. use a:
 - string-tiny: prefixed with size [uint8] followed by [UTF-8 string-data]
 - string-short: prefixed with size [uint16] followed by [UTF-8 string-data]
 - string: prefixed with size [uint32] followed by [UTF-8 string-data]
-- multilanguage: list of: ISO 639-2 language-code followed by string-tiny, string-short or string. list is terminated with 0.
+- multilanguage: list of: [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code (3-bytes in ascii) followed by string-tiny, string-short or string. list is terminated with 0. additional to the ISO 639-3 codes we define a special code for no specific language: "any"
 
 ## Package
 
