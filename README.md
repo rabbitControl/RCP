@@ -263,7 +263,7 @@ Blue: 0x00 0x00 0xFF 0xFF
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | string-tiny | value 0 means: first-element | y | default value
 | entries | 0x31 (49) | list of string-tiny, terminated with 0 (0-length string-tiny) | 0 | y | list of enumerations
-
+| multiselect | 0x32 (50) | boolean | false | y | allow multiple selections or not
 
 
 ### Typedefinition fixed Array
