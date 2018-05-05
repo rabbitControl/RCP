@@ -342,20 +342,27 @@ size-prefixed UTF-8 string forming an URI
 
 | typename   | hex   | description
 |------------|-------|--------------|
-| Custom Widget | 0x01 | a custom widget
-| Info | 0x09 | For discovery: only shows datatype, label. groupParameters are collapsable
-| Textbox | 0x10 |
-| Numberbox | 0x11 |
-| Button | 0x12 |
-| Checkbox | 0x13 |
-| Radiobutton | 0x14 |
-| Slider | 0x15 |
-| Dial | 	0x16 |
-| Colorbox | 0x17 |
-| Table | 0x18 |
-| Treeview | 0x19 |
-| Dropdown | 0x1a |
-| XYField | 0x1b |
+| Custom Widget | 0x0001 | a custom widget
+| Info | 0x0010 | For discovery: only shows datatype, label. groupParameters are collapsable
+| Textbox | 0x0011 |
+| Bang | 0x0012 |
+| Press | 0x0013 |
+| Toggle | 0x0014 |
+| Numberbox | 0x0015 |
+| Dial | 	0x0016 |
+| Slider | 0x0017 |
+| Slider2d | 0x0018 |
+| Range | 0x0019 |
+| Dropdown | 0x001a |
+| Radiobutton | 0x001b |
+| Colorbox | 0x001c |
+| Table | 0x001d |
+| Filechooser | 0x001e |
+| Directorychooser | 0x001f |
+| IP | 0x0020 |
+| List | 0x8000 |
+| Listpage | 0x8001 |
+| Tabs | 0x8002 |
 
 ### label-position table:
 
