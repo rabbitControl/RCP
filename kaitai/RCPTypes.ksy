@@ -129,27 +129,61 @@ enums:
     0x55: label_position
 
   label_position:
-    0x00: left
-    0x01: right
-    0x02: top
-    0x03: bottom
-    0x04: center
+    0x01: left
+    0x02: right
+    0x03: top
+    0x04: bottom
+    0x05: center
 
   widgettype:
-    0x01: customwidget
-    0x09: info
-    0x10: textbox
-    0x11: numberbox
-    0x12: button
-    0x13: checkbox
-    0x14: radiobutton
-    0x15: slider
-    0x16: dial
-    0x17: colorbox
-    0x18: table
-    0x19: treeview
-    0x1a: dropdown
-    0x1f: xyfield
+    0x0001: customwidget
+    0x0010: info
+    0x0011: textbox
+    0x0012: bang
+    0x0013: press
+    0x0014: toggle
+    0x0015: numberbox
+    0x0016: dial
+    0x0017: slider
+    0x0018: slider2d
+    0x0019: range
+    0x001a: dropdown
+    0x001b: radiobutton
+    0x001c: colorbox
+    0x001d: table
+    0x001e: filechooser
+    0x001f: directorychooser
+    0x0020: ip
+    0x8000: list
+    0x8001: listpage
+    0x8002: tabs
+
+
+  textbox_options:
+    0x56: multiline
+    0x57: wordwrap
+    0x58: password
+    
+  numberbox_options:
+    0x56: precision
+    0x57: format
+    0x58: stepsize
+    0x59: cyclic
+    
+  numberbox_format:
+    0x01: dec
+    0x02: hex
+    0x03: bin
+    
+  slider_options:
+    0x56: horizontal
+    
+  dial_options:
+    0x56: cyclic
+    
+  customwidget_options:
+    0x56: uuid
+    0x57: config
 
   client_status:
     0x00: disconnected
