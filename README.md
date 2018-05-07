@@ -330,7 +330,7 @@ size-prefixed UTF-8 string forming an URI
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| type | 0x50 (80) | uint16 | text input | y | type of widget.  see widget type-table
+| **type** | 0x50 (80) | uint16 | 0x0011: textbox | n | type of widget. see widget type-table and widget options
 | enabled | 0x51 (81) | byte | true | y | if widget allows user input
 | visible | 0x52 (82) |	byte | true | y | if widget is visible
 | label-visible | 0x53	(83) | byte | true | y | if label is visible
@@ -368,11 +368,65 @@ size-prefixed UTF-8 string forming an URI
 
 | typename   | hex   |
 |------------|-------|
-| left | 0x00 |
-| right | 0x01 |
-| top | 0x02 |
-| bottom | 0x03 |
-| center | 0x04 |
+| left | 0x01 |
+| right | 0x02 |
+| top | 0x03 |
+| bottom | 0x04 |
+| center | 0x05 |
+
+
+### Textbox:
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| multiline | 0x56 (86) | boolean | false | y | enable/disable multiline textfield
+| wordwrap | 0x57 (87) | boolean | false | y | enable/disable word wrap
+| password | 0x58 (88) | boolean | false | y | enable/disable if testbox is a password input
+
+
+### Numberbox:
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| precision | 0x56 (86) | uint8 | 2 | y | set precision for numberbox
+| format | 0x57 (87) | uint8 | 0x01 | y | set format of numberbox: dec/hex/bin
+| stepsize | 0x58 (88) | T of value | if Value.multipleof > 0, then value.multipleof. Else dependent on value.subtype: If real: 0.01. If int: 1 | y | a value always must be within it’s definition. Therefore If stepsize collides with value.multipleof, then value.multipleof is used: to keep value within it’s defintion.
+| cyclic | 0x59 (89) | boolean | false | y | inspector should wrap around value
+
+## format table:
+
+| typename   | hex   |
+|------------|-------|
+| dec | 0x01 |
+| hex | 0x02 |
+| bin | 0x03 |
+
+
+### BangButton:
+- fires on press
+
+### ToggleButton (Checkbox):
+- Switch: toggles it's state on each press
+
+### PressButton:
+- onPress sends 1, onRelease sends 0
+
+
+### Radiobutton:
+
+
+### Slider:
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| horizontal | 0x56 (86) | boolean | true | y | if slider is horizontal
+
+
+### Dial:
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| cyclic | 0x56 (86) | boolean | false | y | if dial is cyclic
 
 
 ### Custom Widget:
