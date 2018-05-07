@@ -429,6 +429,21 @@ size-prefixed UTF-8 string forming an URI
 | cyclic | 0x56 (86) | boolean | false | y | if dial is cyclic
 
 
+### Colorbox:
+
+### Table:
+work-in-progress:
+option: labels for dimensions: array of labels
+
+### Dropdown:
+
+### Range:
+min					                     max
+|----------------------------|
+      |------|
+      v1     v2
+
+
 ### Custom Widget:
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
