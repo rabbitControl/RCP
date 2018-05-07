@@ -438,11 +438,12 @@ option: labels for dimensions: array of labels
 ### Dropdown:
 
 ### Range:
-min					                     max
+```
+min		             max
 |----------------------------|
       |------|
       v1     v2
-
+```
 
 ### Custom Widget:
 
