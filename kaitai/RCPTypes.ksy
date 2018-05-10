@@ -62,6 +62,7 @@ enums:
   enum_options:
     0x30: default
     0x31: entries
+    0x32: multiselect
 
   fixed_array_options:
     0x30: default
