@@ -54,6 +54,7 @@ enums:
 
   string_options:
     0x30: default
+    0x31: regular_expression
 
   color_options:
     0x30: default
