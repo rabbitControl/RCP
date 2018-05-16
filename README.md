@@ -270,10 +270,10 @@ Blue: 0x00 0x00 0xFF 0xFF
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements
-| **length** | - | int32 | 0 | n | length of fixed array
+| **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements (all except fixed-array, dynamic-array)
+| **dimensions** | - | int32 | 0 | n | amount of dimensions
+| **dimensions_sizes** | - | <dimensions> times int32 | - | n | amount of elements in each dimension
 | default | 0x30 (48) | fixed array of elementtype | - | y | default value
-
 
 
 
