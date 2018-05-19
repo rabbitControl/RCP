@@ -266,18 +266,29 @@ Blue: 0x00 0x00 0xFF 0xFF
 | multiselect | 0x32 (50) | boolean | false | y | allow multiple selections or not
 
 
-### Typedefinition fixed Array
+### Typedefinition Array
+
+array-structure:
+dimension-count followed by elements per dimension
+dimension-count: <int32>
+element per dimension: <int32>
+
+e.g. 3-dimensionsal array with 2 times 2 times one elements (int[2][2][1]):
+3 2 2 1
+
+array-data:
+array-structure followed number of bytes defined by the element-type and the array-strucutre
+
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements (all except fixed-array, dynamic-array)
-| **dimensions** | - | int32 | 0 | n | amount of dimensions
-| **dimensions_sizes** | - | <dimensions> times int32 | - | n | amount of elements in each dimension
-| default | 0x30 (48) | fixed array of elementtype | - | y | default value
+| structure | - | array-structure | 0 | y | defines the structure of the array: number of dimensions and elements per dimensions
+| default | 0x30 (48) | array-data | - | y | default value
 
 
 
-### Typedefinition dynamic Array
+### Typedefinition List
 
 length-prefixed values of elementtype.
 
