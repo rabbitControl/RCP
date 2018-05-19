@@ -283,8 +283,8 @@ array-structure followed number of bytes defined by the element-type and the arr
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements (all except fixed-array, dynamic-array)
-| structure | - | array-structure | 0 | y | defines the structure of the array: number of dimensions and elements per dimensions
 | default | 0x30 (48) | array-data | - | y | default value
+| structure | 0x31 (49) | array-structure | 0 | y | defines the structure of the array: number of dimensions and elements per dimensions
 
 
 
