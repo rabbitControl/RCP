@@ -110,8 +110,8 @@ enums:
     0x22: rgb
     0x23: rgba
     0x24: enum
-    0x25: fixed_array
-    0x26: dynamic_array
+    0x25: array
+    0x26: list
     0x27: bang
     0x28: group # parameter group
     0x2a: uri
