@@ -70,6 +70,8 @@ enums:
 
   list_options:
     0x30: default
+    0x31: minimum
+    0x32: maximum
     
   uri_options:
     0x30: default
