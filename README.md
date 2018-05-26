@@ -174,6 +174,7 @@ No other Parameter is allowed to have this id.
 | URI | 0x2a (42) | size prefixed
 | IPv4 | 0x2b (43) | 4
 | IPv6 | 0x2c (44) | 16
+| range | 0x2d (45) |
 
 
 
@@ -188,18 +189,34 @@ byte value:
 | default | 0x30 (48) | byte | 0 | y | default value
 
 
-### Typedefinition Numbers: uint8, int8, uint16, int16, ...
+### Typedefinition Numbers:
 
+uint8, int8, uint16, int16, ...  
 see type-table for all number-types.
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | of type | 0 | y | default value
-| minimum | 0x31 (49) | of type | 0 | y | min value
-| maximum | 0x32 (50) | of type | 0 | y | max value
+| minimum | 0x31 (49) | of type | minimum of type | y | min value
+| maximum | 0x32 (50) | of type | maximum of type | y | max value
 | multipleof | 0x33 (51) | of type | 0 | y | multiple of value
 | scale | 0x34 (52) | byte | 0 | y | one of these (0x00, 0x01, 0x02)
 | unit | 0x35 (53) | string-tiny | "" | y | the unit of value
+
+
+### Typedefinition Range:
+
+range for number types: see type-table for all number-types.
+
+range-data:
+2 consecutive values of type
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| **elementtype** | - | TypeDefinition | int32 | n | Number TypeDefintion of range element
+| default | 0x30 (48) | range-data | element-type-default element-type-default | y | default value
+
+
 
 ### Typedefinition Vector: Vector2f32, Vector2i8, Vector4f32, ...
 
