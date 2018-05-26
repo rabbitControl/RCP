@@ -203,10 +203,8 @@ see type-table for all number-types.
 
 ### Typedefinition Vector: Vector2f32, Vector2i8, Vector4f32, ...
 
-VectorXY
-
-where X specifies the size
-
+VectorXY  
+where X specifies the size  
 where Y specifies the type
 
 see type-table for a full list of available Vector-types.
@@ -242,12 +240,9 @@ see type-table for a full list of available Vector-types.
 
 Colors are in byte-order with 8-bits per channel
 
-e.g. RGBA:
-
-Red: 0xFF 0x00 0x00 0xFF
-
-Green: 0x00 0xFF 0x00 0xFF
-
+e.g. RGBA:  
+Red: 0xFF 0x00 0x00 0xFF  
+Green: 0x00 0xFF 0x00 0xFF  
 Blue: 0x00 0x00 0xFF 0xFF
 
 
@@ -268,21 +263,22 @@ Blue: 0x00 0x00 0xFF 0xFF
 
 ### Typedefinition Array
 
-array-structure:
-dimension-count followed by elements per dimension
-dimension-count: <int32>
-element per dimension: <int32>
+array-structure:  
+dimension-count followed by elements per dimension  
+dimension-count: <int32>  
+elements per dimension: dimension-count x <int32>  
 
-e.g. 3-dimensionsal array with 2 times 2 times one elements (int[2][2][1]):
+e.g.  
+3-dimensionsal array with 2 times 2 times one elements (int[2][2][1]):  
 3 2 2 1
 
-array-data:
-array-structure followed number of bytes defined by the element-type and the array-strucutre
+array-data:  
+array-structure followed by number of bytes defined by the element-type and the array-structure
 
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements (all except fixed-array, dynamic-array)
+| **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements (all except array, list)
 | default | 0x30 (48) | array-data | - | y | default value
 | structure | 0x31 (49) | array-structure | 0 | y | defines the structure of the array: number of dimensions and elements per dimensions
 
@@ -290,16 +286,23 @@ array-structure followed number of bytes defined by the element-type and the arr
 
 ### Typedefinition List
 
-length-prefixed values of elementtype.
+list-data:  
+a size-prefixed list of values for each dimension recursively.
 
-e.g.: \<length int32\> value value value
+e.g.:  
+[] –> 0  
+[0] -> 1 0  
+[a, b] -> 2 a b  
+[[a, b, c], [d, e, f]] -> 2 3 a b c 3 d e f  
+[[a, b, c], [d, e]] -> 2 3 a b c 2 d e
+
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements
-| default | 0x30 (48) | length-prefix (int32) followed by values of elementtype | 0 - | y | default value
-| minimum | 0x32 | int32 | 0 | y | minimum size of array
-| maximum | 0x33 | int32 | max int32 | y | maximum size of array
+| **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements (all except array, list)
+| default | 0x30 (48) | list-data | 0 | y | default value
+| minimum | 0x32 | one-dimensional list of <int32> | 0 | y | minimum length of list per dimension. if minimum length of a dimension is not specified, then the minimum length is 0.
+| maximum | 0x33 | one-dimensional list of <int32> | 0 | y | maximum length of list per dimension. if maximum length of a dimension is not specified, then the maximum length is max-int.
  
 
 ### URI:
