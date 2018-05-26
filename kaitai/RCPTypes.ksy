@@ -88,6 +88,9 @@ enums:
     0x30: default
     0x31: uuid
     0x32: config
+    
+  range_options:
+    0x30: default
 
   datatype:
     0x01: customtype
@@ -119,6 +122,7 @@ enums:
     0x2a: uri
     0x2b: ipv4
     0x2c: ipv6
+    0x2d: range
 
   number_scale:
     0x00: linear
