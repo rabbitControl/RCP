@@ -130,12 +130,9 @@ enums:
     0x02: exp2
 
   widget_options:
-    0x50: type
-    0x51: enabled
-    0x52: visible
-    0x53: label_visible
-    0x54: value_visible
-    0x55: label_position
+    0x50: enabled
+    0x51: label_visible
+    0x52: value_visible
 
   label_position:
     0x01: left
