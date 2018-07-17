@@ -1,3 +1,5 @@
+-> back to [RCP Specification](RCPSpecification.md)
+
 ## Widget (0x24):
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
