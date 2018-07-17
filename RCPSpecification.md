@@ -6,9 +6,9 @@
 
 The first draft version of RCP only defines 1. (Values) and 2. (Widgets)
 
--> Have a look at the [Value Specification](https://github.com/rabbitControl/RCP/blob/master/RCPValue.md)
+-> Have a look at the [Value Specification](RCPValue.md)
 
--> Have a look at the [Widget Specification](https://github.com/rabbitControl/RCP/blob/master/RCPWidget.md)
+-> Have a look at the [Widget Specification](RCPWidget.md)
 
 
 ## Endianess
