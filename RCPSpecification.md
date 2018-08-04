@@ -81,14 +81,14 @@ chaining Parameters: data can contain more than one Parameter.
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **id** | - | int16 | - | n | unique identifier (can not be 0. see: parent)
-| **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value [Value Specification](RCPValue.md)
+| **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value. see: [Value Specification](RCPValue.md)
 | value | 0x20 (32) | known from typedefinition | ? | y |	value (length is known by type!)
 | label | 0x21 (33)	| multilanguage string-tiny | "" | y | Human readable identifier
 | description | 0x22 (34) | multilanguage string-short | "" | y | can be shown as a tooltip
 | tags | 0x23 (35)	|	string-tiny | "" | y | space separated list of tags
 | order | 0x24 (36)	|	int32 | 0 | y | allows for most simple layout
 | parentid | 0x25 (37)	|	int16 | 0 | y | specifies another parameterGroup as parent.
-| widget | 0x26 (38) | widget data | text-input-widget | y | if not specified a default widget is used
+| widget | 0x26 (38) | widget data | text-input-widget | y | see: [Widget Specification](RCPWidget.md)
 | userdata | 0x27 (39) | size-prefixed bytearray | - | y | various user-data. e.g.: metadata, tags, ...
 | userid | 0x28 (40) | string-tiny | "" | y | user id
 | terminator | 0 | 1 byte | 0 | n | terminator
