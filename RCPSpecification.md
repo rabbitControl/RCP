@@ -81,7 +81,7 @@ chaining Parameters: data can contain more than one Parameter.
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **id** | - | int16 | - | n | unique identifier (can not be 0. see: parent)
-| **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value
+| **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value [Value Specification](RCPValue.md)
 | value | 0x20 (32) | known from typedefinition | ? | y |	value (length is known by type!)
 | label | 0x21 (33)	| multilanguage string-tiny | "" | y | Human readable identifier
 | description | 0x22 (34) | multilanguage string-short | "" | y | can be shown as a tooltip
