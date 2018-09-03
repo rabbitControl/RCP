@@ -19,3 +19,6 @@ Request for Comments (RFC)
 
 Join the discussion on riot:  
 https://riot.im/app/#/room/#rcp:matrix.org
+
+Follow us on mastodon:
+https://vis.social/@rabbitcontrol
