@@ -44,6 +44,7 @@
 | IPv4 | 0x2b (43) | 4
 | IPv6 | 0x2c (44) | 16
 | range | 0x2d (45) |
+| Image | 0x2e (46) |
 
 
 
@@ -194,6 +195,17 @@ size-prefixed UTF-8 string forming an URI
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | 16 bytes | - | y | default value
+
+
+### Image:
+
+#### rcp-image-data:
+size prefix: <int32>  
+image-data: bytes of one of the following image-formats: JPEG, PNG, BMP, GIF  
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| default | 0x30 (48) | rcp-image-data | - | y | default image
 
 
 ### Custom Type:
