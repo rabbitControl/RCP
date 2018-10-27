@@ -32,6 +32,7 @@ enums:
     0x26: widget
     0x27: userdata
     0x28: userid
+    0x29: readonly
 
   boolean_options:
     0x30: default
