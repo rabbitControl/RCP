@@ -91,6 +91,7 @@ chaining Parameters: data can contain more than one Parameter.
 | widget | 0x26 (38) | widget data | text-input-widget | y | see: [Widget Specification](RCPWidget.md)
 | userdata | 0x27 (39) | size-prefixed bytearray | - | y | various user-data. e.g.: metadata, tags, ...
 | userid | 0x28 (40) | string-tiny | "" | y | user id
+| readonly | 0x29 (41) | byte | false | y | read only
 | terminator | 0 | 1 byte | 0 | n | terminator
 
 
