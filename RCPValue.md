@@ -129,7 +129,7 @@ Blue: 0x00 0x00 0xFF 0xFF
 
 ### Typedefinition Array
 
-array-structure:  
+#### rcp-array-structure:  
 dimension-count followed by elements per dimension  
 dimension-count: <int32>  
 elements per dimension: dimension-count x <int32>  
@@ -138,15 +138,15 @@ e.g.
 3-dimensionsal array with 2 times 2 times one elements (int[2][2][1]):  
 3 2 2 1
 
-array-data:  
-array-structure followed by number of bytes defined by the element-type and the array-structure
+#### rcp-array-data:  
+rcp-array-structure followed by number of bytes defined by the element-type and the rcp-array-structure
 
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements (all except array, list)
-| default | 0x30 (48) | array-data | - | y | default value
-| structure | 0x31 (49) | array-structure | 0 | y | defines the structure of the array: number of dimensions and elements per dimensions
+| default | 0x30 (48) | rcp-array-data | - | y | default value
+| structure | 0x31 (49) | rcp-array-structure | 0 | y | defines the structure of the array: number of dimensions and elements per dimensions
 
 
 
