@@ -144,7 +144,8 @@ enums:
     0x05: center
 
   widgettype:
-    0x0001: customwidget
+    0x0001: default
+    0x0002: custom
     0x0010: info
     0x0011: textbox
     0x0012: bang
