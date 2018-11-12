@@ -17,7 +17,8 @@
 
 | typename   | hex   | description
 |------------|-------|--------------|
-| Custom Widget | 0x0001 | a custom widget
+| Default Widget | 0x0001 | the default widget
+| Custom Widget | 0x0002 | a custom widget
 | Info | 0x0010 | For discovery: only shows datatype, label. groupParameters are collapsable
 | Textbox | 0x0011 |
 | Bang | 0x0012 | fires on press
