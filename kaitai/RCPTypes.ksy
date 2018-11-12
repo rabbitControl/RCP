@@ -134,6 +134,7 @@ enums:
     0x50: enabled
     0x51: label_visible
     0x52: value_visible
+    0x53: needs_confirmation
 
   label_position:
     0x01: left
