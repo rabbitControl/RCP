@@ -8,6 +8,7 @@
 | enabled | 0x50 (80) | byte | true | y | if widget allows user input
 | label-visible | 0x51 (81) | byte | true | y | if label is visible
 | value-visible | 0x52 (82) | byte | true | y | if value is visible
+| needs-confirmation | 0x53 (83) | byte | false | y | if input needs to be confirmed
 | ... special widget options... |
 | **terminator** | 0 | byte | 0 | n | terminator
 
