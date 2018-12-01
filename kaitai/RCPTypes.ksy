@@ -124,6 +124,7 @@ enums:
     0x2b: ipv4
     0x2c: ipv6
     0x2d: range
+    0x2e: image
 
   number_scale:
     0x00: linear
