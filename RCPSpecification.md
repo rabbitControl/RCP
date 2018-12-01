@@ -64,16 +64,13 @@ chaining Parameters: data can contain more than one Parameter.
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **id**         | - | int16  | 0 | n | id of parameterGroup or Parameter
-| **terminator** | 0 | 1 byte | 0 | n | terminator
-
 
 
 ## Version Data
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| version       | 0x1a	(26)   | tiny-string    | "" | y | semver
-| **terminator** | 0 | 1 byte | 0 | n | terminator
+| version       | 0x1a	(26)   | tiny-string    | "" |n| semver
 
 
 ## Parameter:
