@@ -140,15 +140,14 @@ e.g.
 3 2 2 1
 
 #### rcp-array-data:  
-rcp-array-structure followed by number of bytes defined by the element-type and the rcp-array-structure
+number of bytes defined by the element-type and the structure
 
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | - | n | TypeDefintion of array elements (all except array, list)
+| **structure** | - | rcp-array-structure | 0 | n | defines the structure of the array: number of dimensions and elements per dimensions
 | default | 0x30 (48) | rcp-array-data | - | y | default value
-| structure | 0x31 (49) | rcp-array-structure | 0 | y | defines the structure of the array: number of dimensions and elements per dimensions
-
 
 
 ### Typedefinition List
