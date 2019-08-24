@@ -67,29 +67,28 @@ enums:
 
   array_options:
     0x30: default
-    0x31: structure
 
   list_options:
     0x30: default
     0x31: minimum
     0x32: maximum
-    
+
   uri_options:
     0x30: default
     0x31: filter
     0x32: schema
-    
+
   ipv4_options:
     0x30: default
-   
+
   ipv6_options:
     0x30: default
-    
+
   customtype_options:
     0x30: default
     0x31: uuid
     0x32: config
-    
+
   range_options:
     0x30: default
 
@@ -173,24 +172,24 @@ enums:
     0x56: multiline
     0x57: wordwrap
     0x58: password
-    
+
   numberbox_options:
     0x56: precision
     0x57: format
     0x58: stepsize
     0x59: cyclic
-    
+
   numberbox_format:
     0x01: dec
     0x02: hex
     0x03: bin
-    
+
   slider_options:
     0x56: horizontal
-    
+
   dial_options:
     0x56: cyclic
-    
+
   customwidget_options:
     0x56: uuid
     0x57: config
