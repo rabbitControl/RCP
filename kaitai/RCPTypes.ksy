@@ -17,10 +17,8 @@ enums:
     0x05: remove
     0x06: updatevalue
 
-  metadata_options:
-    0x1a: version
-    0x1b: capabilities
-    0x1c: commands
+  infodata_options:
+    0x1a: applicationid
 
   parameter_options:
     0x20: value
