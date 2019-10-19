@@ -47,16 +47,15 @@ chaining Parameters: data can contain more than one Parameter.
 
 | command   | ID   | expected data | comment   |
 |-----------|------|---------------|-----------|
-| version | 0x01 | Version Data |
+| info | 0x01 | null or Info Data | if no data is sent: it has to be answered with an info command including info data. if data is sent, it must not be answered by an info command.
 | initialize | 0x02 | null or ID Data | if no data is sent: request for all parameters. sends update command(s) to client.
 | discover | 0x03 | null or ID Data | if no data is sent: request for all parameters. parameters are sent without typdedefinition-options, without value and userdata. discover only discovers on level, no subgroups are discovered. sends update command(s) to client.
 | update | 0x04 |	Parameter
 | remove | 0x05 | Parameter
 | updatevalue | 0x06 | specialized smallest update-value format
 
-
-- data provider ususally send: version, add, update, updateValue, remove
-- data clients usually send: discover, initialize, update, updateValue
+- clients usually send: info, discover, initialize, update, updateValue
+- server ususally sends: info, add, update, updateValue, remove
 
 
 ## ID Data
@@ -66,11 +65,12 @@ chaining Parameters: data can contain more than one Parameter.
 | **id**         | - | int16  | 0 | n | id of parameterGroup or Parameter
 
 
-## Version Data
+## Info Data
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| version       | 0x1a	(26)   | tiny-string    | "" |n| semver
+| **version**   | - | tiny-string    | "" |n| semver
+| applicationid       | 0x1a	(26)   | tiny-string    | "" |y| Can be used to identify the server/client application
 
 
 ## Parameter:
