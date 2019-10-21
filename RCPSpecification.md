@@ -71,7 +71,7 @@ chaining Parameters: data can contain more than one Parameter.
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **version**   | - | tiny-string    | "" |n| semver
 | applicationid       | 0x1a	(26)   | tiny-string    | "" |y| Can be used to identify the server/client application
-| terminator    | 0 | 1 byte | 0 | n | terminator
+| **terminator**    | 0 | 1 byte | 0 | n | terminator
 
 
 ## Parameter:
@@ -90,7 +90,7 @@ chaining Parameters: data can contain more than one Parameter.
 | userdata | 0x27 (39) | size-prefixed bytearray | - | y | various user-data. e.g.: metadata, tags, ...
 | userid | 0x28 (40) | string-tiny | "" | y | user id
 | readonly | 0x29 (41) | byte | false | y | read only
-| terminator | 0 | 1 byte | 0 | n | terminator
+| **terminator** | 0 | 1 byte | 0 | n | terminator
 
 
 ## ParameterGroup:
@@ -118,10 +118,10 @@ to optimize the update of the value of a parameter, there is a specialized updat
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| command       | 0x06         | byte           | -               | n | updateValue command
-| parameter id  |              | int16          | 0               | n | parameter id
-| mandatory part of datatype   |              | byte           | 0               | n | datatype
-| value         |              | type of datatype  | ?               | n | the value
+| **command**       | 0x06         | byte           | -               | n | updateValue command
+| **parameter id**  |              | int16          | 0               | n | parameter id
+| **mandatory part of datatype**   |              | byte           | 0               | n | datatype
+| **value**         |              | type of datatype  | ?               | n | the value
 
 this reduces the amount of data to be sent for a simple value udpate.
 
