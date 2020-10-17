@@ -1,6 +1,7 @@
 ![Alt RCP diagram](./RCP_diagram.svg)
-(RCP example to control a host application with other devices)
+(RCP example to control a host application from other devices)
 
+[rabbitcontrol.cc](http://rabbitcontrol.cc)
 
 # RCP
 Remote Control Protocol
