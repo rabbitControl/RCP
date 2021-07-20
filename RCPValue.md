@@ -26,13 +26,13 @@
 | uint64 | 0x18	(24) | 8 |
 | float32 | 0x19 (25) | 4 |
 | float64 | 0x1a (26) | 8 |
-| Vector2i32 | 0x1b | 2 x 4 |
-| Vector2f32 | 0x1c | 2 x 4 |
-| Vector3i32 | 0x1d | 3 x 4 |
-| Vector3f32 | 0x1e | 3 x 4 |
-| Vector4i32 | 0x1f | 4 x 4 |
-| Vector4f32 | 0x20 | 4 x 4 |
-| String | 0x21 | size prefixed
+| Vector2i32 | 0x1b (27) | 2 x 4 |
+| Vector2f32 | 0x1c (28) | 2 x 4 |
+| Vector3i32 | 0x1d (29) | 3 x 4 |
+| Vector3f32 | 0x1e (30) | 3 x 4 |
+| Vector4i32 | 0x1f (31) | 4 x 4 |
+| Vector4f32 | 0x20 (32) | 4 x 4 |
+| String | 0x21 (33) | size prefixed
 | RGB | 0x22 (34) |
 | RGBA | 0x23 (35) |
 | Enum | 0x24 (36) |
@@ -173,8 +173,8 @@ e.g.:
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements (all except array, list)
 | default | 0x30 (48) | list-data | 0 | y | default value
-| minimum | 0x32 | one-dimensional list of <int32> | 0 | y | minimum length of list per dimension. if minimum length of a dimension is not specified, then the minimum length is 0.
-| maximum | 0x33 | one-dimensional list of <int32> | 0 | y | maximum length of list per dimension. if maximum length of a dimension is not specified, then the maximum length is max-int.
+| minimum | 0x32 (50) | one-dimensional list of <int32> | 0 | y | minimum length of list per dimension. if minimum length of a dimension is not specified, then the minimum length is 0.
+| maximum | 0x33 (51) | one-dimensional list of <int32> | 0 | y | maximum length of list per dimension. if maximum length of a dimension is not specified, then the maximum length is max-int.
  
 
 ### URI:
