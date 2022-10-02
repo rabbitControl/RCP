@@ -1,14 +1,14 @@
 -> back to [RCP Specification](RCPSpecification.md)
+<br />  
 
 ## Typedefinition:
-
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **datatype** | - |  byte (see datatype table) | 0x2f | n | type of value
 | ... type options... | | ||||
 | **terminator** | 0 | byte | 0 | n | terminator
-
+<br />  
 
 ### Datatypes: (1byte)
 
@@ -45,8 +45,7 @@
 | IPv6 | 0x2c (44) | 16
 | range | 0x2d (45) |
 | Image | 0x2e (46) |
-
-
+<br />  
 
 ### Typedefinition Boolean:
 
@@ -57,7 +56,7 @@ byte value:
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | byte | 0 | y | default value
-
+<br />  
 
 ### Typedefinition Numbers:
 
@@ -80,6 +79,7 @@ see type-table for all number-types.
 | Linear | 0x00 |
 | Log | 0x01 |
 | exp2 | 0x02 |
+<br />  
 
 ### Typedefinition Range:
 
@@ -92,6 +92,7 @@ range-data:
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | int32 | n | Number TypeDefintion of range element
 | default | 0x30 (48) | range-data | element-type-default element-type-default | y | default value
+<br />  
 
 ### Typedefinition String: string
 
@@ -101,7 +102,7 @@ range-data:
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | rcp string | 0 - | y | default value
 | regular expression | 0x31 (49) | rcp string | "" | y | regular expression to define the form. e.g. limit amount of newlines in text: "\\A(?>[^\r\n]*(?>\r\n?|\n)){0,3}[^\r\n]*\\z"
-
+<br />  
 
 ### Typedefinition Color: RGB, RGBA
 
@@ -122,8 +123,7 @@ e.g. RGB:
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | int32 | 0 | y | default value
-
-
+<br />  
 
 ### Typedefinition Enum
 
@@ -132,7 +132,7 @@ e.g. RGB:
 | default | 0x30 (48) | string-tiny | value 0 means: first-element | y | default value
 | entries | 0x31 (49) | list of string-tiny, terminated with 0 (0-length string-tiny) | 0 | y | list of enumerations
 | multiselect | 0x32 (50) | boolean | false | y | allow multiple selections or not
-
+<br />  
 
 ### Typedefinition Array
 
@@ -154,7 +154,7 @@ number of bytes defined by the element-type and the structure
 | **elementtype** | - | TypeDefinition | - | n | TypeDefintion of array elements (all except array, list)
 | **structure** | - | rcp-array-structure | 0 | n | defines the structure of the array: number of dimensions and elements per dimensions
 | default | 0x30 (48) | rcp-array-data | - | y | default value
-
+<br />  
 
 ### Typedefinition List
 
@@ -175,7 +175,7 @@ e.g.:
 | default | 0x30 (48) | list-data | 0 | y | default value
 | minimum | 0x32 (50) | one-dimensional list of <int32> | 0 | y | minimum length of list per dimension. if minimum length of a dimension is not specified, then the minimum length is 0.
 | maximum | 0x33 (51) | one-dimensional list of <int32> | 0 | y | maximum length of list per dimension. if maximum length of a dimension is not specified, then the maximum length is max-int.
- 
+<br />  
 
 ### URI:
 
@@ -186,21 +186,21 @@ size-prefixed UTF-8 string forming an URI
 | default | 0x30 (48) | string | 0 - | y | default value
 | filter | 0x31 (49) | string-tiny | - | y | empty (all files), "dir" or a file-filter as defined [here](https://msdn.microsoft.com/en-us/library/system.windows.forms.filedialog.filter(v=vs.110).aspx).
 | schema | 0x32 (50) | string-tiny | - | y | space-seperated list with allowed schemas. e.g. "file ftp http https"
-
+<br />  
 
 ### IPv4:
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | 4 bytes | - | y | default value
-
+<br />  
 
 ### IPv6:
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | 16 bytes | - | y | default value
-
+<br />  
 
 ### Image:
 
@@ -211,7 +211,7 @@ image-data: bytes of one of the following image-formats: JPEG, PNG, BMP, GIF
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | rcp-image-data | - | y | default image
-
+<br />  
 
 ### Custom Type:
 
