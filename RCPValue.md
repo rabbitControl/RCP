@@ -38,12 +38,12 @@
 | Enum | 0x24 (36) |
 | Array | 0x25 (37) |
 | List | 0x26 (38) |
-| BANG | 0x27 (39) | 0 |
-| group | 0x28 (40) | 0 |
+| Bang | 0x27 (39) | 0 |
+| Group | 0x28 (40) | 0 |
 | URI | 0x2a (42) | size prefixed
 | IPv4 | 0x2b (43) | 4
 | IPv6 | 0x2c (44) | 16
-| range | 0x2d (45) |
+| Range | 0x2d (45) |
 | Image | 0x2e (46) |
 <br />  
 
