@@ -68,7 +68,7 @@ see type-table for all number-types.
 | default | 0x30 (48) | of type | 0 | y | default value
 | minimum | 0x31 (49) | of type | minimum of type | y | min value
 | maximum | 0x32 (50) | of type | maximum of type | y | max value
-| multipleof | 0x33 (51) | of type | 0 | y | multiple of value
+| multipleof | 0x33 (51) | of type | 0 | y | multiple of value (a value of 0 means: multipleof does not apply)
 | scale | 0x34 (52) | byte | 0 | y | one of these (0x00, 0x01, 0x02)
 | unit | 0x35 (53) | string-tiny | "" | y | the unit of value
 
