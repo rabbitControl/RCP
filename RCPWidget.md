@@ -57,6 +57,7 @@
 | stepsize-multiplier | 0x57 (87) | T of value | 1 | y | assuming a numberbox has buttons to step the value up/down, this option defines a multiplier for Value.stepsize. If Value.Stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
 | cyclic | 0x58 (88) | boolean | false | y | inspector should wrap around value
 
+
 ### Dial:
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
@@ -73,18 +74,11 @@
 | horizontal | 0x57 (87) | boolean | true | y | if slider is horizontal
 
 
-### Table:
-work-in-progress:
-option: labels for dimensions: array of labels
-
-
 ### Range:
-```
-min		             max
-|----------------------------|
-      |------|
-      v1     v2
-```
+
+| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| --------------|--------------|----------------|-----------------|------------|---------------|
+| precision | 0x56 (86) | uint8 | 2 | y | set precision for value display
 
 ### Custom Widget:
 
