@@ -46,8 +46,7 @@
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | multiline | 0x56 (86) | boolean | false | y | enable/disable multiline textfield
-| wordwrap | 0x57 (87) | boolean | false | y | enable/disable word wrap
-| password | 0x58 (88) | boolean | false | y | enable/disable if testbox is a password input
+| password | 0x57 (87) | boolean | false | y | enable/disable if testbox is a password input
 
 
 ### Numberbox:
