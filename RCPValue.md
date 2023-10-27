@@ -63,6 +63,9 @@ byte value:
 uint8, int8, uint16, int16, ...  Vector2f32, Vector2i32, Vector3f32, Vector3i32, ...
 see type-table for all number-types.
 
+floating point values are follow IEEE 754 standard.
+
+
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | default | 0x30 (48) | of type | 0 | y | default value
