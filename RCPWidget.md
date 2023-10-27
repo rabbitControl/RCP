@@ -54,9 +54,8 @@
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | precision | 0x56 (86) | uint8 | 2 | y | set precision for numberbox
-| format | 0x57 (87) | uint8 | 0x01 | y | set format of numberbox: dec/hex/bin
-| stepsize | 0x58 (88) | T of value | if Value.multipleof > 0, then value.multipleof. Else dependent on value.subtype: If real: 0.01. If int: 1 | y | a value always must be within it’s definition. Therefore If stepsize collides with value.multipleof, then value.multipleof is used: to keep value within it’s defintion.
-| cyclic | 0x59 (89) | boolean | false | y | inspector should wrap around value
+| stepsize | 0x57 (87) | T of value | if Value.multipleof > 0, then value.multipleof. Else dependent on value.subtype: If real: 0.01. If int: 1 | y | a value always must be within it’s definition. Therefore If stepsize collides with value.multipleof, then value.multipleof is used: to keep value within it’s defintion.
+| cyclic | 0x58 (88) | boolean | false | y | inspector should wrap around value
 
 ## format table:
 
