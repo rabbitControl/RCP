@@ -53,7 +53,7 @@
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| precision | 0x56 (86) | uint8 | 2 | y | set precision for numberbox
+| precision | 0x56 (86) | uint8 | 2 | y | set precision for value display
 | stepsize-multiplier | 0x57 (87) | T of value | 1 | y | assuming a numberbox has buttons to step the value up/down, this option defines a multiplier for Value.stepsize. If Value.Stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
 | cyclic | 0x58 (88) | boolean | false | y | inspector should wrap around value
 
@@ -61,14 +61,16 @@
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| cyclic | 0x56 (86) | boolean | false | y | if dial is cyclic
+| precision | 0x56 (86) | uint8 | 2 | y | set precision for the value display
+| cyclic | 0x57 (87) | boolean | false | y | if dial is cyclic
 
 
 ### Slider:
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| horizontal | 0x56 (86) | boolean | true | y | if slider is horizontal
+| precision | 0x56 (86) | uint8 | 2 | y | set precision for value display
+| horizontal | 0x57 (87) | boolean | true | y | if slider is horizontal
 
 
 ### Table:
