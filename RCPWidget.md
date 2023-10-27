@@ -54,17 +54,8 @@
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | precision | 0x56 (86) | uint8 | 2 | y | set precision for numberbox
-| stepsize | 0x57 (87) | T of value | if Value.multipleof > 0, then value.multipleof. Else dependent on value.subtype: If real: 0.01. If int: 1 | y | a value always must be within it’s definition. Therefore If stepsize collides with value.multipleof, then value.multipleof is used: to keep value within it’s defintion.
+| stepsize-multiplier | 0x57 (87) | T of value | 1 | y | assuming a numberbox has buttons to step the value up/down, this option defines a multiplier for Value.stepsize. If Value.Stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
 | cyclic | 0x58 (88) | boolean | false | y | inspector should wrap around value
-
-## format table:
-
-| typename   | hex   |
-|------------|-------|
-| dec | 0x01 |
-| hex | 0x02 |
-| bin | 0x03 |
-
 
 ### Dial:
 
