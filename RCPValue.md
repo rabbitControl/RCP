@@ -121,11 +121,14 @@ e.g. RGB:
 
 ### Typedefinition Enum
 
+value is a size-prefixed array of uint16.
+
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | string-tiny | value 0 means: first-element | y | default value
-| entries | 0x31 (49) | list of string-tiny, terminated with 0 (0-length string-tiny) | 0 | y | list of enumerations
-| multiselect | 0x32 (50) | boolean | false | y | allow multiple selections or not
+| default | 0x30 (48) | size-prefixed (uint16) array of uint16 | 0 | y | default value, selection indices
+| entries | 0x31 (49) | size-prefixed (uint16) array of string-tiny | 0 | y | list of enumerations
+| minimum selection count | 0x32 (50) | uint16 | 0 | y | the minimum amount of allowed selected items (<= maximum selection count)
+| maximum selection count | 0x33 (51) | uint16 | 1 | y | the maximum amount of allowed selected items (>= minimum selection count)
 <br />  
 
 ### Typedefinition Array
