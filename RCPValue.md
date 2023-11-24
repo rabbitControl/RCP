@@ -135,8 +135,8 @@ value is a size-prefixed array of uint16.
 
 #### rcp-array-structure:  
 dimension-count followed by elements per dimension  
-dimension-count: <int32>  
-elements per dimension: dimension-count x <int32>  
+dimension-count: \<int32>  
+elements per dimension: dimension-count x \<int32>  
 
 e.g.  
 3-dimensionsal array with 2 times 2 times one elements (int[2][2][1]):  
@@ -170,8 +170,8 @@ e.g.:
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements (all except array, list)
 | default | 0x30 (48) | list-data | 0 | y | default value
-| minimum | 0x32 (50) | one-dimensional list of <int32> | 0 | y | minimum length of list per dimension. if minimum length of a dimension is not specified, then the minimum length is 0.
-| maximum | 0x33 (51) | one-dimensional list of <int32> | 0 | y | maximum length of list per dimension. if maximum length of a dimension is not specified, then the maximum length is max-int.
+| minimum | 0x32 (50) | one-dimensional list of \<int32> | 0 | y | minimum length of list per dimension. if minimum length of a dimension is not specified, then the minimum length is 0.
+| maximum | 0x33 (51) | one-dimensional list of \<int32> | 0 | y | maximum length of list per dimension. if maximum length of a dimension is not specified, then the maximum length is max-int.
 <br />  
 
 ### URI:
