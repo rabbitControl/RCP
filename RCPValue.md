@@ -204,7 +204,7 @@ size-prefixed UTF-8 string forming an URI
 ### Image:
 
 #### rcp-image-data:
-size prefix: int32  
+size prefix: uint32  
 image-data: bytes of one of the following image-formats: JPEG, PNG, BMP, GIF  
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
