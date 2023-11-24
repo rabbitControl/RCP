@@ -72,17 +72,8 @@ floating point values are follow IEEE 754 standard.
 | minimum | 0x31 (49) | of type | minimum of type | y | min value
 | maximum | 0x32 (50) | of type | maximum of type | y | max value
 | stepsize | 0x33 (51) | of type | 0 | y | must be >= 0; constrains possibles values to a multiple of stepsize, a value of 0 means: no constraint
-| scale | 0x34 (52) | byte | 0 | y | one of these (0x00, 0x01, 0x02)
-| unit | 0x35 (53) | string-tiny | "" | y | the unit of value
+| unit | 0x34 (52) | string-tiny | "" | y | the unit of value
 
-#### scale table
-
-| Name   | hex   |
-|--------|-------|
-| Linear | 0x00 |
-| Log | 0x01 |
-| exp2 | 0x02 |
-<br />  
 
 ### Typedefinition Range:
 
