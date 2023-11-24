@@ -149,7 +149,7 @@ number of bytes defined by the element-type and the structure
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | - | n | TypeDefintion of array elements (all except array, list)
-| **structure** | - | rcp-array-structure | 0 | n | defines the structure of the array: number of dimensions and elements per dimensions
+| **structure** | - | rcp-array-structure | - | n | defines the structure of the array: number of dimensions and elements per dimensions
 | default | 0x30 (48) | rcp-array-data | - | y | default value
 <br />  
 
