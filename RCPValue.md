@@ -163,12 +163,14 @@ e.g.:
 [0] -> 1 0  
 [a, b] -> 2 a b  
 [ [a, b, c], [d, e, f] ] -> 2 3 a b c 3 d e f  
-[ [a, b, c], [d, e] ] -> 2 3 a b c 2 d e
+[ [a, b, c], [d, e] ] -> 2 3 a b c 2 d e  
+[ [ [1], [2], [3] ], [ [4], [5], [6] ] ] ->
+2 3 1 1 1 2 1 3 3 1 4 1 5 1 6
 
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **elementtype** | - | TypeDefinition | StringType | n | TypeDefintion of array elements (all except array, list)
+| **elementtype** | - | TypeDefinition | - | n | TypeDefintion of array elements (all except array, list)
 | default | 0x30 (48) | list-data | 0 | y | default value
 | minimum | 0x32 (50) | one-dimensional list of \<int32> | 0 | y | minimum length of list per dimension. if minimum length of a dimension is not specified, then the minimum length is 0.
 | maximum | 0x33 (51) | one-dimensional list of \<int32> | 0 | y | maximum length of list per dimension. if maximum length of a dimension is not specified, then the maximum length is max-int.
