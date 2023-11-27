@@ -142,7 +142,7 @@ value is a size-prefixed array of uint16.
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | Enum data | 0 | y | default value, selection indices
-| entries | 0x31 (49) | size-prefixed (uint16) array of string-short | 0 | y | list of enumerations
+| entries | 0x31 (49) | size-prefixed (uint16) array of multilanguage string-short | 0 | y | list of enumerations
 | minimum selection count | 0x32 (50) | uint16 | 0 | y | the minimum amount of allowed selected items (<= maximum selection count)
 | maximum selection count | 0x33 (51) | uint16 | 1 | y | the maximum amount of allowed selected items (>= minimum selection count)
 <br />  
