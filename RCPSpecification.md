@@ -1,128 +1,142 @@
 ## RCP Levels:
-- __Value__: Number, String, Color, … This is the value without visual representation
-- __Widget__ (optional): Button, Slider, … This is the visual representation of a Value. A Widget must be implemented client-side. The protocol defines standard widgets for basic types. Optionally complex types can be added when needed.
-
--> Have a look at the [Value Specification](RCPValue.md)
-
--> Have a look at the [Widget Specification](RCPWidget.md)
+- [Value](RCPValue.md):
+  - Value without visual representation
+  - Boolean, Numbers, String, Color, etc.
+  - Custom type
+- [Widget](RCPWidget.md):
+  - The visual representation of a value
+  - Widgets must be implemented client-side
+  - The protocol defines standard widgets for basic types
+  - Button, Slider, Dial, etc.
+  - Custom widget
 
 
 ## Endianess
 
-The format is using big endian
+For multi byte data words, network byte order (big endian byte order) is used.
 
-## Framing
+## Byte / Bits
 
-Data Framing is not scope of this protocol.
+1 byte equals to 8 bits (one octet).
 
-of interest. use a:
-- prefix stream with magic (e.g.: 0x04 0x0F 0x05 0x09)
-- SLIP RFC 1055
+## Terminator
+
+A 0-byte is used to mark the end of optional properties.
+
+## Property order
+
+Optional properties can be ordered randomly.
 
 ## Types
 
-- string-tiny: prefixed with size [uint8] followed by [UTF-8 string-data]
-- string-short: prefixed with size [uint16] followed by [UTF-8 string-data]
-- string: prefixed with size [uint32] followed by [UTF-8 string-data]
-- multilanguage: list of: [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code (3-bytes in ascii) followed by string-tiny, string-short or string. list is terminated with 0. additional to the ISO 639-3 codes we define a special code for no specific language: "any"
+- string-short:
+  - A string prefixed with its size using \<uint8> followed by UTF-8 string-data
+- string-long:
+  - A string prefixed with its size using \<uint16> followed by UTF-8 string-data
+- multilanguage string:
+  - A terminated list of [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code (3-bytes in ascii) followed by string-short or string-long.
+  - The list is terminated with a 0-byte.
+  - Additionally to the [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) codes we define a special code for no specific language: `any` which is used as default language.
 
 ## Package
 
-| Name          | ID hex/dec   | Value           | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **command** | - | byte | - | n | command of package |
-| timestamp | 0x11(17) | uint64 | 0 | y | optional timestamp |
-| data | 0x12(18) | - | - | y | package data. type depends on command |
-| **terminator** | 0 | byte | 0 | n | package terminator |
+| Name          | ID hex&nbsp;(dec)   | Value   | Default value   | Optional   | Description   |
+| --------------|---------------------|---------|-----------------|------------|---------------|
+| **command** | - | byte | - | n | Command of package. |
+| timestamp | 0x11(17) | uint64 | 0 | y | Timestamp |
+| data | 0x12(18) | - | - | y | Package data. The type depends on the command. |
+| **terminator** | 0 | byte | 0 | n | Terminator |
 
-note: we may want to send id/timestamp before the data, to decide if packet is valid (udp case), prefix the value with data-id. otherwise we need to parse the data before to get id/timestamp
+Note: we may want to send the timestamp before the data, so we can decide if a packet is valid or not (e.g. when using UDP as transport). Otherwise we need to fully parse the data before reaching the timestamp.
 
-chaining Parameters: data can contain more than one Parameter.
+A packet containing paramter-data can contain more than one parameter in the data-field.
 
 ### command table:
 
-| command   | ID   | expected data | comment   |
+| Command   | ID   | Expected data | Comment   |
 |-----------|------|---------------|-----------|
-| info | 0x01 | null or Info Data | if no data is sent: it has to be answered with an info command including info data. if data is sent, it must not be answered by an info command.
-| initialize | 0x02 | null or ID Data | if no data is sent: request for all parameters. sends update command(s) to client.
-| discover | 0x03 | null or ID Data | if no data is sent: request for all parameters. parameters are sent without typdedefinition-options, without value and userdata. discover only discovers on level, no subgroups are discovered. sends update command(s) to client.
-| update | 0x04 |	Parameter
-| remove | 0x05 | ID Data
-| updatevalue | 0x06 | specialized smallest update-value format
+| info | 0x01 | not set or "Info Data" | If no data is set in the packet it is a request for "Info Data". In this case a info-packet with valid "Info Data" needs to be sent back to the origin of the request.<br>If data is set in the packet it must not be answered.
+| initialize | 0x02 | - | Request for all parameters. A server needs to send update-packets for all parameters to (only) the requesting client.
+| update | 0x04 | Parameter | Full or partial parameter-data.
+| remove | 0x05 | ID Data | This is used to identify parameters for deletion and future features.
+| updatevalue | 0x06 | update-value format | See [Update-value packet](#Update-value-packet)
 
-- clients usually send: info, discover, initialize, update, updateValue
-- server ususally sends: info, add, update, updateValue, remove
+- Clients send: info, initialize, update, updatevalue
+- Servers send: info, update, updatevalue, remove
 
 
 ## ID Data
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **id**         | - | int16  | 0 | n | id of parameterGroup or Parameter
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| **id**         | - | int16  | 0 | n | The id of a parameter.
 
 
 ## Info Data
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
+| Name          | ID hex&nbsp;(dec)   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **version**   | - | tiny-string    | "" |n| semver
-| applicationid       | 0x1a	(26)   | tiny-string    | "" |y| Can be used to identify the server/client application
-| **terminator**    | 0 | 1 byte | 0 | n | terminator
+| **version**   | - | string-short    | - | n | String in [semver](https://semver.org/) format.
+| applicationid       | 0x1a	(26)   | string-short    | "" |y| Can be used to identify the server/client application
+| **terminator**    | 0 | 1 byte | 0 | n | Terminator
 
 
 ## Parameter:
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **id** | - | int16 | - | n | unique identifier (can not be 0. see: parent)
-| **typedefinition** |	- | TypeDefinition | - | n | typedefinition of value. see: [Value Specification](RCPValue.md)
-| value | 0x20 (32) | known from typedefinition | ? | y |	value (length is known by type!)
-| label | 0x21 (33)	| multilanguage string-tiny | "" | y | Human readable identifier
-| description | 0x22 (34) | multilanguage string-short | "" | y | can be shown as a tooltip
-| tags | 0x23 (35)	|	string-tiny | "" | y | space separated list of tags
-| order | 0x24 (36)	|	int32 | 0 | y | allows for most simple layout
-| parentid | 0x25 (37)	|	int16 | 0 | y | specifies another parameterGroup as parent.
-| widget | 0x26 (38) | widget data | text-input-widget | y | see: [Widget Specification](RCPWidget.md)
-| userdata | 0x27 (39) | size-prefixed bytearray | - | y | various user-data. e.g.: metadata, tags, ...
-| userid | 0x28 (40) | string-tiny | "" | y | user id
-| readonly | 0x29 (41) | byte | false | y | read only
-| **terminator** | 0 | 1 byte | 0 | n | terminator
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| **id** | - | int16 | - | - | Unique parameter identifier. Needs to be != 0.<br>A parameter-id of 0 identifies the virtual root group. Also see "parent".
+| **typedefinition** |	- | TypeDefinition | - | n | Typedefinition of value. see: [Value Specification](RCPValue.md)
+| value | 0x20 (32) | known from typedefinition | type-specific default | y |	The value. Byte-length is known from type.
+| label | 0x21 (33)	| multilanguage string-short | "" | y | Human readable identifier.
+| description | 0x22 (34) | multilanguage string-long | "" | y | The dscription.
+| tags | 0x23 (35)	|	string-short | "" | y | Space separated list of tags
+| order | 0x24 (36)	|	int32 | 0 | y | Allows to sort the paramters. This is useful when using auto-layouts like a list of parameters.
+| parentid | 0x25 (37)	|	int16 | 0 | y | Specifies a ParameterGroup as parent. See [ParameterGroup](#ParameterGroup).
+| widget | 0x26 (38) | widget data | textbox-widget (0x0011) | y | See: [Widget Specification](RCPWidget.md)
+| userdata | 0x27 (39) | size-prefixed array of bytes | - | y | A place for various user-data.
+| userid | 0x28 (40) | string-short | "" | y | A custom user-id
+| readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read only (does not accept remote updates)
+| **terminator** | - | byte | 0 | n | Terminator
 
 
 ## ParameterGroup:
 
-A ParameterGroup is a Parameter without value/defaultValue and a fixed TypeDefintion (group).
+A parameter-group is a parameter without value and a group-typedefintion without a default-value to organize parameters in a tree structure.
 
-A ParameterGroup allows to structure your parameters and can be used to discover parameters on different levels.
+A parameter can only be child of excactly one group (see parent-property of parameter).
 
-A Parameter can only be child of excactly one group.
+Default-override:
 
-
-## Root Parameter Group
-
-This parameter group is a virtual Parameter-group which does always exist.
-It defines the highes level in the hirarchy tree.
-
-The id of the root-group is 0.
-
-No other Parameter is allowed to have this id.
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| widget | 0x26 (38) | widget data | List-widget (0x8000) | y | See: [Widget Specification](RCPWidget.md)
 
 
-## updateValue
+### Root ParameterGroup
 
-to optimize the update of the value of a parameter, there is a specialized updateValue command in the form:
+The root ParameterGroup is a virtual parameter-group which does always exist. It defines the highest level in the hirarchy tree.
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **command**       | 0x06         | byte           | -               | n | updateValue command
-| **parameter id**  |              | int16          | 0               | n | parameter id
-| **mandatory part of datatype**   |              | byte           | 0               | n | datatype
-| **value**         |              | type of datatype  | ?               | n | the value
+The parameter-id of the root group is 0.
 
-this reduces the amount of data to be sent for a simple value udpate.
+No other Parameter is allowed to use this id.
+
+
+## Update-value packet
+
+To optimize the update of a parameter-value, the update-value packet exists in the form of:
+
+| Name          | Type      | Value   | Optional   | Description   |
+| --------------|-----------|---------|------------|---------------|
+| **command**       | byte           | 0x06     | n | Update-value command.
+| **parameter id**  | int16          | 0        | n | Parameter id.<br>A value of 0 is invalid, the packet shall be discarded in this case.
+| **mandatory part of datatype**   | bytes | datatype-data | n | Mandatory part of the datatype.<br>Needed to be able to resolve this packet.
+| **value**         | type of datatype  | value-data | n | the value of type as defined in Datatype.
+
+This packet reduces the amount of data to be sent for a simple value udpate.
 
 e.g.:
 
-updating a int32 with id 0x01 to value 255:
+Updating a parameter of \<int32> with id 1 to value 255 only needs 8 bytes:
 
-0x06 0x01 0x01 0x15 0x00 0x00 0x00 0xFF (8 bytes)
+`0x06 0x00 0x01 0x15 0x00 0x00 0x00 0xFF`

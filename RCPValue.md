@@ -1,20 +1,21 @@
--> back to [RCP Specification](RCPSpecification.md)
-<br />  
+back to: [RCP Specification](RCPSpecification.md)  
+jump to: [RCP Widget](RCPWidget.md)
+
 
 ## Typedefinition:
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **datatype** | - |  byte (see datatype table) | 0x2f | n | type of value
-| ... type options... | | ||||
-| **terminator** | 0 | byte | 0 | n | terminator
-<br />  
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| **datatype** | - |  byte | 0x2f | n | The type of the value - see datatype table.
+| ... type options... | | | | | Options for the type. |
+| **terminator** | 0 | byte | 0 | n | Terminator
 
-### Datatypes: (1byte)
 
-| datatype   | hex (dec)   | length (bytes)   |
-| -----------|-------------|------------------|
-| custom type | 0x01 (1) | defined by typedef |
+### Datatype table:
+
+| Datatype   | hex&nbsp;(dec)   | Length (bytes)   |
+| -----------|------------------|------------------|
+| custom type | 0x01 (1) | Defined by type definition. |
 | boolean | 0x10 (16) | 1 |
 | int8 | 0x11 (17) | 1 |
 | uint8 | 0x12 (18) | 1 |
@@ -32,191 +33,208 @@
 | Vector3f32 | 0x1e (30) | 3 x 4 |
 | Vector4i32 | 0x1f (31) | 4 x 4 |
 | Vector4f32 | 0x20 (32) | 4 x 4 |
-| String | 0x21 (33) | size prefixed
-| RGB | 0x22 (34) |
-| RGBA | 0x23 (35) |
-| Enum | 0x24 (36) |
-| Array | 0x25 (37) |
+| String | 0x21 (33) | string-long
+| RGB | 0x22 (34) | 4 |
+| RGBA | 0x23 (35) | 4 |
+| Enum | 0x24 (36) | Array of string-short |
+| Array | 0x25 (37) | Defined by array-structure |
 | List | 0x26 (38) |
 | Bang | 0x27 (39) | 0 |
 | Group | 0x28 (40) | 0 |
-| URI | 0x2a (42) | size prefixed
-| IPv4 | 0x2b (43) | 4
-| IPv6 | 0x2c (44) | 16
-| Range | 0x2d (45) |
-| Image | 0x2e (46) |
+| URI | 0x2a (42) | string-long |
+| IPv4 | 0x2b (43) | 4 |
+| IPv6 | 0x2c (44) | 16 |
+| Range | 0x2d (45) | 2 x number-type-size|
+| Image | 0x2e (46) | size-prefixed image-data|
 <br />  
 
-### Typedefinition Boolean:
+### Boolean:
 
-byte value:
-- 0 == false
-- bigger than 0 == true
+##### Boolean byte-value:  
+- 0x00: false  
+- not 0x00: true
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | byte | 0 | y | default value
 <br />  
 
-### Typedefinition Numbers:
+### Numbers:
 
-uint8, int8, uint16, int16, ...  Vector2f32, Vector2i32, Vector3f32, Vector3i32, ...
-see type-table for all number-types.
+- uint8, int8, uint16, int16, ...  
+- Vector2f32, Vector2i32, Vector3f32, Vector3i32, ...  
 
-floating point values are follow IEEE 754 standard.
+See [Datatype table](#datatype-table) for all number-types.  
+Floating point values follow the [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) standard.
 
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | of type | 0 | y | default value
-| minimum | 0x31 (49) | of type | minimum of type | y | min value
-| maximum | 0x32 (50) | of type | maximum of type | y | max value
-| stepsize | 0x33 (51) | of type | 0 | y | must be >= 0; constrains possibles values to a multiple of stepsize, a value of 0 means: no constraint
-| unit | 0x34 (52) | string-tiny | "" | y | the unit of value
-
-
-### Typedefinition Range:
-
-range for number types: see type-table for all number-types.
-
-range-data:
-2 consecutive values of type
-
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **elementtype** | - | TypeDefinition | int32 | n | Number TypeDefintion of range element
-| default | 0x30 (48) | range-data | element-type-default element-type-default | y | default value
+| minimum | 0x31 (49) | of type | minimum of type | y | Smallest allowed value
+| maximum | 0x32 (50) | of type | maximum of type | y | Biggest allowed value
+| stepsize | 0x33 (51) | of type | 0 | y | The stepsize must be >= 0. It constrains possible values to a multiple of the stepsize. A value of 0 means: no constraint.
+| unit | 0x34 (52) | string-short | "" | y | The unit of the value.
 <br />  
 
-### Typedefinition String: string
+### Range:
 
-4-byte size-prefixed UTF-8 string
+Range for number types: see [Datatype table](#datatype-table) for all number-types.
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | rcp string | 0 - | y | default value
-| regular expression | 0x31 (49) | rcp string | "" | y | regular expression to define the form. e.g. limit amount of newlines in text: "\\A(?>[^\r\n]*(?>\r\n?|\n)){0,3}[^\r\n]*\\z"
+##### Range data:  
+2 consecutive values of the number type where the first value in the data is the lower value and the seconds is the higher value of the range.  
+e.g.:   
+Range-data for a number of type \<int8>: `0x01 0x0a`
+
+
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| **elementtype** | - | byte-array | TypeDefinition | n | Number type-defintion of range element
+| default | 0x30 (48) | Range data | 0 0 | y | default value
 <br />  
 
-### Typedefinition Color: RGB, RGBA
+### String
 
+##### String data: 
+string-long  
+<br />  
+
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| default | 0x30 (48) | string-long | 0 | y | default value
+| regular expression | 0x31 (49) | string-long | 0 | y | A regular expression to define allowed string values. E.g.: limit the amount of newlines: "\\A(?>[^\r\n]*(?>\r\n?|\n)){0,3}[^\r\n]*\\z"
+<br />  
+
+### Color: RGB, RGBA
+
+##### Color data:
+int32  
 Colors are represented in a 32bit value in byte-order (big-endian) with 8-bits per channel:
 
-e.g. RGBA:
-* Red opaque: 0xFF 0x00 0x00 0xFF
-* Red transparent: 0x00 0x00 0x00 0xFF
-* Green opaque: 0xFF 0x00 0xFF 0x00
-* Blue 50% transparent: 0x80 0xFF 0x00 0x00
+e.g. RGBA:  
+* Red opaque: `0xFF 0x00 0x00 0xFF`  
+* Red transparent: `0x00 0x00 0x00 0xFF`  
+* Green opaque: `0xFF 0x00 0xFF 0x00`  
+* Blue 50% transparent: `0x80 0xFF 0x00 0x00`
 
-e.g. RGB:
-* Red: 0xFF 0x00 0x00 0xFF
-* Green: 0xFF 0x00 0xFF 0x00
-* Blue: 0xFF 0xFF 0x00 0x00
+e.g. RGB:  
+* Red: `0xFF 0x00 0x00 0xFF`  
+* Green: `0xFF 0x00 0xFF 0x00`  
+* Blue: `0xFF 0xFF 0x00 0x00`  
 
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | int32 | 0 | y | default value
 <br />  
 
-### Typedefinition Enum
+### Enum
+
+##### Enum data:
+Enum data is a size-prefixed array of \<uint16>-indices representing the selection in the enum. 
+Size-prefix: \<uint16>
+
+e.g.: a selection of 2 indices (0 and 1):  
+`0x00 0x02 0x00 0x00 0x00 0x01`
 
 value is a size-prefixed array of uint16.
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | size-prefixed (uint16) array of uint16 | 0 | y | default value, selection indices
-| entries | 0x31 (49) | size-prefixed (uint16) array of string-tiny | 0 | y | list of enumerations
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| default | 0x30 (48) | Enum data | 0 | y | default value, selection indices
+| entries | 0x31 (49) | size-prefixed (uint16) array of string-short | 0 | y | list of enumerations
 | minimum selection count | 0x32 (50) | uint16 | 0 | y | the minimum amount of allowed selected items (<= maximum selection count)
 | maximum selection count | 0x33 (51) | uint16 | 1 | y | the maximum amount of allowed selected items (>= minimum selection count)
 <br />  
 
-### Typedefinition Array
+### Array
 
-#### rcp-array-structure:  
-dimension-count followed by elements per dimension  
+##### Array structure:  
+\<dimension-count> followed by \<elemente per dimension>  
 dimension-count: \<int32>  
 elements per dimension: dimension-count x \<int32>  
 
-e.g.  
-3-dimensionsal array with 2 times 2 times one elements (int[2][2][1]):  
-3 2 2 1
+E.g.: a 3-dimensionsal array with 2 times 2 times 1 elements (int[2][2][1]):  `3 2 2 1`
 
-#### rcp-array-data:  
-number of bytes defined by the element-type and the structure
-
-
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **elementtype** | - | TypeDefinition | - | n | TypeDefintion of array elements (all except array, list)
-| **structure** | - | rcp-array-structure | - | n | defines the structure of the array: number of dimensions and elements per dimensions
-| default | 0x30 (48) | rcp-array-data | - | y | default value
+##### Array data:  
+Number of bytes defined by the element-type and the structure.  
 <br />  
 
-### Typedefinition List
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| **elementtype** | - | TypeDefinition | - | n | TypeDefintion of array elements (all except array, list)
+| **structure** | - | Array structure | - | n | defines the structure of the array: number of dimensions and elements per dimensions
+| default | 0x30 (48) | Array data | - | y | default value
+<br />  
 
-list-data:  
-a size-prefixed list of values for each dimension recursively.
+### List
+
+##### List data:  
+A size-prefixed list of values for each dimension.
 
 e.g.:  
-[] –> 0  
-[0] -> 1 0  
-[a, b] -> 2 a b  
-[ [a, b, c], [d, e, f] ] -> 2 3 a b c 3 d e f  
-[ [a, b, c], [d, e] ] -> 2 3 a b c 2 d e  
-[ [ [1], [2], [3] ], [ [4], [5], [6] ] ] ->
-2 3 1 1 1 2 1 3 3 1 4 1 5 1 6
+`[] –> 0`  
+`[a] -> 1 a`  
+`[a, b] -> 2 a b`  
+`[ [a, b, c], [d, e, f] ] -> 2 3 a b c 3 d e f`  
+`[ [a, b, c], [d, e] ] -> 2 3 a b c 2 d e`  
+`[ [ [1], [2], [3] ], [ [4], [5], [6] ] ] ->
+2 3 1 1 1 2 1 3 3 1 4 1 5 1 6`  
+<br />
 
-
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | - | n | TypeDefintion of array elements (all except array, list)
-| default | 0x30 (48) | list-data | 0 | y | default value
-| minimum | 0x32 (50) | one-dimensional list of \<int32> | 0 | y | minimum length of list per dimension. if minimum length of a dimension is not specified, then the minimum length is 0.
-| maximum | 0x33 (51) | one-dimensional list of \<int32> | 0 | y | maximum length of list per dimension. if maximum length of a dimension is not specified, then the maximum length is max-int.
+| default | 0x30 (48) | List data | 0 | y | default value
+| minimum | 0x32 (50) | one-dimensional list of \<int32> | 0 | y | The minimum length of list per dimension. If minimum length of a dimension is not specified, then the minimum length is 0.
+| maximum | 0x33 (51) | one-dimensional list of \<int32> | 0 | y | The maximum length of list per dimension. If maximum length of a dimension is not specified, then the maximum length is the maximum value of int32.
 <br />  
 
 ### URI:
 
-size-prefixed UTF-8 string forming an URI
+##### Uri data:
+string-long
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | string | 0 - | y | default value
-| filter | 0x31 (49) | string-tiny | - | y | empty (all files), "dir" or a file-filter as defined [here](https://msdn.microsoft.com/en-us/library/system.windows.forms.filedialog.filter(v=vs.110).aspx).
-| schema | 0x32 (50) | string-tiny | - | y | space-seperated list with allowed schemas. e.g. "file ftp http https"
+Size-prefixed UTF-8 string forming an URI
+
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| default | 0x30 (48) | string-long | 0 | y | default value
+| filter | 0x31 (49) | string-short | 0 | y | If empty no filter is set and all files/pathes are allowed. A value of "dir" or a file-filter as defined [here](https://msdn.microsoft.com/en-us/library/system.windows.forms.filedialog.filter(v=vs.110).aspx) restricts the value.
+| schema | 0x32 (50) | string-short | 0 | y | A space seperated list with allowed schemas. e.g. "file ftp http https".<br/>Emptry string means all schemes are allowed.
 <br />  
 
 ### IPv4:
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | 4 bytes | - | y | default value
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| default | 0x30 (48) | 4 bytes | 0 | y | default value
 <br />  
 
 ### IPv6:
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | 16 bytes | - | y | default value
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| default | 0x30 (48) | 16 bytes | 0 | y | default value
 <br />  
 
 ### Image:
 
-#### rcp-image-data:
-size prefix: uint32  
+#### Image-data:
+\<size-prefix> followed by \<image-data>  
+size-prefix: uint32  
 image-data: bytes of one of the following image-formats: JPEG, PNG, BMP, GIF  
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| default | 0x30 (48) | rcp-image-data | - | y | default image
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| default | 0x30 (48) | image-data | 0 | y | default image
 <br />  
 
 ### Custom Type:
 
-| Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **size** | - | uint32 | - | n | byte-length of type
+| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| **size** | - | uint32 | - | n | The amount of bytes for that value.
 | default | 0x30 (48) | size-amount of bytes | - | y | default value
-| uuid | 0x31 (49) | UUID: 16 bytes  | - | y | UUID of custom type. this must be unique to avoid widget-conflicts. !0
-| config | 0x32 (50) | 4-byte size-prefixed byte-array | - | y | custom config, can be anything
+| uuid | 0x31 (49) | UUID: 16 bytes  | - | y | UUID of custom type. This must be a valid UUID (!= 0) to avoid custom value-conflicts. The UUID must be sent on initialize but can be omitted on updates.
+| config | 0x32 (50) | uint32 size-prefixed byte-array | - | y | Custom config - can be anything.
