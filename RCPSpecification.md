@@ -38,28 +38,28 @@ Optional properties can be ordered randomly.
   - The list is terminated with a 0-byte.
   - Additionally to the [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) codes we define a special code for no specific language: `any` which is used as default language.
 
-## Package
+## Packet
 
 | Name          | ID hex&nbsp;(dec)   | Value   | Default value   | Optional   | Description   |
 | --------------|---------------------|---------|-----------------|------------|---------------|
-| **command** | - | byte | - | n | Command of package. |
-| timestamp | 0x11(17) | uint64 | 0 | y | Timestamp |
-| data | 0x12(18) | - | - | y | Package data. The type depends on the command. |
+| **command** | - | byte | - | n | Command of packet. |
+| timestamp | 0x11(17) | uint64 | 0 | y | A timestamp. |
+| data | 0x12(18) | - | - | y | packet data. The type depends on the command. |
 | **terminator** | 0 | byte | 0 | n | Terminator |
 
-Note: we may want to send the timestamp before the data, so we can decide if a packet is valid or not (e.g. when using UDP as transport). Otherwise we need to fully parse the data before reaching the timestamp.
+If a timestamp is present it must be the first option in the packet.  
+This allows to decide if a packet is valid or not (e.g. when using UDP as transport). If the data would be written before the timestamp we would need to fully parse the data before reaching the timestamp to decide if the packet is valid.
 
-A packet containing paramter-data can contain more than one parameter in the data-field.
 
-### command table:
+### Command table
 
 | Command   | ID   | Expected data | Comment   |
 |-----------|------|---------------|-----------|
 | info | 0x01 | not set or "Info Data" | If no data is set in the packet it is a request for "Info Data". In this case a info-packet with valid "Info Data" needs to be sent back to the origin of the request.<br>If data is set in the packet it must not be answered.
-| initialize | 0x02 | - | Request for all parameters. A server needs to send update-packets for all parameters to (only) the requesting client.
-| update | 0x04 | Parameter | Full or partial parameter-data.
-| remove | 0x05 | ID Data | This is used to identify parameters for deletion and future features.
-| updatevalue | 0x06 | update-value format | See [Update-value packet](#Update-value-packet)
+| initialize | 0x02 | - | Request for all parameters. A server needs to send update-packets for all parameters to (only) the requesting client to fully initialize that client. Only after sending all parameters to a client the server starts sending incremental update packets.
+| update | 0x04 | Parameter | Incremental update packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
+| remove | 0x05 | ID Data | This is used to identify parameters for deletion.<br>Data chaining: the data field can contain more than one [ID Data](#ID-data).
+| updatevalue | 0x06 | update-value format | See [Update-value packet](#Update-value-packet). Valueupdate packets must only be sent to fully initialized clients. 
 
 - Clients send: info, initialize, update, updatevalue
 - Servers send: info, update, updatevalue, remove
@@ -81,7 +81,7 @@ A packet containing paramter-data can contain more than one parameter in the dat
 | **terminator**    | 0 | 1 byte | 0 | n | Terminator
 
 
-## Parameter:
+## Parameter Data
 
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
@@ -89,7 +89,7 @@ A packet containing paramter-data can contain more than one parameter in the dat
 | **typedefinition** |	- | TypeDefinition | - | n | Typedefinition of value. see: [Value Specification](RCPValue.md)
 | value | 0x20 (32) | known from typedefinition | type-specific default | y |	The value. Byte-length is known from type.
 | label | 0x21 (33)	| multilanguage string-short | "" | y | Human readable identifier.
-| description | 0x22 (34) | multilanguage string-long | "" | y | The dscription.
+| description | 0x22 (34) | multilanguage string-long | "" | y | The description.
 | tags | 0x23 (35)	|	string-short | "" | y | Space separated list of tags
 | order | 0x24 (36)	|	int32 | 0 | y | Allows to sort the paramters. This is useful when using auto-layouts like a list of parameters.
 | parentid | 0x25 (37)	|	int16 | 0 | y | Specifies a ParameterGroup as parent. See [ParameterGroup](#ParameterGroup).
