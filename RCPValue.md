@@ -82,7 +82,7 @@ Floating point values follow the [IEEE 754-2019](https://standards.ieee.org/ieee
 Range for number types: see [Datatype table](#datatype-table) for all number-types.
 
 ##### Range data:  
-2 consecutive values of the number type where the first value in the data is the lower value and the seconds is the higher value of the range.  
+2 consecutive values of the number type.  
 e.g.:   
 Range-data for a number of type \<int8>: `0x01 0x0a`
 
@@ -90,7 +90,7 @@ Range-data for a number of type \<int8>: `0x01 0x0a`
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **elementtype** | - | byte-array | TypeDefinition | n | Number type-defintion of range element
-| default | 0x30 (48) | Range data | 0 0 | y | default value
+| default | 0x30 (48) | Range data | 0 1 | y | default value
 <br />  
 
 ### String
