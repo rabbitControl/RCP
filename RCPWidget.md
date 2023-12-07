@@ -47,8 +47,9 @@ jump to: [RCP Value](RCPValue.md)
 
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| multiline | 0x56 (86) | boolean | false | y | enable/disable multiline textfield
-| password | 0x57 (87) | boolean | false | y | enable/disable if textbox is a password input
+| multiline | 0x56 (86) | boolean | false | y | enable/disable multiline textfield.
+| password | 0x57 (87) | boolean | false | y | enable/disable if textbox is a password input.
+| placeholder | 0x58 (88) | multilanguage string-short | "" | y | Text to be displayed if the value is empty.
 <br />
 
 ### Numberbox:
