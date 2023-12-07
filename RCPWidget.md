@@ -7,7 +7,6 @@ jump to: [RCP Value](RCPValue.md)
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **type** | - | int16 | textbox (0x0011) | n | type of widget. see widget type-table and widget options
-| enabled | 0x50 (80) | byte | 1 (true) | y | if widget allows user input
 | label-visible | 0x51 (81) | byte | 1 (true) | y | if label is visible
 | value-visible | 0x52 (82) | byte | 1 (true) | y | if value is visible
 | needs-confirmation | 0x53 (83) | byte | 0 (false) | y | if input needs to be confirmed

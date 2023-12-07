@@ -96,7 +96,8 @@ This allows to decide if a packet is valid or not (e.g. when using UDP as transp
 | widget | 0x26 (38) | widget data | textbox-widget (0x0011) | y | See: [Widget Specification](RCPWidget.md)
 | userdata | 0x27 (39) | size-prefixed array of bytes | - | y | A place for various user-data.
 | userid | 0x28 (40) | string-short | "" | y | A custom user-id
-| readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read only (does not accept remote updates)
+| readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read only a server does not accept remote updates. On a client the widget is disabled showing the current value.
+| enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the (client) widget does not show a value and disables the visual representation of the parameter (grayed out). This indicates a parameter currently not in use.
 | **terminator** | - | byte | 0 | n | Terminator
 
 
