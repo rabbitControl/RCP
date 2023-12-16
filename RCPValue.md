@@ -50,7 +50,8 @@ jump to: [RCP Widget](RCPWidget.md)
 
 ### Boolean:
 
-##### Boolean byte-value:  
+##### Boolean data:  
+One byte is used for the boolean value.  
 - 0x00: false  
 - not 0x00: true
 
@@ -131,13 +132,13 @@ e.g. RGB:
 ### Enum
 
 ##### Enum data:
-Enum data is a size-prefixed array of \<uint16>-indices representing the selection in the enum. 
+Enum data is a size-prefixed array of \<uint16>-indices representing the selection in the enum.  
 Size-prefix: \<uint16>
 
 e.g.: a selection of 2 indices (0 and 1):  
-`0x00 0x02 0x00 0x00 0x00 0x01`
+`0x00 0x02 0x00 0x00 0x00 0x01`  
+<br />
 
-value is a size-prefixed array of uint16.
 
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
@@ -201,7 +202,7 @@ Size-prefixed UTF-8 string forming an URI
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | string-long | 0 | y | default value
 | filter | 0x31 (49) | string-short | 0 | y | If empty no filter is set and all files/pathes are allowed. A value of "dir" or a file-filter as defined [here](https://msdn.microsoft.com/en-us/library/system.windows.forms.filedialog.filter(v=vs.110).aspx) restricts the value.
-| schema | 0x32 (50) | string-short | 0 | y | A space seperated list with allowed schemas. e.g. "file ftp http https".<br/>Emptry string means all schemes are allowed.
+| schema | 0x32 (50) | string-short | 0 | y | A space seperated list with allowed schemas. e.g. "file ftp http https".<br/>Empty string means all schemes are allowed.
 <br />  
 
 ### IPv4:
@@ -236,5 +237,5 @@ image-data: bytes of one of the following image-formats: JPEG, PNG, BMP, GIF
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **size** | - | uint32 | - | n | The amount of bytes for that value.
 | default | 0x30 (48) | size-amount of bytes | - | y | default value
-| uuid | 0x31 (49) | UUID: 16 bytes  | - | y | UUID of custom type. This must be a valid UUID (!= 0) to avoid custom value-conflicts. The UUID must be sent on initialize but can be omitted on updates.
+| uuid | 0x31 (49) | UUID: 16 bytes  | - | y | UUID of custom type. This must be a valid UUID (!= 0) to avoid custom value-conflicts. The UUID must be sent on initialize but can be omitted on incremental updates.
 | config | 0x32 (50) | uint32 size-prefixed byte-array | - | y | Custom config - can be anything.

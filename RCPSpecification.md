@@ -3,6 +3,7 @@
   - Value without visual representation
   - Boolean, Numbers, String, Color, etc.
   - Custom type
+
 - [Widget](RCPWidget.md):
   - The visual representation of a value
   - Widgets must be implemented client-side
@@ -13,7 +14,7 @@
 
 ## Endianess
 
-For multi byte data words, network byte order (big endian byte order) is used.
+For multi byte data words, network byte order (big endian) is used.
 
 ## Byte / Bits
 
@@ -26,17 +27,25 @@ A 0-byte is used to mark the end of optional properties.
 ## Property order
 
 Optional properties can be ordered randomly.
+## String types
 
-## Types
+RCP uses two different string types which are defined in the following form:
 
 - string-short:
-  - A string prefixed with its size using \<uint8> followed by UTF-8 string-data
+  - A string prefixed with the string length using \<uint8> as the prefix followed by UTF-8 string-data.
 - string-long:
-  - A string prefixed with its size using \<uint16> followed by UTF-8 string-data
-- multilanguage string:
-  - A terminated list of [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code (3-bytes in ascii) followed by string-short or string-long.
+  - A string prefixed with the string length using \<uint16> as the prefix followed by UTF-8 string-data.
+
+## Multilanguage string:
+
+RCP supports multiple languages by using multi-language strings. A `Multilanguage string` contains multiple versions of the string in different languages. Each language is prefixed with a [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code or `any` for no specific language.  
+
+All the languages are transmitted at once. We decided to favour this over a different approach where languages would need to be declared and translations would need to be fetched when switching a language in a frontend.
+
+  - A terminated list of [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code (3-bytes in ascii) followed by a string-short or string-long.
   - The list is terminated with a 0-byte.
   - Additionally to the [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) codes we define a special code for no specific language: `any` which is used as default language.
+
 
 ## Packet
 
@@ -101,26 +110,26 @@ This allows to decide if a packet is valid or not (e.g. when using UDP as transp
 | **terminator** | - | byte | 0 | n | Terminator
 
 
-## ParameterGroup:
+## Parameter Group:
 
-A parameter-group is a parameter without value and a group-typedefintion without a default-value to organize parameters in a tree structure.
+A `Parameter Group` is a parameter without value and a group-typedefintion without a default-value to organize parameters in a tree structure.
 
-A parameter can only be child of excactly one group (see parent-property of parameter).
+A parameter can only be child of excactly one group (see parent-option of parameter).
 
-Default-override:
+#### Default override:
 
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | widget | 0x26 (38) | widget data | List-widget (0x8000) | y | See: [Widget Specification](RCPWidget.md)
 
 
-### Root ParameterGroup
+#### Root Parameter Group
 
-The root ParameterGroup is a virtual parameter-group which does always exist. It defines the highest level in the hirarchy tree.
+The root `Parameter Group` is a virtual group which does always exist. It defines the highest level in the hirarchy tree.
 
 The parameter-id of the root group is 0.
 
-No other Parameter is allowed to use this id.
+No other Parameter is allowed to use this parameter id.
 
 
 ## Update-value packet

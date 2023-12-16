@@ -91,5 +91,5 @@ jump to: [RCP Value](RCPValue.md)
 
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| uuid          | 0x56 (86) | UUID: 16-byte     | 0 | y | UUID of custom widget. This must be a valid UUID (!= 0) to avoid custom widget-conflicts. The UUID must be sent on initialize but can be omitted on updates.
-| config        | 0x57 (87) | 4-byte size-prefixed byte-array | - | y | Custom config - can be anything.
+| uuid          | 0x56 (86) | UUID: 16-byte     | 0 | y | UUID of custom widget. This must be a valid UUID (!= 0) to avoid custom widget-conflicts. The UUID must be sent on initialize but can be omitted on incremental updates.
+| config        | 0x57 (87) | uint32 size-prefixed byte-array | - | y | Custom config - can be anything.
