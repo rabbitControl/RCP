@@ -36,6 +36,10 @@ The `Option Id` consits of 8 bits (one octet) where the most significant bit det
      
 - TERM: Terminator bit
 - Option Id: The value of the option id
+     
+#### Option Id 0 (packet terminator)
+
+An [Option Id](#Option-Id) of 0 with terminator-flag set (0x80) is used as terminator for [packets](#packet).  
 
 ## Option order
 
@@ -99,37 +103,47 @@ All the languages are transmitted at once. We decided to favour this over a diff
 
 ## Packet
 
-| Name          | ID hex&nbsp;(dec)   | Value   | Default value   | Optional   | Description   |
-| --------------|---------------------|---------|-----------------|------------|---------------|
-| **command** | - | byte | - | n | Command of packet. |
-| timestamp | 0x11(17) | uint64 | 0 | y | A timestamp. |
-| data | 0x12(18) | - | - | y | packet data. The type depends on the command. |
-| **terminator** | 0 | byte | 0 | n | Terminator |
+RCP wraps its data into data packets with an optional timestamp. Data can be chained.
 
-If a timestamp is present it must be the first option in the packet.  
-This allows to decide if a packet is valid or not (e.g. when using UDP as transport). If the data would be written before the timestamp we would need to fully parse the data before reaching the timestamp to decide if the packet is valid.
+     0               1              1/8
+      7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...
+     +-+-+-+---------+---------------+-----------------------+------------+
+     |T|R|R| Command |   Timestamp   | command specific Data | terminator |
+     |S|S|S|   (5)   |  (if TS is 1) | command specific Data |   (0x80)   |
+     | |V|V|         |      (64)     |  ...                  |            |
+     | |1|2|         |               |                       |            |
+     +-+-+-+---------+---------------+-----------------------|------------+
+     
+     
+
+- TS: Timestamp flag. If this flag is set the first 64 bit after the command is a timestamp
+- RSV1/RSV2: reserved for future use
+- [Command](#command-table): The command defines what the packet data means.
+- Timestamp: a 64bit timestamp if the timestamp-flag is set  
+- Data: The data as defined by the command (can be chained)  
+- Terminator: 0x80
 
 
 ### Command table
 
 | Command   | ID   | Expected data | Comment   |
 |-----------|------|---------------|-----------|
-| info | 0x01 | not set or "Info Data" | If no data is set in the packet it is a request for "Info Data". In this case a info-packet with valid "Info Data" needs to be sent back to the origin of the request.<br>If data is set in the packet it must not be answered.
-| initialize | 0x02 | - | Request for all parameters. A server needs to send update-packets for all parameters to (only) the requesting client to fully initialize that client. Only after sending all parameters to a client the server starts sending incremental update packets.
-| update | 0x04 | Parameter | Incremental update packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
-| remove | 0x05 | ID Data | This is used to identify parameters for deletion.<br>Data chaining: the data field can contain more than one [ID Data](#ID-data).
-| updatevalue | 0x06 | update-value format | See [Update-value packet](#Update-value-packet). Valueupdate packets must only be sent to fully initialized clients. 
+| info | 0x01 | not set or [Info data](#info-data) | If no data is set in the packet it is a request for [Info Data](#info-data). In this case a info-packet with valid [Info Data](#info-data) needs to be sent back to the origin of the request.<br>If data is set in the packet it must not be answered.
+| initialize | 0x02 | - | Request for all parameters. A server needs to send update-packets for all parameters to (only) the requesting client to fully initialize that client. Only after sending all parameters to a client the server starts sending incremental update packets to this client.
+| update | 0x03 | [Parameter data](#Parameter-data) | Incremental update packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
+| updatevalue | 0x04 | [Update value data](#Update-value-data) | See [Update value](#Update-value). Valueupdate packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Update value](#Update-value) data.
+| remove | 0x05 | [Parameter Id](#Parameter-Id) | This is used to identify parameters for deletion.<br>Data chaining: the data field can contain more than one [ID Data](#ID-data).
 
-- Clients send: info, initialize, update, updatevalue
-- Servers send: info, update, updatevalue, remove
-
-
-## ID Data
-
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
-| --------------|---------------------|-----------|-----------------|------------|---------------|
-| **id**         | - | int16  | 0 | n | The id of a parameter.
-
+- Clients send:
+	- info
+	- initialize
+	- update
+	- updatevalue
+- Servers send:
+	- info
+	- update
+	- updatevalue
+	- remove
 
 ## Info Data
 
@@ -180,21 +194,20 @@ The parameter-id of the root group is 0.
 No other Parameter is allowed to use this parameter id.
 
 
-## Update-value packet
+## Update value data
 
-To optimize the update of a parameter-value, the update-value packet exists in the form of:
+To optimize the update of a parameter value a special form is defined:
 
 | Name          | Type      | Value   | Optional   | Description   |
 | --------------|-----------|---------|------------|---------------|
-| **command**       | byte           | 0x06     | n | Update-value command.
-| **parameter id**  | int16          | 0        | n | Parameter id.<br>A value of 0 is invalid, the packet shall be discarded in this case.
-| **mandatory part of datatype**   | bytes | datatype-data | n | Mandatory part of the datatype.<br>Needed to be able to resolve this packet.
+| **parameter id**  | [Parameter Id](#Parameter-Id)          | -         | n | Tghe Parameter id.<br>A value of 0 is invalid, the packet shall be discarded in this case.
+| **mandatory part of datatype**   | Typedefinition | datatype-data | n | Mandatory part of the datatype without options.<br>Needed to be able to resolve this packet without additional lookup.
 | **value**         | type of datatype  | value-data | n | the value of type as defined in Datatype.
 
-This packet reduces the amount of data to be sent for a simple value udpate.
+This reduces the amount of data to be sent when only updating the value especially when chaining parameter updates.
 
-e.g.:
+E.g.:
 
 Updating a parameter of \<int32> with id 1 to value 255 only needs 8 bytes:
 
-`0x06 0x00 0x01 0x15 0x00 0x00 0x00 0xFF`
+`0x04 0x81 0x95 0x00 0x00 0x00 0xFF 0x80`
