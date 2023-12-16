@@ -41,6 +41,40 @@ The `Option Id` consits of 8 bits (one octet) where the most significant bit det
 
 Optional properties can be randomly ordered.
 
+## Parameter Id
+
+The parameter-id may be encoded in multiple consecutive bytes, where the most significant bit of the byte defines whether this byte is the last byte of the `Parameter Id`.  
+To obtain the value of the `Parameter Id`, each byte needs to be masked with 0x80.
+
+Implementations shall avoid sending useless 0-bytes. E.g.: if a `Parameter Id` is smaller than 128 only one byte should be sent.
+
+NOTE: This design introduces a volatility. The protocol can be stalled by continuously sending valid parts of a paramter id, never ending it.
+
+Big endian applies: the first byte in the data stream is the most significant byte.
+
+      7 6 5 4 3 2 1 0 
+     +-+-------------+
+     |T| parameter-id|
+     |E|     (7)     |
+     |R|             |
+     |M|             |
+     +-+-------------+
+     
+- TERM: terminator bit
+     
+E.g. Parameter Id 1:
+
+      7 6 5 4 3 2 1 0 
+     +-+-------------+
+     |1|0 0 0 0 0 0 1|	= 1
+     +-+-------------+
+
+E.g. Parameter Id 129: 
+
+      7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 
+     +-+-------------+-+-------------+
+     |0|0 0 0 0 0 0 1|1|0 0 0 0 0 0 1| = 129
+     +-+-------------+-+-------------+
 
 
 ## String types
@@ -109,7 +143,7 @@ This allows to decide if a packet is valid or not (e.g. when using UDP as transp
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| **id** | - | int16 | - | - | Unique parameter identifier. Needs to be != 0.<br>A parameter-id of 0 identifies the virtual root group. Also see "parent".
+| **id** | - | [Parameter Id](#Parameter-Id) | - | - | Unique parameter identifier. Needs to be != 0.<br>A parameter-id of 0 identifies the virtual root group. Also see "parent".
 | **typedefinition** |	- | [Typedefinition](RCPValue.md) | - | n | Typedefinition of value.<br/>See: [Typedefinition](RCPValue.md)
 | value | 0x20 (32) | known from typedefinition | type-specific default | y |	The value. Byte-length is known from type.
 | label | 0x21 (33)	| multilanguage string-short | "" | y | Human readable identifier.
