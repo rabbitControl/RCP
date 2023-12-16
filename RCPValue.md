@@ -49,18 +49,20 @@ The `Datatype Id` consits of 8 bits (one octet) where the most significant bit d
 | Vector4i32 | 0x1f (31) | 4 x 4 |
 | Vector4f32 | 0x20 (32) | 4 x 4 |
 | String | 0x21 (33) | string-long
-| RGB | 0x22 (34) | 4 |
+| RGB | 0x22 (34) | 3 |
 | RGBA | 0x23 (35) | 4 |
-| Enum | 0x24 (36) | Array of string-short |
-| Array | 0x25 (37) | Defined by array-structure |
-| List | 0x26 (38) |
-| Bang | 0x27 (39) | 0 |
-| Group | 0x28 (40) | 0 |
-| URI | 0x2a (42) | string-long |
-| IPv4 | 0x2b (43) | 4 |
-| IPv6 | 0x2c (44) | 16 |
-| Range | 0x2d (45) | 2 x number-type-size|
-| Image | 0x2e (46) | size-prefixed image-data|
+| RGB Float | 0x24 (36) | 3 x 4 |
+| RGBA Float | 0x25 (37) | 4 x 4 |
+| Enum | 0x26 (38) | Array of string-short |
+| Array | 0x27 (39) | Defined by array-structure |
+| List | 0x28 (40) |
+| Bang | 0x29 (41) | 0 |
+| Group | 0x2a (42) | 0 |
+| URI | 0x2b (43) | string-long |
+| IPv4 | 0x2c (44) | 4 |
+| IPv6 | 0x2d (45) | 16 |
+| Range | 0x2e (46) | 2 x number-type-size|
+| Image | 0x2f (47) | size-prefixed image-data|
 <br />  
 
 ### Boolean:
@@ -121,22 +123,69 @@ string-long
 | regular expression | 0x31 (49) | string-long | 0 | y | A regular expression to define allowed string values. E.g.: limit the amount of newlines: "\\A(?>[^\r\n]*(?>\r\n?|\n)){0,3}[^\r\n]*\\z"
 <br />  
 
-### Color: RGB, RGBA
+
+### Color: RGB
 
 ##### Color data:
-int32  
-Colors are represented in a 32bit value in byte-order (big-endian) with 8-bits per channel:
+3 bytes to encode the channels R, G, B  
+
+e.g. RGB:  
+* Red: `0xFF 0x00 0x00`  
+* Green: `0x00 0xFF 0x00`  
+* Blue: `0x00 0x00 0xFF`  
+
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| default | 0x30 (48) | 3 bytes | 0 | y | default value
+<br />  
+
+
+### Color: RGBA
+
+##### Color data:
+4 bytes to encode the channels R, G, B, A  
 
 e.g. RGBA:  
 * Red opaque: `0xFF 0x00 0x00 0xFF`  
-* Red transparent: `0x00 0x00 0x00 0xFF`  
-* Green opaque: `0xFF 0x00 0xFF 0x00`  
-* Blue 50% transparent: `0x80 0xFF 0x00 0x00`
+* Red transparent: `0xFF 0x00 0x00 0x00`  
+* Green opaque: `0x00 0xFF 0x00 0xFF`  
+* Blue 50% transparent: `0x00 0x00 0xFF 0x80`
 
-e.g. RGB:  
-* Red: `0xFF 0x00 0x00 0xFF`  
-* Green: `0xFF 0x00 0xFF 0x00`  
-* Blue: `0xFF 0xFF 0x00 0x00`  
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| default | 0x30 (48) | 4 bytes | 0 | y | default value
+<br />  
+
+
+### Color: RGB Float
+
+##### Color data:
+3 float32 (big-endian) to encode the channels R, G, B in the range of 0 .. 1  
+
+e.g. RGBA:  
+* Red: `0x0000803f 0x00000000 0x00000000`  
+* Green: `0x00000000 0x0000803f 0x00000000`  
+* 50% Blue: `0x00000000 0x00000000 0x0000003f`
+
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| default | 0x30 (48) | 3 x 4 bytes | 0 | y | default value
+<br />  
+
+
+### Color: RGBA Float
+
+##### Color data:
+4 float32 (big-endian) to encode the channels R, G, B, A in the range of 0 .. 1  
+
+e.g. RGBA:  
+* Red opaque: `0x0000803f 0x00000000 0x00000000 0x0000803f`  
+* Red transparent: `0x0000803f 0x00000000 0x00000000 0x00000000`  
+* Green opaque: `0x00000000 0x0000803f 0x00000000 0x0000803f`  
+* Blue 50% transparent: `0x00000000 0x00000000 0x0000803f 0x0000003f`
 
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
