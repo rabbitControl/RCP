@@ -58,13 +58,14 @@ Big endian applies: the first byte in the data stream is the most significant by
 
       7 6 5 4 3 2 1 0 
      +-+-------------+
-     |T| parameter-id|
-     |E|     (7)     |
-     |R|             |
-     |M|             |
+     |T|  Parameter  |
+     |E|     Id      |
+     |R|    Part     |
+     |M|     (7)     |
      +-+-------------+
      
 - TERM: terminator bit
+- Parameter Id part: The value of the parameter id
      
 E.g. Parameter Id 1:
 
@@ -108,8 +109,8 @@ RCP wraps its data into data packets with an optional timestamp. Data can be cha
      0               1              1/8
       7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...
      +-+-+-+---------+---------------+-----------------------+------------+
-     |T|R|R| Command |   Timestamp   | command specific Data | terminator |
-     |S|S|S|   (5)   |  (if TS is 1) | command specific Data |   (0x80)   |
+     |T|R|R| Command |   Timestamp   | Command specific data | Terminator |
+     |S|S|S|   (5)   |  (if TS is 1) | Command specific data |   (0x80)   |
      | |V|V|         |      (64)     |  ...                  |            |
      | |1|2|         |               |                       |            |
      +-+-+-+---------+---------------+-----------------------|------------+
