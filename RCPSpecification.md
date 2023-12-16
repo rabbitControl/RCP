@@ -95,17 +95,17 @@ This allows to decide if a packet is valid or not (e.g. when using UDP as transp
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **id** | - | int16 | - | - | Unique parameter identifier. Needs to be != 0.<br>A parameter-id of 0 identifies the virtual root group. Also see "parent".
-| **typedefinition** |	- | TypeDefinition | - | n | Typedefinition of value. see: [Value Specification](RCPValue.md)
+| **typedefinition** |	- | [Typedefinition](RCPValue.md) | - | n | Typedefinition of value.<br/>See: [Typedefinition](RCPValue.md)
 | value | 0x20 (32) | known from typedefinition | type-specific default | y |	The value. Byte-length is known from type.
 | label | 0x21 (33)	| multilanguage string-short | "" | y | Human readable identifier.
-| description | 0x22 (34) | multilanguage string-long | "" | y | The description.
-| tags | 0x23 (35)	|	string-short | "" | y | Space separated list of tags
-| order | 0x24 (36)	|	int32 | 0 | y | Allows to sort the paramters. This is useful when using auto-layouts like a list of parameters.
-| parentid | 0x25 (37)	|	int16 | 0 | y | Specifies a ParameterGroup as parent. See [ParameterGroup](#ParameterGroup).
-| widget | 0x26 (38) | widget data | textbox-widget (0x0011) | y | See: [Widget Specification](RCPWidget.md)
-| userdata | 0x27 (39) | size-prefixed array of bytes | - | y | A place for various user-data.
+| description | 0x22 (34) | multilanguage string-long | "" | y | The description of the parameter.
+| tags | 0x23 (35)	|	string-short | "" | y | Space separated list of tags. (Tags containing spaces are not supported)
+| order | 0x24 (36)	|	int32 | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters.
+| parentid | 0x25 (37)	|	[Parameter Id](#Parameter-Id) | 0 | y | Specifies a ParameterGroup as parent. See [Parameter Group](#Parameter-Group).
+| widget | 0x26 (38) | [Widget data](RCPWidget.md) | textbox-widget (0x0011) | y | Specify the widget for this parameter. Senseful defaults are specified for different datatypes. See [Widget data](RCPWidget.md) for more information.
+| userdata | 0x27 (39) | uint32 size-prefixed array of bytes | - | y | A place for various user-data.
 | userid | 0x28 (40) | string-short | "" | y | A custom user-id
-| readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read only a server does not accept remote updates. On a client the widget is disabled showing the current value.
+| readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value.
 | enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the (client) widget does not show a value and disables the visual representation of the parameter (grayed out). This indicates a parameter currently not in use.
 | **terminator** | - | byte | 0 | n | Terminator
 

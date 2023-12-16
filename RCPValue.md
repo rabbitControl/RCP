@@ -13,7 +13,7 @@ jump to: [RCP Widget](RCPWidget.md)
 
 ### Datatype table:
 
-| Datatype   | hex&nbsp;(dec)   | Length (bytes)   |
+| Datatype   | Datatype Id<br/>hex&nbsp;(dec)   | Length (bytes)   |
 | -----------|------------------|------------------|
 | custom type | 0x01 (1) | Defined by type definition. |
 | boolean | 0x10 (16) | 1 |
@@ -72,8 +72,8 @@ Floating point values follow the [IEEE 754-2019](https://standards.ieee.org/ieee
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | of type | 0 | y | default value
-| minimum | 0x31 (49) | of type | minimum of type | y | Smallest allowed value
-| maximum | 0x32 (50) | of type | maximum of type | y | Biggest allowed value
+| minimum | 0x31 (49) | of type | minimum of type | y | Smallest allowed value (inclusive)
+| maximum | 0x32 (50) | of type | maximum of type | y | Biggest allowed value (inclusive)
 | stepsize | 0x33 (51) | of type | 0 | y | The stepsize must be >= 0. It constrains possible values to a multiple of the stepsize. A value of 0 means: no constraint.
 | unit | 0x34 (52) | string-short | "" | y | The unit of the value.
 <br />  
@@ -126,7 +126,7 @@ e.g. RGB:
 
 | Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| default | 0x30 (48) | int32 | 0 | y | default value
+| default | 0x30 (48) | 4 x 4 bytes | 0 | y | default value
 <br />  
 
 ### Enum
