@@ -20,13 +20,29 @@ For multi byte data words, network byte order (big endian) is used.
 
 1 byte equals to 8 bits (one octet).
 
-## Terminator
+## Option Id
 
-A 0-byte is used to mark the end of optional properties.
+RCP uses options in all parts of the protocol to setup [Values](RCPValue.md) or [Widgets](RCPWidget.md). Senseful default values are defined for common uses. Default values for options should not to be transmitted.  
 
-## Property order
+The `Option Id` consits of 8 bits (one octet) where the most significant bit determines whether more options are following (0) or not (1).  
 
-Optional properties can be ordered randomly.
+      7 6 5 4 3 2 1 0 
+     +-+-------------+
+     |T| Option Id   |
+     |E|     (7)     |
+     |R|             |
+     |M|             |
+     +-+-------------+
+     
+- TERM: Terminator bit
+- Option Id: The value of the option id
+
+## Option order
+
+Optional properties can be randomly ordered.
+
+
+
 ## String types
 
 RCP uses two different string types which are defined in the following form:
@@ -83,16 +99,15 @@ This allows to decide if a packet is valid or not (e.g. when using UDP as transp
 
 ## Info Data
 
-| Name          | ID hex&nbsp;(dec)   | ValueType      | default value   | optional   | description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **version**   | - | string-short    | - | n | String in [semver](https://semver.org/) format.
-| applicationid       | 0x1a	(26)   | string-short    | "" |y| Can be used to identify the server/client application
-| **terminator**    | 0 | 1 byte | 0 | n | Terminator
+| applicationid       | 0x1a	(26)   | string-short    | "" |y| Can be used to identify the server/client application.
 
 
 ## Parameter Data
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **id** | - | int16 | - | - | Unique parameter identifier. Needs to be != 0.<br>A parameter-id of 0 identifies the virtual root group. Also see "parent".
 | **typedefinition** |	- | [Typedefinition](RCPValue.md) | - | n | Typedefinition of value.<br/>See: [Typedefinition](RCPValue.md)
@@ -107,7 +122,6 @@ This allows to decide if a packet is valid or not (e.g. when using UDP as transp
 | userid | 0x28 (40) | string-short | "" | y | A custom user-id
 | readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value.
 | enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the (client) widget does not show a value and disables the visual representation of the parameter (grayed out). This indicates a parameter currently not in use.
-| **terminator** | - | byte | 0 | n | Terminator
 
 
 ## Parameter Group:
@@ -118,7 +132,7 @@ A parameter can only be child of excactly one group (see parent-option of parame
 
 #### Default override:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | widget | 0x26 (38) | widget data | List-widget (0x8000) | y | See: [Widget Specification](RCPWidget.md)
 

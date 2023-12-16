@@ -4,11 +4,26 @@ jump to: [RCP Widget](RCPWidget.md)
 
 ## Typedefinition:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+### Datatype Id
+
+The `Datatype Id` consits of 8 bits (one octet) where the most significant bit determines whether options are following (0) or not (1).
+
+      7 6 5 4 3 2 1 0 
+     +-+-------------+
+     |T| Datatype Id |
+     |E|     (7)     |
+     |R|             |
+     |M|             |
+     +-+-------------+
+     
+- TERM: terminator bit. It marks the end of options.  
+<br />
+
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| **datatype** | - |  byte | 0x2f | n | The type of the value - see datatype table.
-| ... type options... | | | | | Options for the type. |
-| **terminator** | 0 | byte | 0 | n | Terminator
+| **Datatype Id** | - |  byte | 0x21 | n | The type of the value - see [datatype table](#Datatype-table).
+| ... type options... | | | | | Options for the type. See below. |
 
 
 ### Datatype table:
@@ -55,7 +70,7 @@ One byte is used for the boolean value.
 - 0x00: false  
 - not 0x00: true
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | byte | 0 | y | default value
 <br />  
@@ -69,7 +84,7 @@ See [Datatype table](#datatype-table) for all number-types.
 Floating point values follow the [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) standard.
 
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | of type | 0 | y | default value
 | minimum | 0x31 (49) | of type | minimum of type | y | Smallest allowed value (inclusive)
@@ -88,9 +103,9 @@ e.g.:
 Range-data for a number of type \<int8>: `0x01 0x0a`
 
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| **elementtype** | - | byte-array | TypeDefinition | n | Number type-defintion of range element
+| **elementtype** | - | TypeDefinition |0x99 | n | Number type-defintion of range element.<br />Default: float32 without options.
 | default | 0x30 (48) | Range data | 0 1 | y | default value
 <br />  
 
@@ -100,7 +115,7 @@ Range-data for a number of type \<int8>: `0x01 0x0a`
 string-long  
 <br />  
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | string-long | 0 | y | default value
 | regular expression | 0x31 (49) | string-long | 0 | y | A regular expression to define allowed string values. E.g.: limit the amount of newlines: "\\A(?>[^\r\n]*(?>\r\n?|\n)){0,3}[^\r\n]*\\z"
@@ -124,7 +139,7 @@ e.g. RGB:
 * Blue: `0xFF 0xFF 0x00 0x00`  
 
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | 4 x 4 bytes | 0 | y | default value
 <br />  
@@ -140,7 +155,7 @@ e.g.: a selection of 2 indices (0 and 1):
 <br />
 
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | Enum data | 0 | y | default value, selection indices
 | entries | 0x31 (49) | size-prefixed (uint16) array of multilanguage string-short | 0 | y | list of enumerations
@@ -161,7 +176,7 @@ E.g.: a 3-dimensionsal array with 2 times 2 times 1 elements (int[2][2][1]):  `3
 Number of bytes defined by the element-type and the structure.  
 <br />  
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | - | n | TypeDefintion of array elements (all except array, list)
 | **structure** | - | Array structure | - | n | defines the structure of the array: number of dimensions and elements per dimensions
@@ -183,7 +198,7 @@ e.g.:
 2 3 1 1 1 2 1 3 3 1 4 1 5 1 6`  
 <br />
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | - | n | TypeDefintion of array elements (all except array, list)
 | default | 0x30 (48) | List data | 0 | y | default value
@@ -198,7 +213,7 @@ string-long
 
 Size-prefixed UTF-8 string forming an URI
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | string-long | 0 | y | default value
 | filter | 0x31 (49) | string-short | 0 | y | If empty no filter is set and all files/pathes are allowed. A value of "dir" or a file-filter as defined [here](https://msdn.microsoft.com/en-us/library/system.windows.forms.filedialog.filter(v=vs.110).aspx) restricts the value.
@@ -207,14 +222,14 @@ Size-prefixed UTF-8 string forming an URI
 
 ### IPv4:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | 4 bytes | 0 | y | default value
 <br />  
 
 ### IPv6:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | 16 bytes | 0 | y | default value
 <br />  
@@ -226,14 +241,14 @@ Size-prefixed UTF-8 string forming an URI
 size-prefix: uint32  
 image-data: bytes of one of the following image-formats: JPEG, PNG, BMP, GIF  
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | image-data | 0 | y | default image
 <br />  
 
 ### Custom Type:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **size** | - | uint32 | - | n | The amount of bytes for that value.
 | default | 0x30 (48) | size-amount of bytes | - | y | default value

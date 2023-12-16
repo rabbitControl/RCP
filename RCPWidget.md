@@ -4,14 +4,26 @@ jump to: [RCP Value](RCPValue.md)
 
 ## Widget (0x24):
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+### Widget Id
+
+The `Widget Id` is a 2-byte value where the most significant bit determines whether options are following (0) or not (1).
+
+     0               1  
+      7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 
+     +-+-----------------------------+
+     |T|         widget-id           |
+     |E|            (15)             |
+     |R|                             |
+     |M|                             |
+     +-+-----------------------------+
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| **type** | - | int16 | textbox (0x0011) | n | type of widget. see widget type-table and widget options
+| **Widget Id** | - | int16 | textbox (0x0011) | n | type of widget. see widget type-table and widget options
 | label-visible | 0x51 (81) | byte | 1 (true) | y | if label is visible
 | value-visible | 0x52 (82) | byte | 1 (true) | y | if value is visible
 | needs-confirmation | 0x53 (83) | byte | 0 (false) | y | if input needs to be confirmed
 | ... special widget options... |
-| **terminator** | 0 | byte | 0 | n | Terminator
 <br />
 
 ### Widget type table:
@@ -37,14 +49,14 @@ jump to: [RCP Value](RCPValue.md)
 | Filechooser | 0x001e (30) | uri | |
 | Directorychooser | 0x001f (31) | | |
 | IP | 0x0020 (32) | IPv4 / IPv6 | |
-| List | 0x8000 (32768) | | Layouting Widget for Groups
-| Listpage | 0x8001 (32769) | | Layouting Widget for Groups
-| Tabs | 0x8002 (32770)| | Layouting Widget for Groups
+| List | 0x4000 (32768) | | Layouting Widget for Groups
+| Listpage | 0x4001 (32769) | | Layouting Widget for Groups
+| Tabs | 0x4002 (32770)| | Layouting Widget for Groups
 <br />
 
 ### Textbox:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | multiline | 0x56 (86) | boolean | false | y | enable/disable multiline textfield.
 | password | 0x57 (87) | boolean | false | y | enable/disable if textbox is a password input.
@@ -53,7 +65,7 @@ jump to: [RCP Value](RCPValue.md)
 
 ### Numberbox:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | precision | 0x56 (86) | uint8 | 2 | y | The precision for value display.
 | stepsize-multiplier | 0x57 (87) | type of value | 1 | y | Assuming a numberbox has buttons to step the value up/down, this option defines a multiplier for Value.stepsize. If Value.stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
@@ -63,7 +75,7 @@ jump to: [RCP Value](RCPValue.md)
 
 ### Dial:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | precision | 0x56 (86) | uint8 | 2 | y | The precision for the value display.
 | cyclic | 0x57 (87) | boolean | false | y | if dial is cyclic
@@ -72,7 +84,7 @@ jump to: [RCP Value](RCPValue.md)
 
 ### Slider:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | precision | 0x56 (86) | uint8 | 2 | y | The precision for the value display.
 | horizontal | 0x57 (87) | boolean | true | y | if slider is horizontal
@@ -81,7 +93,7 @@ jump to: [RCP Value](RCPValue.md)
 
 ### Range:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | precision | 0x56 (86) | uint8 | 2 | y | The precision for the value display.
 | nan-meaning | 0x57 (87) | tiny-string | "NaN" | y | String that describes the meaning of NaN in the context of the value.
@@ -89,7 +101,7 @@ jump to: [RCP Value](RCPValue.md)
 
 ### Custom Widget:
 
-| Name          | ID hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | uuid          | 0x56 (86) | UUID: 16-byte     | 0 | y | UUID of custom widget. This must be a valid UUID (!= 0) to avoid custom widget-conflicts. The UUID must be sent on initialize but can be omitted on incremental updates.
 | config        | 0x57 (87) | uint32 size-prefixed byte-array | - | y | Custom config - can be anything.
