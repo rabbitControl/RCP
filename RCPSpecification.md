@@ -61,7 +61,7 @@ Big endian applies: the first byte in the data stream is the most significant by
      |T|  Parameter  |
      |E|     Id      |
      |R|    Part     |
-     |M|     (7)     |
+     |M|    (7)      |
      +-+-------------+
      
 - TERM: terminator bit
@@ -104,7 +104,7 @@ All the languages are transmitted at once. We decided to favour this over a diff
 
 ## Packet
 
-RCP wraps its data into data packets with an optional timestamp. Data can be chained.
+RCP wraps data into data packets with an optional timestamp. Data can be chained.
 
      0               1              1/8
       7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...
@@ -175,7 +175,7 @@ RCP wraps its data into data packets with an optional timestamp. Data can be cha
 
 ## Parameter Group:
 
-A `Parameter Group` is a parameter without value and a group-typedefintion without a default-value to organize parameters in a tree structure.
+A `Parameter Group` is a parameter without value and a group-typedefintion without default-value to organize parameters in a tree structure.
 
 A parameter can only be child of excactly one group (see parent-option of parameter).
 
@@ -188,7 +188,7 @@ A parameter can only be child of excactly one group (see parent-option of parame
 
 #### Root Parameter Group
 
-The root `Parameter Group` is a virtual group which does always exist. It defines the highest level in the hirarchy tree.
+The root `Parameter Group` is a virtual group which does always exist. It defines the highest level in the hierarchy tree.
 
 The parameter-id of the root group is 0.
 
