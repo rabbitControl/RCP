@@ -48,7 +48,7 @@ Optional properties can be randomly ordered.
 ## Parameter Id
 
 The parameter-id may be encoded in multiple consecutive bytes, where the most significant bit of the byte defines whether this byte is the last byte of the `Parameter Id`.  
-To obtain the value of the `Parameter Id`, each byte needs to be masked with 0x80.
+To obtain the value of the `Parameter Id`, each byte needs to be masked with 0x7F.
 
 Implementations shall avoid sending useless 0-bytes. E.g.: if a `Parameter Id` is smaller than 128 only one byte should be sent.
 
