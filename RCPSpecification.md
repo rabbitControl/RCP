@@ -183,7 +183,7 @@ A parameter can only be child of excactly one group (see parent-option of parame
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| widget | 0x26 (38) | widget data | List-widget (0x8000) | y | See: [Widget Specification](RCPWidget.md)
+| widget | 0x26 (38) | widget data | List-widget (0x4000) | y | See: [Widget Specification](RCPWidget.md)
 
 
 #### Root Parameter Group
