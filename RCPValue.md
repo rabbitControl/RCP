@@ -262,10 +262,18 @@ string-long
 
 Size-prefixed UTF-8 string forming an URI
 
+filter definition: 
+- "dir": for choosing a directory
+- pairs of: human-readable-string|*.suffix: for choosing a file
+
+e.g.: txt files (*.txt)|*.txt|All files (*.*)|*.*
+
+e.g.: dir
+
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | string-long | 0 | y | default value
-| filter | 0x31 (49) | string-short | 0 | y | If empty no filter is set and all files/pathes are allowed. A value of "dir" or a file-filter as defined [here](https://msdn.microsoft.com/en-us/library/system.windows.forms.filedialog.filter(v=vs.110).aspx) restricts the value.
+| filter | 0x31 (49) | string-short | 0 | y | If empty no filter is set and all files/pathes are allowed. see filter definition above.
 | schema | 0x32 (50) | string-short | 0 | y | A space seperated list with allowed schemas. e.g. "file ftp http https".<br/>Empty string means all schemes are allowed.
 <br />  
 
