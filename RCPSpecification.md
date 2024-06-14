@@ -69,7 +69,7 @@ chaining Parameters: data can contain more than one Parameter.
 
 | Name          | ID hex/dec   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **version**   | - | tiny-string    | "" |n| semver
+| **version**   | - | tiny-string    | "" |n| semver of rcp protocol version
 | applicationid       | 0x1a	(26)   | tiny-string    | "" |y| Can be used to identify the server/client application
 | **terminator**    | 0 | 1 byte | 0 | n | terminator
 
