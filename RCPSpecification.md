@@ -84,7 +84,7 @@ chaining Parameters: data can contain more than one Parameter.
 | label | 0x21 (33)	| multilanguage string-tiny | "" | y | Human readable identifier
 | description | 0x22 (34) | multilanguage string-short | "" | y | can be shown as a tooltip
 | tags | 0x23 (35)	|	string-tiny | "" | y | space separated list of tags
-| order | 0x24 (36)	|	int32 | 0 | y | allows for most simple layout
+| order | 0x24 (36)	|	int32 | 0 | y | sorting for parameters. allows for most simple layout: a higher order sorts a parameter after a parameter with a lower order
 | parentid | 0x25 (37)	|	int16 | 0 | y | specifies another parameterGroup as parent.
 | widget | 0x26 (38) | widget data | text-input-widget | y | see: [Widget Specification](RCPWidget.md)
 | userdata | 0x27 (39) | size-prefixed bytearray | - | y | various user-data. e.g.: metadata, tags, ...
