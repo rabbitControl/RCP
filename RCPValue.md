@@ -301,5 +301,5 @@ image-data: bytes of one of the following image-formats: JPEG, PNG, BMP, GIF
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **size** | - | uint32 | - | n | The amount of bytes for that value.
 | default | 0x30 (48) | size-amount of bytes | - | y | default value
-| uuid | 0x31 (49) | UUID: 16 bytes  | - | y | UUID of custom type. This must be a valid UUID (!= 0) to avoid custom value-conflicts. The UUID must be sent on initialize but can be omitted on incremental updates.
+| typeid | 0x31 (49) | uint32  | - | y | ID of custom type. The ID must be sent on initialize but can be omitted on incremental updates.
 | config | 0x32 (50) | uint32 size-prefixed byte-array | - | y | Custom config - can be anything.
