@@ -152,7 +152,7 @@ RCP wraps data into data packets with an optional timestamp. Data can be chained
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **version**   | - | string-short    | - | n | String in [semver](https://semver.org/) format.
 | applicationid       | 0x1a	(26)   | string-short    | "" |y| Can be used to identify the server/client application.
-| applicationversion  | 0x1b	(27)   | tiny-string     | "" |y| version of application
+| applicationversion  | 0x1b	(27)   | string-short     | "" |y| version of application
 
 
 ## Parameter Data
