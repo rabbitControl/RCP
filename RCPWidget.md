@@ -103,5 +103,5 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| uuid          | 0x56 (86) | UUID: 16-byte     | 0 | y | UUID of custom widget. This must be a valid UUID (!= 0) to avoid custom widget-conflicts. The UUID must be sent on initialize but can be omitted on incremental updates.
+| widgetid          | 0x56 (86) | uint32     | 0 | y | ID of custom widget. The ID must be sent on initialize but can be omitted on incremental updates.
 | config        | 0x57 (87) | uint32 size-prefixed byte-array | - | y | Custom config - can be anything.
