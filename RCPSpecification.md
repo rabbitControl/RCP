@@ -131,7 +131,7 @@ RCP wraps data into data packets with an optional timestamp. Data can be chained
 | Command   | ID   | Expected data | Comment   |
 |-----------|------|---------------|-----------|
 | info | 0x01 | not set or [Info data](#info-data) | If no data is set in the packet it is a request for [Info Data](#info-data). In this case a info-packet with valid [Info Data](#info-data) needs to be sent back to the origin of the request.<br>If data is set in the packet it must not be answered.
-| initialize | 0x02 | - | Request for all parameters. A server needs to send update-packets for all parameters to (only) the requesting client to fully initialize that client. Only after sending all parameters to a client the server starts sending incremental update packets to this client.
+| initialize | 0x02 | - | On servers: request for all parameters. A server needs to send update-packets for all parameters to (only) the requesting client to fully initialize that client. After sending all parameters the server sends "initialize" back to the client. Only after sending all parameters to a client the server starts sending incremental update packets to this client. On clients: marks the end of the initial list of parameters. Clients ignore value-updates until they receive "initialize".
 | update | 0x03 | [Parameter data](#Parameter-data) | Incremental update packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
 | updatevalue | 0x04 | [Update value data](#Update-value-data) | See [Update value](#Update-value). Valueupdate packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Update value](#Update-value) data.
 | remove | 0x05 | [Parameter Id](#Parameter-Id) | This is used to identify parameters for deletion.<br>Data chaining: the data field can contain more than one [ID Data](#ID-data).
@@ -153,6 +153,7 @@ RCP wraps data into data packets with an optional timestamp. Data can be chained
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **version**   | - | string-short    | - | n | String in [semver](https://semver.org/) format.
 | applicationid       | 0x1a	(26)   | string-short    | "" |y| Can be used to identify the server/client application.
+| applicationversion  | 0x1b	(27)   | string-short     | "" |y| version of application
 
 
 ## Parameter Data

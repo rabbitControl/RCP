@@ -262,10 +262,18 @@ string-long
 
 Size-prefixed UTF-8 string forming an URI
 
+filter definition: 
+- "dir": for choosing a directory
+- pairs of: human-readable-string|*.suffix: for choosing a file
+
+e.g.: txt files (*.txt)|*.txt|All files (*.*)|*.*
+
+e.g.: dir
+
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | string-long | 0 | y | default value
-| filter | 0x31 (49) | string-short | 0 | y | If empty no filter is set and all files/pathes are allowed. A value of "dir" or a file-filter as defined [here](https://msdn.microsoft.com/en-us/library/system.windows.forms.filedialog.filter(v=vs.110).aspx) restricts the value.
+| filter | 0x31 (49) | string-short | 0 | y | If empty no filter is set and all files/pathes are allowed. see filter definition above.
 | schema | 0x32 (50) | string-short | 0 | y | A space seperated list with allowed schemas. e.g. "file ftp http https".<br/>Empty string means all schemes are allowed.
 <br />  
 
@@ -301,5 +309,5 @@ image-data: bytes of one of the following image-formats: JPEG, PNG, BMP, GIF
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **size** | - | uint32 | - | n | The amount of bytes for that value.
 | default | 0x30 (48) | size-amount of bytes | - | y | default value
-| uuid | 0x31 (49) | UUID: 16 bytes  | - | y | UUID of custom type. This must be a valid UUID (!= 0) to avoid custom value-conflicts. The UUID must be sent on initialize but can be omitted on incremental updates.
+| typeid | 0x31 (49) | uint32  | - | y | ID of custom type. The ID must be sent on initialize but can be omitted on incremental updates.
 | config | 0x32 (50) | uint32 size-prefixed byte-array | - | y | Custom config - can be anything.
