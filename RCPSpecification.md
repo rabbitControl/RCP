@@ -107,22 +107,23 @@ All the languages are transmitted at once. We decided to favour this over a diff
 RCP wraps data into data packets with an optional timestamp. Data can be chained.
 
      0               1              1/8
-      7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...
-     +-+-+-+---------+---------------+-----------------------+------------+
-     |T|R|R| Command |   Timestamp   | Command specific data | Terminator |
-     |S|S|S|   (5)   |  (if TS is 1) | Command specific data |   (0x80)   |
-     | |V|V|         |      (64)     |  ...                  |            |
-     | |1|2|         |               |                       |            |
-     +-+-+-+---------+---------------+-----------------------|------------+
+      7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...   7 6 5 4 3 2 1 0
+     +-+-+-+---------+---------------+-----------------------+--------------+
+     |T|M|R| Command |   Timestamp   | Command specific data |  Terminator  |
+     |S|U|S|   (5)   |  (if TS is 1) | Command specific data |   (if MULT)  |
+     | |L|V|         |      (64)     |  ...                  |     0x80     |
+     | |T| |         |               |                       |              |
+     +-+-+-+---------+---------------+-----------------------|--------------+
      
      
 
-- TS: Timestamp flag. If this flag is set the first 64 bit after the command is a timestamp
-- RSV1/RSV2: reserved for future use
+- TS: Timestamp flag. If this flag is set the first 64 bit after the command is a timestamp.
+- MULT: If multiple data we expect a terminator, otherwise not.
+- RSV: Reserved for future use.
 - [Command](#command-table): The command defines what the packet data means.
-- Timestamp: a 64bit timestamp if the timestamp-flag is set  
-- Data: The data as defined by the command (can be chained)  
-- Terminator: 0x80
+- Timestamp: A 64bit timestamp if the timestamp-flag is set.
+- Data: The data as defined by the command.  
+- Terminator: 0x80 if MULT is set.
 
 
 ### Command table
@@ -194,6 +195,8 @@ The parameter-id of the root group is 0.
 
 No other Parameter is allowed to use this parameter id.
 
+To configure the root group you can send a non-multi parameter-update packet. Typically only the widget can be set on the root group.
+
 
 ## Update value data
 
@@ -209,6 +212,6 @@ This reduces the amount of data to be sent when only updating the value especial
 
 E.g.:
 
-Updating a parameter of \<int32> with id 1 to value 255 only needs 8 bytes:
+Updating a parameter of \<int32> with id 1 to value 255 only needs 7 bytes:
 
-`0x04 0x81 0x95 0x00 0x00 0x00 0xFF 0x80`
+`0x06 0x81 0x95 0x00 0x00 0x00 0xFF`
