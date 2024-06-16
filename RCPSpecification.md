@@ -71,7 +71,6 @@ chaining Parameters: data can contain more than one Parameter.
 | --------------|--------------|----------------|-----------------|------------|---------------|
 | **version**   | - | tiny-string    | "" |n| rcp protocol version
 | applicationid       | 0x1a	(26)   | tiny-string    | "" |y| Can be used to identify the server/client application
-| applicationversion       | 0x1b	(27)   | tiny-string    | "" |y| version of application
 | **terminator**    | 0 | 1 byte | 0 | n | terminator
 
 
