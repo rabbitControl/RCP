@@ -23,6 +23,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | label-visible | 0x51 (81) | byte | 1 (true) | y | if label is visible
 | value-visible | 0x52 (82) | byte | 1 (true) | y | if value is visible
 | needs-confirmation | 0x53 (83) | byte | 0 (false) | y | if input needs to be confirmed
+| userdata | 0x54 (84) | uint32 size-prefixed array of bytes | 0 | y | e.g.: additional configuraiton (options) for widget
 | ... special widget options... |
 <br />
 
