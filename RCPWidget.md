@@ -39,7 +39,6 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | Press | 0x0013 (19) | | On press sends 1, on release sends 0.
 | Checkbox | 0x0014 (20) | boolean | A Checkbox supporting following states: off, on, tri-state. Toggles it's state on each press.
 | Switch | 0x0014 (20) |  | A Checkbox supporting following states: off, on. Toggles it's state on each press.
-
 | Numberbox | 0x0015 (21) | number without min/max | A numberbox or spinner.
 | Dial | 0x0016 (22) | | |
 | Slider | 0x0017 (23) | number with min/max |
