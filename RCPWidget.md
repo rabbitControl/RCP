@@ -91,7 +91,18 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | precision | 0x56 (86) | uint8 | 2 | y | The precision for the value display.
 | horizontal | 0x57 (87) | boolean | true | y | if slider is horizontal
 | nan-meaning | 0x58 (88) | tiny-string | "NaN" | y | String that describes the meaning of NaN in the context of the value.
+| trackfill-mode | 0x59 (89) | byte | 0 | y | Defines on which side of the slider the track is filled.
 <br />
+
+
+| Trackfill Mode    | value   |
+| ------------------|---------|
+| None | 0 |
+| Left | 1 |
+| Center | 2 |
+| Right | 3 |
+
+
 
 ### Range:
 
