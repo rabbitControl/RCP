@@ -172,7 +172,7 @@ RCP wraps data into data packets with an optional timestamp. Data can be chained
 | userdata | 0x27 (39) | uint32 size-prefixed array of bytes | - | y | A place for various user-data.
 | userid | 0x28 (40) | string-short | "" | y | A custom user-id
 | readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value.
-| enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the (client) widget does not show a value and disables the visual representation of the parameter (grayed out). This indicates a parameter currently not in use.
+| enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the visual representation of the parameter is disabled (grayed out). A not enabled parameter indicates a parameter currently not in use.
 
 
 ## Parameter Group:
