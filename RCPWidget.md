@@ -35,7 +35,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | Custom Widget | 0x0002 (2) | *custom | A custom widget
 | Info | 0x0010 (16) | all | Only shows the label and value. Group parameters are collapsable. This is the fallback widget for all widgets the client does not implement.
 | Textbox | 0x0011 (17) | *string | A text-input. Default widget for string.
-| Bang | 0x0012 (18) | *bang | A Button
+| Button | 0x0012 (18) | *bang | A Button
 | Switch | 0x0014 (20) | *boolean | A switch supporting following states: off, on. Switches the value on each press to its opposite state.
 | Checkbox | 0x0014 (20) | boolean | A checkbox supporting following states: off, on, indeterminate. Toggles the value on each press between true and false and unsets the indeterminate state option if it was set.
 | Press | 0x0013 (19) | boolean | On press sends 1, on release sends 0.
@@ -56,6 +56,43 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | Tabs | 0x4002 (32770)| group | Layouting Widget for Groups
 <br />
 
+
+### Button:
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| button-label | 0x56 (86) | multilanguage string-short | 0 | y | The label used on the button.
+| trigger-on-up | 0x57 (87) | boolean | false | y | If set the button triggers the bang on up.
+<br />
+
+
+### Switch:
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| switch-label-on | 0x56 (86) | multilanguage string-short | 0 | y | The label used on the switch if the value is on.
+| switch-label-off | 0x57 (87) | multilanguage string-short | 0 | y | The label used on the switch if the value is off.
+<br />
+
+
+### Checkbox:
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| indeterminate | 0x56 (86) | boolean | false | y | enable/disable the indeterminate state of the checkbox (e.g.: shows neither off nor on).
+
+<br />
+
+
+### Press:
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| press-label-on | 0x56 (86) | multilanguage string-short | 0 | y | The label used on the press-widget if the value is on.
+| press-label-off | 0x57 (87) | multilanguage string-short | 0 | y | The label used on the press-widget if the value is off.
+<br />
+
+
 ### Textbox:
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
@@ -65,13 +102,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | placeholder | 0x58 (88) | multilanguage string-short | "" | y | Text to be displayed if the value is empty.
 <br />
 
-### Checkbox:
 
-| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
-| --------------|---------------------|-----------|-----------------|------------|---------------|
-| indeterminate | 0x56 (86) | boolean | false | y | enable/disable the indeterminate state of the checkbox (e.g.: shows neither off nor on).
-
-<br />
 
 ### Numberbox:
 
