@@ -42,7 +42,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | Numberbox | 0x0015 (21) | *number without min/max, number with min/max | A numberbox or spinner.
 | Dial | 0x0016 (22) | number | |
 | Slider | 0x0017 (23) | *number with min/max |
-| Slider2d | 0x0018 (24) | *vector2 with min/max |
+| Slider2d | 0x0018 (24) | vector2 with min/max | X/Y single touch field interface
 | Range | 0x0019 (25) | *range | A range-slider
 | Dropdown | 0x001a (26) | *enum | A drop-down list of options
 | Radiobutton | 0x001b (27) | enum | |
