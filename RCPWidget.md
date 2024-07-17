@@ -120,7 +120,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| precision | 0x56 (86) | uint8 | 2 | y | The precision for the value display.
+| precision | 0x56 (86) | uint8 | 3 | y | The precision for the value display.
 | stepsize-multiplier | 0x57 (87) | type of value | 1 | y | Assuming a numberbox has buttons to step the value up/down, this option defines a multiplier for Value.stepsize. If Value.stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
 | horizontal | 0x58 (86) | boolean | true | y | if slider is horizontal
 | nan-meaning | 0x59 (89) | multilanguage string-short | "NaN" | y | String that describes the meaning of NaN in the context of the value.
@@ -141,8 +141,9 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| precision | 0x56 (86) | uint8 | 2 | y | The precision for the value display.
-| nan-meaning | 0x57 (87) | tiny-string | "NaN" | y | String that describes the meaning of NaN in the context of the value.
+| precision | 0x56 (86) | uint8 | 3 | y | The precision for the value display.
+| stepsize-multiplier | 0x57 (87) | type of value | 1 | y | Step the values up/down (e.g. with cursor keys), this option defines a multiplier for Value.stepsize. If Value.stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
+| nan-meaning | 0x58 (88) | multilanguage string-short | "NaN" | y | String that describes the meaning of NaN in the context of the value.
 <br />
 
 ### Custom Widget:
