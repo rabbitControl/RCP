@@ -46,7 +46,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | Range | 0x0019 (25) | *range | A range-slider
 | Dropdown | 0x001a (26) | *enum | A drop-down list of options
 | Radiobutton | 0x001b (27) | enum | |
-| Colorbox | 0x001c (28) | *color | |
+| Colorchooser | 0x001c (28) | *color | |
 | Table | 0x001d (29) | *array / list | |
 | Filechooser | 0x001e (30) | *uri | |
 | Directorychooser | 0x001f (31) | uri | |
