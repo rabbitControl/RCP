@@ -50,6 +50,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | Table | 0x001d (29) | *array / list | |
 | URI | 0x001e (30) | *uri | |
 | IP | 0x0020 (32) | *IPv4 / IPv6 | |
+| Image | 0x0021 (33) | *Image | |
 | List | 0x4000 (32768) | *group | Layouting Widget for Groups
 | Listpage | 0x4001 (32769) | group | Layouting Widget for Groups
 | Tabs | 0x4002 (32770)| group | Layouting Widget for Groups
@@ -153,6 +154,15 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | placeholder | 0x56 (86) | multilanguage string-short | 0 | y | Text to be displayed if the value is empty.
 | button-label | 0x57 (87) | multilanguage string-short | 0 | y | The label used on a button to open a file-dialog.
 <br />
+
+
+### Image
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| overlay-text | 0x56 (86) | multilanguage string-long | 0 | y | Text to be displayed as overlay.
+<br />
+
 
 ### Custom Widget:
 
