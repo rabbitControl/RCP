@@ -48,8 +48,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | Radiobutton | 0x001b (27) | enum | |
 | Colorchooser | 0x001c (28) | *color | |
 | Table | 0x001d (29) | *array / list | |
-| Filechooser | 0x001e (30) | *uri | |
-| Directorychooser | 0x001f (31) | uri | |
+| URI | 0x001e (30) | *uri | |
 | IP | 0x0020 (32) | *IPv4 / IPv6 | |
 | List | 0x4000 (32768) | *group | Layouting Widget for Groups
 | Listpage | 0x4001 (32769) | group | Layouting Widget for Groups
@@ -144,6 +143,15 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | precision | 0x56 (86) | uint8 | 3 | y | The precision for the value display.
 | stepsize-multiplier | 0x57 (87) | type of value | 1 | y | Step the values up/down (e.g. with cursor keys), this option defines a multiplier for Value.stepsize. If Value.stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
 | nan-meaning | 0x58 (88) | multilanguage string-short | "NaN" | y | String that describes the meaning of NaN in the context of the value.
+<br />
+
+
+### URI
+
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
+| --------------|---------------------|-----------|-----------------|------------|---------------|
+| placeholder | 0x56 (86) | multilanguage string-short | 0 | y | Text to be displayed if the value is empty.
+| button-label | 0x57 (87) | multilanguage string-short | 0 | y | The label used on a button to open a file-dialog.
 <br />
 
 ### Custom Widget:
