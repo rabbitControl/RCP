@@ -168,7 +168,7 @@ RCP wraps data into data packets with an optional timestamp. Data can be chained
 | tags | 0x23 (35)	|	string-short | "" | y | Space separated list of tags. (Tags containing spaces are not supported)
 | order | 0x24 (36)	|	int32 | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters.
 | parentid | 0x25 (37)	|	[Parameter Id](#Parameter-Id) | 0 | y | Specifies a ParameterGroup as parent. See [Parameter Group](#Parameter-Group).
-| widget | 0x26 (38) | [Widget data](RCPWidget.md) | textbox-widget (0x0011) | y | Specify the widget for this parameter. Senseful defaults are specified for different datatypes. See [Widget data](RCPWidget.md) for more information.
+| widget | 0x26 (38) | [Widget data](RCPWidget.md) | default-widget (0x0001) | y | Specify the widget for this parameter. Senseful defaults are specified for different datatypes. See [Widget data](RCPWidget.md) for more information.
 | userdata | 0x27 (39) | uint32 size-prefixed array of bytes | - | y | A place for various user-data.
 | userid | 0x28 (40) | string-short | "" | y | A custom user-id
 | readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value.
