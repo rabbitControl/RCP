@@ -108,10 +108,10 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| precision | 0x56 (86) | uint8 | 2 | y | The precision for value display.
+| precision | 0x56 (86) | uint8 | 3 | y | The precision for value display.
 | stepsize-multiplier | 0x57 (87) | type of value | 1 | y | Assuming a numberbox has buttons to step the value up/down, this option defines a multiplier for Value.stepsize. If Value.stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
 | cyclic | 0x58 (88) | boolean | false | y | Inspector should wrap around Value.maximum and Value.minimum.
-| nan-meaning | 0x59 (89) | string-short | "NaN" | y | String that describes the meaning of NaN for float-values.
+| nan-meaning | 0x59 (89) | language string-short | "NaN" | y | String that describes the meaning of NaN for float-values.
 <br />
 
 ### Dial:
