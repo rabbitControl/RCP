@@ -19,7 +19,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| **Widget Id** | - | int16 | textbox (0x0011) | n | type of widget. see widget type-table and widget options
+| **Widget Id** | - | int16 | - | n | type of widget. see widget type-table and widget options
 | label-visible | 0x51 (81) | byte | 1 (true) | y | if label is visible
 | value-visible | 0x52 (82) | byte | 1 (true) | y | if value is visible
 | needs-confirmation | 0x53 (83) | byte | 0 (false) | y | if input needs to be confirmed
@@ -29,31 +29,31 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 ### Widget type table:
 
-| Typename   | hex&nbsp;(dec)   | Default for Value | Description |
+| Widgetname   | hex&nbsp;(dec)   | Supported types<br>(* default) | Description |
 |------------|------------------|-------------------|-------------|
-| Default Widget | 0x0001 (1) | | The default widget
-| Custom Widget | 0x0002 (2) | | A custom widget
-| Info | 0x0010 (16) | | Only shows the label and value. Group parameters are collapsable.
-| Textbox | 0x0011 (17) | string | A text-input. Default widget for string.
-| Bang | 0x0012 (18) | bang | A Button
-| Press | 0x0013 (19) | | On press sends 1, on release sends 0.
+| Default Widget | 0x0001 (1) | | The default widget for the type (as specified below)
+| Custom Widget | 0x0002 (2) | *custom | A custom widget
+| Info | 0x0010 (16) | all | Only shows the label and value. Group parameters are collapsable. This is the fallback widget for all widgets the client does not implement.
+| Textbox | 0x0011 (17) | *string | A text-input. Default widget for string.
+| Bang | 0x0012 (18) | *bang | A Button
+| Switch | 0x0014 (20) | *boolean | A switch supporting following states: off, on. Switches the value on each press to its opposite state.
 | Checkbox | 0x0014 (20) | boolean | A checkbox supporting following states: off, on, indeterminate. Toggles the value on each press between true and false and unsets the indeterminate state option if it was set.
-| Switch | 0x0014 (20) | boolean | A switch supporting following states: off, on. Switches the value on each press to its opposite state.
-| Numberbox | 0x0015 (21) | number without min/max | A numberbox or spinner.
-| Dial | 0x0016 (22) | | |
-| Slider | 0x0017 (23) | number with min/max |
-| Slider2d | 0x0018 (24) |
-| Range | 0x0019 (25) | range | A range-slider
-| Dropdown | 0x001a (26) | enum | A drop-down list of options
-| Radiobutton | 0x001b (27) | | |
-| Colorbox | 0x001c (28) | color | |
-| Table | 0x001d (29) | array / list| |
-| Filechooser | 0x001e (30) | uri | |
-| Directorychooser | 0x001f (31) | | |
-| IP | 0x0020 (32) | IPv4 / IPv6 | |
-| List | 0x4000 (32768) | | Layouting Widget for Groups
-| Listpage | 0x4001 (32769) | | Layouting Widget for Groups
-| Tabs | 0x4002 (32770)| | Layouting Widget for Groups
+| Press | 0x0013 (19) | boolean | On press sends 1, on release sends 0.
+| Numberbox | 0x0015 (21) | *number without min/max, number with min/max | A numberbox or spinner.
+| Dial | 0x0016 (22) | number | |
+| Slider | 0x0017 (23) | *number with min/max |
+| Slider2d | 0x0018 (24) | *vector2 with min/max |
+| Range | 0x0019 (25) | *range | A range-slider
+| Dropdown | 0x001a (26) | *enum | A drop-down list of options
+| Radiobutton | 0x001b (27) | enum | |
+| Colorbox | 0x001c (28) | *color | |
+| Table | 0x001d (29) | *array / list | |
+| Filechooser | 0x001e (30) | *uri | |
+| Directorychooser | 0x001f (31) | uri | |
+| IP | 0x0020 (32) | *IPv4 / IPv6 | |
+| List | 0x4000 (32768) | *group | Layouting Widget for Groups
+| Listpage | 0x4001 (32769) | group | Layouting Widget for Groups
+| Tabs | 0x4002 (32770)| group | Layouting Widget for Groups
 <br />
 
 ### Textbox:
