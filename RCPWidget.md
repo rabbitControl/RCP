@@ -104,33 +104,27 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 
 
-### Numberbox:
+### Numberbox / Dial:
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | precision | 0x56 (86) | uint8 | 3 | y | The precision for value display.
 | stepsize-multiplier | 0x57 (87) | type of value | 1 | y | Assuming a numberbox has buttons to step the value up/down, this option defines a multiplier for Value.stepsize. If Value.stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
 | cyclic | 0x58 (88) | boolean | false | y | Inspector should wrap around Value.maximum and Value.minimum.
-| nan-meaning | 0x59 (89) | language string-short | "NaN" | y | String that describes the meaning of NaN for float-values.
+| nan-meaning | 0x59 (89) | multilanguage string-short | "NaN" | y | String that describes the meaning of NaN for float-values.
 <br />
 
-### Dial:
 
-| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
-| --------------|---------------------|-----------|-----------------|------------|---------------|
-| precision | 0x56 (86) | uint8 | 2 | y | The precision for the value display.
-| cyclic | 0x57 (87) | boolean | false | y | if dial is cyclic
-| nan-meaning | 0x58 (88) | tiny-string | "NaN" | y | String that describes the meaning of NaN for float-values.
-<br />
 
 ### Slider:
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | precision | 0x56 (86) | uint8 | 2 | y | The precision for the value display.
-| horizontal | 0x57 (87) | boolean | true | y | if slider is horizontal
-| nan-meaning | 0x58 (88) | tiny-string | "NaN" | y | String that describes the meaning of NaN in the context of the value.
-| trackfill-mode | 0x59 (89) | byte | 0 | y | Defines on which side of the slider the track is filled.
+| stepsize-multiplier | 0x57 (87) | type of value | 1 | y | Assuming a numberbox has buttons to step the value up/down, this option defines a multiplier for Value.stepsize. If Value.stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
+| horizontal | 0x58 (86) | boolean | true | y | if slider is horizontal
+| nan-meaning | 0x59 (89) | multilanguage string-short | "NaN" | y | String that describes the meaning of NaN in the context of the value.
+| trackfill-mode | 0x5a (90) | byte | 0 | y | Defines on which side of the slider the track is filled.
 <br />
 
 
