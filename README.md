@@ -18,8 +18,8 @@ For details see [Specification](RCPSpecification.md)
 Work in progress  
 Request for Comments (RFC)
 
-Join the discussion on riot:  
-https://riot.im/app/#/room/#rcp:matrix.org
+Join us in the chat on matrix:  
+https://matrix.to/#/#rcp:matrix.org
 
 Follow us on mastodon:  
 https://vis.social/@rabbitcontrol
