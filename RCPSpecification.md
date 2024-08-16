@@ -160,6 +160,7 @@ Be aware that a parameter-id 0 identifying the virtual [root-group](#Root-Parame
 | applicationid       | 0x1a	(26)   | string-short    | "" |y| Can be used to identify the server/client application.
 | applicationversion  | 0x1b	(27)   | string-short     | "" |y| version of application
 
+In case no optional option is present, InfoData needs to be terminated with 0x80.
 
 ## Parameter Data
 
