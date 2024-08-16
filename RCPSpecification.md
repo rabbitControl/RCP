@@ -20,26 +20,46 @@ For multi byte data words, network byte order (big endian) is used.
 
 1 byte equals to 8 bits (one octet).
 
-## Option Id
+## Flexible value encoding
 
-RCP uses options in all parts of the protocol to setup [Values](RCPValue.md) or [Widgets](RCPWidget.md). Senseful default values are defined for common uses. Default values for options should not to be transmitted.  
+RCP defines a flexible value encoding to minimize the amount of bytes necessary to transmit values. This encoding is used for option-ids, parameter-ids and the parameter count (see initialize command).
 
-The `Option Id` consits of 8 bits (one octet) where the most significant bit determines whether more options are following (0) or not (1).  
+A value encoded with `flexible value encoding` consits of a series of maximum 4 bytes where the most significant bit of each byte determines whether more bytes are following (0) or not (1). (Termination bit)  
+
 
       7 6 5 4 3 2 1 0 
      +-+-------------+
-     |T| Option Id   |
-     |E|     (7)     |
+     |T| flexible    |
+     |E|   value (7) |
      |R|             |
      |M|             |
      +-+-------------+
      
 - TERM: Terminator bit
-- Option Id: The value of the option id
-     
-#### Option Id 0 (packet terminator)
+- flexible value: One part of a flexible value
 
-An [Option Id](#Option-Id) of 0 with terminator-flag set (0x80) is used as terminator for [packets](#packet).  
+
+To obtain the value each byte needs to be masked with 0x7F. Big endian applies for the sequence of bytes: the first byte in the data stream is the most significant byte.
+
+E.g.: Value "1" encoded:
+
+      7 6 5 4 3 2 1 0 
+     +-+-------------+
+     |1|0 0 0 0 0 0 1|	= 1
+     +-+-------------+
+
+E.g.: Value "129" encoded: 
+
+      7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 
+     +-+-------------+-+-------------+
+     |0|0 0 0 0 0 0 1|1|0 0 0 0 0 0 1| = 129
+     +-+-------------+-+-------------+
+
+## Option Id
+
+RCP uses options in all parts of the protocol to setup [Values](RCPValue.md) or [Widgets](RCPWidget.md). Senseful default values are defined for common uses. Default values for options should not to be transmitted.  
+
+The `Option Id` is encoded with the [flexible value encoding](#flexible-value-encoding)
 
 ## Option order
 
@@ -49,40 +69,7 @@ Optional properties can be randomly ordered.
 
 The parameter-id is a unique identifier for each parameter. The paramter-id 0 is reserved and identifies the virtual [root-group](#Root-Parameter-Group).
 
-The parameter-id is encoded in a sequence of bytes (at least one), where the most significant bit of each byte defines whether this byte is the last byte of the `Parameter Id` sequence.  
-To obtain the value of the `Parameter Id`, each byte needs to be masked with 0x7F.
-
-Implementations shall avoid sending useless 0-bytes. E.g.: if a `Parameter Id` is smaller than 128 only one byte should be sent.
-
-NOTE: This design introduces a volatility. The protocol can be stalled by continuously sending valid parts of a paramter id, never ending it.
-
-Big endian applies: the first byte in the data stream is the most significant byte.
-
-      7 6 5 4 3 2 1 0 
-     +-+-------------+
-     |T|  Parameter  |
-     |E|     Id      |
-     |R|    Part     |
-     |M|    (7)      |
-     +-+-------------+
-     
-- TERM: terminator bit
-- Parameter Id part: The value of the parameter id
-     
-E.g. Parameter Id 1:
-
-      7 6 5 4 3 2 1 0 
-     +-+-------------+
-     |1|0 0 0 0 0 0 1|	= 1
-     +-+-------------+
-
-E.g. Parameter Id 129: 
-
-      7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 
-     +-+-------------+-+-------------+
-     |0|0 0 0 0 0 0 1|1|0 0 0 0 0 0 1| = 129
-     +-+-------------+-+-------------+
-
+The parameter-id is encoded with the [flexible value encoding](#flexible-value-encoding)
 
 ## String types
 
@@ -111,10 +98,10 @@ RCP wraps data into data packets with an optional timestamp. Data can be chained
      0               1              1/8
       7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...   7 6 5 4 3 2 1 0
      +-+-+-+---------+---------------+-----------------------+--------------+
-     |T|M|R| Command |   Timestamp   | Command specific data |  Terminator  |
-     |S|U|S|   (5)   |  (if TS is 1) | Command specific data |   (if MULT)  |
-     | |L|V|         |      (64)     |  ...                  |     0x80     |
-     | |T| |         |               |                       |              |
+     |T|M|R| Command |   Timestamp   | Command specific data |     Packet   |
+     |S|U|S|   (5)   |  (if TS is 1) | Command specific data |   Terminator |
+     | |L|V|         |      (64)     |  ...                  |   (if MULT)  |
+     | |T| |         |               |                       |      0x80    |
      +-+-+-+---------+---------------+-----------------------|--------------+
      
      
@@ -125,7 +112,11 @@ RCP wraps data into data packets with an optional timestamp. Data can be chained
 - [Command](#command-table): The command defines what the packet data means.
 - Timestamp: A 64bit timestamp if the timestamp-flag is set.
 - Data: The data as defined by the command.  
-- Terminator: 0x80 if MULT is set.
+- Packet Terminator: 0x80 if MULT is set.
+
+#### Packet terminator
+
+Be aware that a parameter-id 0 identifying the virtual [root-group](#Root-Parameter-Group) has the same value as the packet terminator. Hence configuring the root-group only works by sending a non-multi parameter-update packet.
 
 
 ### Command table
@@ -192,7 +183,7 @@ A parameter can only be child of excactly one group (see parent-option of parame
 
 #### Root Parameter Group
 
-The root `Parameter Group` is a virtual group which does always exist. It defines the highest level in the hierarchy tree. The parameter-id of the root group is 0. No other Parameter is allowed to use this parameter id. To configure the root group you can send a parameter-update packet. Typically only the widget can be set on the root group.
+The root `Parameter Group` is a virtual group which does always exist. It defines the highest level in the hierarchy tree. The parameter-id of the root group is 0. No other Parameter is allowed to use this parameter id. To configure the root group you can send a non-multi parameter-update packet. A non-multi parameter-update packet is necessary because the parameter-id 0 and the [Packet Terminator](#packet) both have the same value (0x80). Typically only the widget can be set on the root group.
 
 
 ## Update value data
