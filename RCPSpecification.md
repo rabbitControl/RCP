@@ -59,8 +59,19 @@ E.g.: Value "129" encoded:
 
 RCP uses options in all parts of the protocol to setup [Values](RCPValue.md) or [Widgets](RCPWidget.md). Senseful default values are defined for common uses. Default values for options should not to be transmitted.  
 
-The `Option Id` is encoded with the [flexible value encoding](#flexible-value-encoding)
+The `Option Id` consits of 8 bits (one octet) where the most significant bit determines whether more options are following (0) or not (1).  
 
+      7 6 5 4 3 2 1 0 
+     +-+-------------+
+     |T| Option Id   |
+     |E|     (7)     |
+     |R|             |
+     |M|             |
+     +-+-------------+
+     
+- TERM: Terminator bit
+- Option Id: The value of the option id
+     
 ## Option order
 
 Optional properties can be randomly ordered.
