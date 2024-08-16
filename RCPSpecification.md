@@ -109,21 +109,21 @@ RCP wraps data into data packets with an optional timestamp. Data can be chained
      0               1              1/8
       7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...   7 6 5 4 3 2 1 0
      +-+-+-+---------+---------------+-----------------------+--------------+
-     |T|M|R| Command |   Timestamp   | Command specific data |     Packet   |
-     |S|U|S|   (5)   |  (if TS is 1) | Command specific data |   Terminator |
-     | |L|V|         |      (64)     |  ...                  |   (if MULT)  |
-     | |T| |         |               |                       |      0x80    |
+     |T|R|R| Command |   Timestamp   | Command specific data |     Packet   |
+     |S|S|S|   (5)   |  (if TS is 1) | Command specific data |   Terminator |
+     | |V|V|         |      (64)     |  ...                  |   (cmd spec) |
+     | |1|2|         |               |                       |      0x80    |
      +-+-+-+---------+---------------+-----------------------|--------------+
      
      
 
 - TS: Timestamp flag. If this flag is set the first 64 bit after the command is a timestamp.
-- MULT: If multiple data we expect a terminator, otherwise not.
-- RSV: Reserved for future use.
+- RSV1: Reserved for future use.
+- RSV2: Reserved for future use.
 - [Command](#command-table): The command defines what the packet data means.
 - Timestamp: A 64bit timestamp if the timestamp-flag is set.
 - Data: The data as defined by the command.  
-- Packet Terminator: 0x80 if MULT is set.
+- Packet Terminator: 0x80 command specific: mandatory for commands: update, updatevalue and remove
 
 #### Packet terminator
 
@@ -134,11 +134,11 @@ Be aware that a parameter-id 0 identifying the virtual [root-group](#Root-Parame
 
 | Command   | ID   | Expected data | Comment   |
 |-----------|------|---------------|-----------|
-| info | 0x01 | not set or [Info data](#info-data) | If no data is set in the packet it is a request for [Info Data](#info-data). In this case a info-packet with valid [Info Data](#info-data) needs to be sent back to the origin of the request.<br>If data is set in the packet it must not be answered.
-| initialize | 0x02 | - | On servers: request for all parameters. A server needs to send update-packets for all parameters to (only) the requesting client to fully initialize that client. After sending all parameters the server sends "initialize" back to the client. Only after sending all parameters to a client the server starts sending incremental update packets to this client. On clients: marks the end of the initial list of parameters. Clients ignore value-updates until they receive "initialize".
+| info | 0x01 | [Info data](#info-data) | A client may send this command to identify itself to the server in which case the server answeres with its own InfoData. A server will only ever send this command in response. A client never answeres this command.
+| initialize | 0x02 | [Flexible value encoding](#Flexible-value-encoding) | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. A server will only ever send this command in response. A client never answeres this command.
 | update | 0x03 | [Parameter data](#Parameter-data) | Incremental update packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
 | updatevalue | 0x04 | [Update value data](#Update-value-data) | See [Update value](#Update-value). Valueupdate packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Update value](#Update-value) data.
-| remove | 0x05 | [Parameter Id](#Parameter-Id) | This is used to identify parameters for deletion.<br>Data chaining: the data field can contain more than one [ID Data](#ID-data).
+| remove | 0x05 | [Parameter Id](#Parameter-Id) | This is used to identify parameters for deletion.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id).
 
 - Clients send:
 	- info
@@ -147,6 +147,7 @@ Be aware that a parameter-id 0 identifying the virtual [root-group](#Root-Parame
 	- updatevalue
 - Servers send:
 	- info
+   	- initialize
 	- update
 	- updatevalue
 	- remove
