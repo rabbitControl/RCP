@@ -47,7 +47,9 @@ Optional properties can be randomly ordered.
 
 ## Parameter Id
 
-The parameter-id may be encoded in multiple consecutive bytes, where the most significant bit of the byte defines whether this byte is the last byte of the `Parameter Id`.  
+The parameter-id is a unique identifier for each parameter. The paramter-id 0 is reserved and identifies the virtual [root-group](#Root-Parameter-Group).
+
+The parameter-id is encoded in a sequence of bytes (at least one), where the most significant bit of each byte defines whether this byte is the last byte of the `Parameter Id` sequence.  
 To obtain the value of the `Parameter Id`, each byte needs to be masked with 0x7F.
 
 Implementations shall avoid sending useless 0-bytes. E.g.: if a `Parameter Id` is smaller than 128 only one byte should be sent.
