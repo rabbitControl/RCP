@@ -162,7 +162,7 @@ RCP wraps data into data packets with an optional timestamp. Data can be chained
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| **id** | - | [Parameter Id](#Parameter-Id) | - | - | Unique parameter identifier. Needs to be != 0.<br>A parameter-id of 0 identifies the virtual root group. Also see "parent".
+| **id** | - | [Parameter Id](#Parameter-Id) | - | - | Unique parameter identifier. Also see "parentid".
 | **typedefinition** |	- | [Typedefinition](RCPValue.md) | - | n | Typedefinition of value.<br/>See: [Typedefinition](RCPValue.md)
 | value | 0x20 (32) | known from typedefinition | type-specific default | y |	The value. Byte-length is known from type.
 | label | 0x21 (33)	| multilanguage string-short | "" | y | Human readable identifier.
@@ -192,13 +192,7 @@ A parameter can only be child of excactly one group (see parent-option of parame
 
 #### Root Parameter Group
 
-The root `Parameter Group` is a virtual group which does always exist. It defines the highest level in the hierarchy tree.
-
-The parameter-id of the root group is 0.
-
-No other Parameter is allowed to use this parameter id.
-
-To configure the root group you can send a non-multi parameter-update packet. Typically only the widget can be set on the root group.
+The root `Parameter Group` is a virtual group which does always exist. It defines the highest level in the hierarchy tree. The parameter-id of the root group is 0. No other Parameter is allowed to use this parameter id. To configure the root group you can send a parameter-update packet. Typically only the widget can be set on the root group.
 
 
 ## Update value data
@@ -207,7 +201,7 @@ To optimize the update of a parameter value a special form is defined:
 
 | Name          | Type      | Value   | Optional   | Description   |
 | --------------|-----------|---------|------------|---------------|
-| **parameter id**  | [Parameter Id](#Parameter-Id)          | -         | n | Tghe Parameter id.<br>A value of 0 is invalid, the packet shall be discarded in this case.
+| **parameter id**  | [Parameter Id](#Parameter-Id)          | -         | n | The Parameter id.<br>A value of 0 is invalid (the virtual root-group does not have a value).
 | **mandatory part of datatype**   | Typedefinition | datatype-data | n | Mandatory part of the datatype without options.<br>Needed to be able to resolve this packet without additional lookup.
 | **value**         | type of datatype  | value-data | n | the value of type as defined in Datatype.
 
