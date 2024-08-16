@@ -22,7 +22,7 @@ For multi byte data words, network byte order (big endian) is used.
 
 ## Flexible value encoding
 
-RCP defines a flexible value encoding to minimize the amount of bytes necessary to transmit values. This encoding is used for option-ids, parameter-ids and the parameter count (see initialize command).
+RCP defines a flexible value encoding to minimize the amount of bytes necessary to transmit values. This encoding is used for parameter-ids and the parameter count (see initialize command).
 
 A value encoded with `flexible value encoding` consits of a series of maximum 4 bytes where the most significant bit of each byte determines whether more bytes are following (0) or not (1). (Termination bit)  
 
