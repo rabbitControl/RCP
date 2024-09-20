@@ -48,17 +48,17 @@ The `Datatype Id` consits of 8 bits (one octet) where the most significant bit d
 | Vector3f32 | 0x1e (30) | 3 x 4 |
 | Vector4i32 | 0x1f (31) | 4 x 4 |
 | Vector4f32 | 0x20 (32) | 4 x 4 |
-| String | 0x21 (33) | string-long
+| String | 0x21 (33) | [RCP String](RCPSpecification.md#RCP-String)
 | RGB | 0x22 (34) | 3 |
 | RGBA | 0x23 (35) | 4 |
 | RGB Float | 0x24 (36) | 3 x 4 |
 | RGBA Float | 0x25 (37) | 4 x 4 |
-| Enum | 0x26 (38) | Array of string-short |
+| Enum | 0x26 (38) | Array of [RCP String](RCPSpecification.md#RCP-String) |
 | Array | 0x27 (39) | Defined by array-structure |
 | List | 0x28 (40) |
 | Bang | 0x29 (41) | 0 |
 | Group | 0x2a (42) | 0 |
-| URI | 0x2b (43) | string-long |
+| URI | 0x2b (43) | [RCP String](RCPSpecification.md#RCP-String) |
 | IPv4 | 0x2c (44) | 4 |
 | IPv6 | 0x2d (45) | 16 |
 | Range | 0x2e (46) | 2 x number-type-size|
@@ -92,7 +92,7 @@ Floating point values follow the [IEEE 754-2019](https://standards.ieee.org/ieee
 | minimum | 0x31 (49) | of type | minimum of type | y | Smallest allowed value (inclusive)
 | maximum | 0x32 (50) | of type | maximum of type | y | Biggest allowed value (inclusive)
 | stepsize | 0x33 (51) | of type | 0 | y | The stepsize must be >= 0. It constrains possible values to a multiple of the stepsize. A value of 0 means: no constraint.
-| unit | 0x34 (52) | string-short | "" | y | The unit of the value.
+| unit | 0x34 (52) | [RCP String](RCPSpecification.md#RCP-String) | "" | y | The unit of the value.
 <br />  
 
 ### Range:
@@ -114,13 +114,13 @@ Range-data for a number of type \<int8>: `0x01 0x0a`
 ### String
 
 ##### String data: 
-string-long  
+[RCP String](RCPSpecification.md#RCP-String)  
 <br />  
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| default | 0x30 (48) | string-long | 0 | y | default value
-| regular expression | 0x31 (49) | string-long | 0 | y | A regular expression to define allowed string values. E.g.: limit the amount of newlines: "\\A(?>[^\r\n]*(?>\r\n?|\n)){0,3}[^\r\n]*\\z"
+| default | 0x30 (48) | [RCP String](RCPSpecification.md#RCP-String) | 0 | y | default value
+| regular expression | 0x31 (49) | [RCP String](RCPSpecification.md#RCP-String) | 0 | y | A regular expression to define allowed string values. E.g.: limit the amount of newlines: "\\A(?>[^\r\n]*(?>\r\n?|\n)){0,3}[^\r\n]*\\z"
 <br />  
 
 
@@ -207,7 +207,7 @@ e.g.: a selection of 2 indices (0 and 1):
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | Enum data | 0 | y | default value, selection indices
-| entries | 0x31 (49) | size-prefixed (uint16) array of multilanguage string-short | 0 | y | list of enumerations
+| entries | 0x31 (49) | size-prefixed (uint16) array of multilanguage [RCP String](RCPSpecification.md#RCP-String) | 0 | y | list of enumerations
 | minimum selection count | 0x32 (50) | uint16 | 0 | y | the minimum amount of allowed selected items (<= maximum selection count)
 | maximum selection count | 0x33 (51) | uint16 | 1 | y | the maximum amount of allowed selected items (>= minimum selection count)
 <br />  
@@ -258,7 +258,7 @@ e.g.:
 ### URI:
 
 ##### Uri data:
-string-long
+[RCP String](RCPSpecification.md#RCP-String)
 
 Size-prefixed UTF-8 string forming an URI
 
@@ -272,9 +272,9 @@ e.g.: dir
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| default | 0x30 (48) | string-long | 0 | y | default value
-| filter | 0x31 (49) | string-short | 0 | y | If empty no filter is set and all files/pathes are allowed. see filter definition above.
-| schema | 0x32 (50) | string-short | 0 | y | A space seperated list with allowed schemas. e.g. "file ftp http https".<br/>Empty string means all schemes are allowed.
+| default | 0x30 (48) | [RCP String](RCPSpecification.md#RCP-String) | 0 | y | default value
+| filter | 0x31 (49) | [RCP String](RCPSpecification.md#RCP-String) | 0 | y | If empty no filter is set and all files/pathes are allowed. see filter definition above.
+| schema | 0x32 (50) | [RCP String](RCPSpecification.md#RCP-String) | 0 | y | A space seperated list with allowed schemas. e.g. "file ftp http https".<br/>Empty string means all schemes are allowed.
 <br />  
 
 ### IPv4:
