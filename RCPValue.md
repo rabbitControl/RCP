@@ -214,11 +214,11 @@ e.g.: a selection of 2 indices (0 and 1):
 ### Array
 
 ##### Array structure:  
-\<dimension-count> followed by \<elemente per dimension>  
-dimension-count: \<int32>  
-elements per dimension: dimension-count x \<int32>  
+\<dimension-count> followed by \<elements per dimension>  
+dimension-count: [RCP Int](RCPSpecification.md#RCP-Int)  
+elements per dimension: one [RCP Int](RCPSpecification.md#RCP-Int) per dimension  
 
-E.g.: a 3-dimensionsal array with 2 times 2 times 1 elements (int[2][2][1]):  `3 2 2 1`
+E.g.: a 3-dimensional array with 2 times 2 times 1 elements (int[2][2][1]):  `3 2 2 1`. Encoded in RCP Int: `0x83 0x82 0x82 0x81`.  
 
 ##### Array data:  
 Number of bytes defined by the element-type and the structure.  
@@ -234,7 +234,7 @@ Number of bytes defined by the element-type and the structure.
 ### List
 
 ##### List data:  
-A size-prefixed list of values for each dimension.
+A [RCP Int](RCPSpecification.md#RCP-Int) size-prefixed list of values for each dimension.
 
 e.g.:  
 `[] –> 0`  
