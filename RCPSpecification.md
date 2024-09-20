@@ -175,7 +175,7 @@ In case no optional option is present, InfoData needs to be terminated with 0x80
 | order | 0x24 (36)	|	[Flexible value encoding](#Flexible-value-encoding) | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters.
 | parentid | 0x25 (37)	|	[Parameter Id](#Parameter-Id) | 0 | y | Specifies a ParameterGroup as parent. See [Parameter Group](#Parameter-Group).
 | widget | 0x26 (38) | [Widget data](RCPWidget.md) | default-widget (0x0001) | y | Specify the widget for this parameter. Senseful defaults are specified for different datatypes. See [Widget data](RCPWidget.md) for more information.
-| userdata | 0x27 (39) | uint32 size-prefixed array of bytes | - | y | A place for various user-data.
+| userdata | 0x27 (39) | [Flexible value encoding](#Flexible-value-encoding) size-prefixed array of bytes | - | y | A place for various user-data.
 | userid | 0x28 (40) | string-short | "" | y | A custom user-id
 | readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value.
 | enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the visual representation of the parameter is disabled (grayed out). A not enabled parameter indicates a parameter currently not in use.
