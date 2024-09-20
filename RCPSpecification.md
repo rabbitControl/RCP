@@ -172,7 +172,7 @@ In case no optional option is present, InfoData needs to be terminated with 0x80
 | label | 0x21 (33)	| multilanguage string-short | "" | y | Human readable identifier.
 | description | 0x22 (34) | multilanguage string-long | "" | y | The description of the parameter.
 | tags | 0x23 (35)	|	string-short | "" | y | Space separated list of tags. (Tags containing spaces are not supported)
-| order | 0x24 (36)	|	int32 | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters.
+| order | 0x24 (36)	|	[Flexible value encoding](#Flexible-value-encoding) | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters.
 | parentid | 0x25 (37)	|	[Parameter Id](#Parameter-Id) | 0 | y | Specifies a ParameterGroup as parent. See [Parameter Group](#Parameter-Group).
 | widget | 0x26 (38) | [Widget data](RCPWidget.md) | default-widget (0x0001) | y | Specify the widget for this parameter. Senseful defaults are specified for different datatypes. See [Widget data](RCPWidget.md) for more information.
 | userdata | 0x27 (39) | uint32 size-prefixed array of bytes | - | y | A place for various user-data.
