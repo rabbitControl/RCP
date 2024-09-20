@@ -87,7 +87,7 @@ The parameter-id is encoded as [RCP Int](#RCP-Int)
 
 RCP string: [RCP Int](#RCP-Int) size prefix followd by UTF-8 string-data.
 
-## RCP language string:
+## RCP Language String:
 
 RCP supports multiple languages by using RCP language string. A `RCP language string` contains multiple versions of the string in different languages. Each language is prefixed with a [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code or `any` for no specific language.  
 
@@ -165,8 +165,8 @@ In case no optional option is present, InfoData needs to be terminated with 0x80
 | **id** | - | [Parameter Id](#Parameter-Id) | - | - | Unique parameter identifier. Also see "parentid".
 | **typedefinition** |	- | [Typedefinition](RCPValue.md) | - | n | Typedefinition of value.<br/>See: [Typedefinition](RCPValue.md)
 | value | 0x20 (32) | known from typedefinition | type-specific default | y |	The value. Byte-length is known from type.
-| label | 0x21 (33)	| [RCP language string](#RCP-language-string) | "" | y | Human readable identifier.
-| description | 0x22 (34) | [RCP language string](#RCP-language-string) | "" | y | The description of the parameter.
+| label | 0x21 (33)	| [RCP Language String](#RCP-Language-String) | "" | y | Human readable identifier.
+| description | 0x22 (34) | [RCP Language String](#RCP-Language-String) | "" | y | The description of the parameter.
 | tags | 0x23 (35)	|	[RCP String](#RCP-String) | "" | y | Space separated list of tags. (Tags containing spaces are not supported)
 | order | 0x24 (36)	|	[RCP Int](#RCP-Int) | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters.
 | parentid | 0x25 (37)	|	[Parameter Id](#Parameter-Id) | 0 | y | Specifies a ParameterGroup as parent. See [Parameter Group](#Parameter-Group).
