@@ -24,6 +24,8 @@ For multi byte data words, network byte order (big endian) is used.
 
 RCP defines a flexible value encoding to minimize the amount of bytes necessary to transmit values. This encoding is used for parameter-ids and the parameter count (see initialize command).
 
+Implementors can use an int32 for the decoded value. Flexible-value-encoding's maximum unsigned value is 2^28 = 268435456, this fits in the positive range of a int32.
+
 A value encoded with `flexible value encoding` consits of a series of maximum 4 bytes where the most significant bit of each byte determines whether more bytes are following (0) or not (1). (Termination bit)  
 
 
@@ -54,6 +56,8 @@ E.g.: Value "129" encoded:
      +-+-------------+-+-------------+
      |0|0 0 0 0 0 0 1|1|0 0 0 0 0 0 1| = 129
      +-+-------------+-+-------------+
+
+
 
 ## Option Id
 
