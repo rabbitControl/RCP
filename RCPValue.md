@@ -291,8 +291,7 @@ e.g.: dir
 ### Image:
 
 #### Image-data:
-\<size-prefix> followed by \<image-data>  
-size-prefix: uint32  
+[RCP Int](RCPSpecification.md#RCP-Int) size-prefix followed by \<image-data>  
 image-data: bytes of one of the following image-formats: JPEG, PNG, BMP, GIF  
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
@@ -304,7 +303,7 @@ image-data: bytes of one of the following image-formats: JPEG, PNG, BMP, GIF
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| **size** | - | uint32 | - | n | The amount of bytes for that value.
+| **size** | - | [RCP Int](RCPSpecification.md#RCP-Int) | - | n | The amount of bytes for that value.
 | default | 0x30 (48) | size-amount of bytes | - | y | default value
-| typeid | 0x31 (49) | uint32  | - | y | ID of custom type. The ID must be sent on initialize but can be omitted on incremental updates.
-| config | 0x32 (50) | uint32 size-prefixed byte-array | - | y | Custom config - can be anything.
+| typeid | 0x31 (49) | [RCP Int](RCPSpecification.md#RCP-Int)  | - | y | ID of custom type. The ID must be sent on initialize but can be omitted on incremental updates.
+| config | 0x32 (50) | [RCP Int](RCPSpecification.md#RCP-Int) size-prefixed byte-array | - | y | Custom config - can be anything.
