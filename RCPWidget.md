@@ -23,7 +23,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | label-visible | 0x51 (81) | byte | 1 (true) | y | if label is visible
 | value-visible | 0x52 (82) | byte | 1 (true) | y | if value is visible
 | needs-confirmation | 0x53 (83) | byte | 0 (false) | y | if input needs to be confirmed
-| userdata | 0x54 (84) | uint32 size-prefixed array of bytes | 0 | y | e.g.: additional configuraiton (options) for widget
+| userdata | 0x54 (84) | [RCP Int](RCPSpecification.md#RCP-Int) size-prefixed array of bytes | 0 | y | e.g.: additional configuraiton (options) for widget
 | ... special widget options... |
 <br />
 
@@ -61,7 +61,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| button-label | 0x56 (86) | multilanguage string-short | 0 | y | The label used on the button.
+| button-label | 0x56 (86) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | 0 | y | The label used on the button.
 | trigger-on-up | 0x57 (87) | boolean | false | y | If set the button triggers the bang on up.
 <br />
 
@@ -70,8 +70,8 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| switch-label-on | 0x56 (86) | multilanguage string-short | 0 | y | The label used on the switch if the value is on.
-| switch-label-off | 0x57 (87) | multilanguage string-short | 0 | y | The label used on the switch if the value is off.
+| switch-label-on | 0x56 (86) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | 0 | y | The label used on the switch if the value is on.
+| switch-label-off | 0x57 (87) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | 0 | y | The label used on the switch if the value is off.
 <br />
 
 
@@ -88,8 +88,8 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| press-label-on | 0x56 (86) | multilanguage string-short | 0 | y | The label used on the press-widget if the value is on.
-| press-label-off | 0x57 (87) | multilanguage string-short | 0 | y | The label used on the press-widget if the value is off.
+| press-label-on | 0x56 (86) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | 0 | y | The label used on the press-widget if the value is on.
+| press-label-off | 0x57 (87) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | 0 | y | The label used on the press-widget if the value is off.
 <br />
 
 
@@ -99,7 +99,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | multiline | 0x56 (86) | boolean | false | y | enable/disable multiline textfield.
 | password | 0x57 (87) | boolean | false | y | enable/disable if textbox is a password input.
-| placeholder | 0x58 (88) | multilanguage string-short | "" | y | Text to be displayed if the value is empty.
+| placeholder | 0x58 (88) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | "" | y | Text to be displayed if the value is empty.
 <br />
 
 
@@ -111,7 +111,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | precision | 0x56 (86) | uint8 | 3 | y | The precision for value display.
 | stepsize-multiplier | 0x57 (87) | type of value | 1 | y | Assuming a numberbox has buttons to step the value up/down, this option defines a multiplier for Value.stepsize. If Value.stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
 | cyclic | 0x58 (88) | boolean | false | y | Inspector should wrap around Value.maximum and Value.minimum.
-| nan-meaning | 0x59 (89) | multilanguage string-short | "NaN" | y | String that describes the meaning of NaN for float-values.
+| nan-meaning | 0x59 (89) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | "NaN" | y | String that describes the meaning of NaN for float-values.
 <br />
 
 
@@ -123,7 +123,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | precision | 0x56 (86) | uint8 | 3 | y | The precision for the value display.
 | stepsize-multiplier | 0x57 (87) | type of value | 1 | y | Assuming a numberbox has buttons to step the value up/down, this option defines a multiplier for Value.stepsize. If Value.stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
 | horizontal | 0x58 (86) | boolean | true | y | if slider is horizontal
-| nan-meaning | 0x59 (89) | multilanguage string-short | "NaN" | y | String that describes the meaning of NaN in the context of the value.
+| nan-meaning | 0x59 (89) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | "NaN" | y | String that describes the meaning of NaN in the context of the value.
 | trackfill-mode | 0x5a (90) | byte | 0 | y | Defines on which side of the slider the track is filled.
 <br />
 
@@ -143,7 +143,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | precision | 0x56 (86) | uint8 | 3 | y | The precision for the value display.
 | stepsize-multiplier | 0x57 (87) | type of value | 1 | y | Step the values up/down (e.g. with cursor keys), this option defines a multiplier for Value.stepsize. If Value.stepsize == 0 then assume Value.stepsize to be 1 for this multiplication.
-| nan-meaning | 0x58 (88) | multilanguage string-short | "NaN" | y | String that describes the meaning of NaN in the context of the value.
+| nan-meaning | 0x58 (88) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | "NaN" | y | String that describes the meaning of NaN in the context of the value.
 <br />
 
 
@@ -151,8 +151,8 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| placeholder | 0x56 (86) | multilanguage string-short | 0 | y | Text to be displayed if the value is empty.
-| button-label | 0x57 (87) | multilanguage string-short | 0 | y | The label used on a button to open a file-dialog.
+| placeholder | 0x56 (86) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | 0 | y | Text to be displayed if the value is empty.
+| button-label | 0x57 (87) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | 0 | y | The label used on a button to open a file-dialog.
 <br />
 
 
@@ -160,7 +160,7 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| overlay-text | 0x56 (86) | multilanguage string-long | 0 | y | Text to be displayed as overlay.
+| overlay-text | 0x56 (86) | [RCP Language String](RCPSpecification.md#RCP-Language-String) | 0 | y | Text to be displayed as overlay.
 <br />
 
 
@@ -168,5 +168,5 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
-| widgetid          | 0x56 (86) | uint32     | 0 | y | ID of custom widget. The ID must be sent on initialize but can be omitted on incremental updates.
-| config        | 0x57 (87) | uint32 size-prefixed byte-array | - | y | Custom config - can be anything.
+| widgetid          | 0x56 (86) | [RCP Int](RCPSpecification.md#RCP-Int) | 0 | y | ID of custom widget. The ID must be sent on initialize but can be omitted on incremental updates.
+| config        | 0x57 (87) | [RCP Int](RCPSpecification.md#RCP-Int) size-prefixed byte-array | - | y | Custom config - can be anything.
