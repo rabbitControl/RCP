@@ -82,14 +82,9 @@ The parameter-id is a unique identifier for each parameter. The paramter-id 0 is
 
 The parameter-id is encoded with the [flexible value encoding](#flexible-value-encoding)
 
-## String types
+## RCP String
 
-RCP uses two different string types which are defined in the following form:
-
-- string-short:
-  - A string prefixed with the string length using \<uint8> as the prefix followed by UTF-8 string-data.
-- string-long:
-  - A string prefixed with the string length using \<uint16> as the prefix followed by UTF-8 string-data.
+RCP string: [Flexible value encoding](#Flexible-value-encoding) size prefix followd by UTF-8 string-data.
 
 ## Multilanguage string:
 
@@ -97,7 +92,7 @@ RCP supports multiple languages by using multi-language strings. A `Multilanguag
 
 All the languages are transmitted at once. We decided to favour this over a different approach where languages would need to be declared and translations would need to be fetched when switching a language in a frontend.
 
-  - A terminated list of [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code (3-bytes in ascii) followed by a string-short or string-long.
+  - A terminated list of [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code (3-bytes in ascii) followed by an [RCP String](#RCP-String).
   - The list is terminated with a 0-byte.
   - Additionally to the [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) codes we define a special code for no specific language: `any` which is used as default language.
 
@@ -156,9 +151,9 @@ Be aware that a parameter-id 0 identifying the virtual [root-group](#Root-Parame
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | ValueType      | default value   | optional   | description   |
 | --------------|--------------|----------------|-----------------|------------|---------------|
-| **version**   | - | string-short    | - | n | String in [semver](https://semver.org/) format.
-| applicationid       | 0x1a	(26)   | string-short    | "" |y| Can be used to identify the server/client application.
-| applicationversion  | 0x1b	(27)   | string-short     | "" |y| version of application
+| **version**   | - | [RCP String](#RCP-String)    | - | n | String in [semver](https://semver.org/) format.
+| applicationid       | 0x1a	(26)   | [RCP String](#RCP-String)    | "" |y| Can be used to identify the server/client application.
+| applicationversion  | 0x1b	(27)   | [RCP String](#RCP-String)     | "" |y| version of application
 
 In case no optional option is present, InfoData needs to be terminated with 0x80.
 
@@ -169,14 +164,14 @@ In case no optional option is present, InfoData needs to be terminated with 0x80
 | **id** | - | [Parameter Id](#Parameter-Id) | - | - | Unique parameter identifier. Also see "parentid".
 | **typedefinition** |	- | [Typedefinition](RCPValue.md) | - | n | Typedefinition of value.<br/>See: [Typedefinition](RCPValue.md)
 | value | 0x20 (32) | known from typedefinition | type-specific default | y |	The value. Byte-length is known from type.
-| label | 0x21 (33)	| multilanguage string-short | "" | y | Human readable identifier.
-| description | 0x22 (34) | multilanguage string-long | "" | y | The description of the parameter.
-| tags | 0x23 (35)	|	string-short | "" | y | Space separated list of tags. (Tags containing spaces are not supported)
+| label | 0x21 (33)	| multilanguage string | "" | y | Human readable identifier.
+| description | 0x22 (34) | multilanguage string | "" | y | The description of the parameter.
+| tags | 0x23 (35)	|	[RCP String](#RCP-String) | "" | y | Space separated list of tags. (Tags containing spaces are not supported)
 | order | 0x24 (36)	|	[Flexible value encoding](#Flexible-value-encoding) | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters.
 | parentid | 0x25 (37)	|	[Parameter Id](#Parameter-Id) | 0 | y | Specifies a ParameterGroup as parent. See [Parameter Group](#Parameter-Group).
 | widget | 0x26 (38) | [Widget data](RCPWidget.md) | default-widget (0x0001) | y | Specify the widget for this parameter. Senseful defaults are specified for different datatypes. See [Widget data](RCPWidget.md) for more information.
 | userdata | 0x27 (39) | [Flexible value encoding](#Flexible-value-encoding) size-prefixed array of bytes | - | y | A place for various user-data.
-| userid | 0x28 (40) | string-short | "" | y | A custom user-id
+| userid | 0x28 (40) | [RCP String](#RCP-String) | "" | y | A custom user-id
 | readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value.
 | enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the visual representation of the parameter is disabled (grayed out). A not enabled parameter indicates a parameter currently not in use.
 
