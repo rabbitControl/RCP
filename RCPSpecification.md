@@ -20,13 +20,11 @@ For multi byte data words, network byte order (big endian) is used.
 
 1 byte equals to 8 bits (one octet).
 
-## Flexible value encoding
+## RCP Int
 
-RCP defines a flexible value encoding to minimize the amount of bytes necessary to transmit values. This encoding is used for parameter-ids and the parameter count (see initialize command).
+RCP Int is a flexible value encoding to minimize the amount of bytes necessary to transmit values.
 
-Implementors can use an int32 for the decoded value. Flexible-value-encoding's maximum unsigned value is 2^28 = 268435456, this fits in the positive range of a int32.
-
-A value encoded with `flexible value encoding` consits of a series of maximum 4 bytes where the most significant bit of each byte determines whether more bytes are following (0) or not (1). (Termination bit)  
+A value encoded as `RCP Int` consits of a series of maximum 4 bytes where the most significant bit of each byte determines whether more bytes are following (0) or not (1). (Termination bit)  
 
 
       7 6 5 4 3 2 1 0 
@@ -41,7 +39,7 @@ A value encoded with `flexible value encoding` consits of a series of maximum 4 
 - flexible value: One part of a flexible value
 
 
-To obtain the value each byte needs to be masked with 0x7F. Big endian applies for the sequence of bytes: the first byte in the data stream is the most significant byte.
+To obtain the value each byte needs to be masked with 0x7F. Big endian applies for the sequence of bytes: the first byte in the data stream is the most significant byte. Implementors can use an int32 for the decoded value. RCP Int's maximum unsigned value is 2^28 = 268435456, this fits in the positive range of a int32.
 
 E.g.: Value "1" encoded:
 
@@ -56,7 +54,6 @@ E.g.: Value "129" encoded:
      +-+-------------+-+-------------+
      |0|0 0 0 0 0 0 1|1|0 0 0 0 0 0 1| = 129
      +-+-------------+-+-------------+
-
 
 
 ## Option Id
@@ -84,11 +81,11 @@ Optional properties can be randomly ordered.
 
 The parameter-id is a unique identifier for each parameter. The paramter-id 0 is reserved and identifies the virtual [root-group](#Root-Parameter-Group).
 
-The parameter-id is encoded with the [flexible value encoding](#flexible-value-encoding)
+The parameter-id is encoded as [RCP Int](#RCP-Int)
 
 ## RCP String
 
-RCP string: [Flexible value encoding](#Flexible-value-encoding) size prefix followd by UTF-8 string-data.
+RCP string: [RCP Int](#RCP-Int) size prefix followd by UTF-8 string-data.
 
 ## Multilanguage string:
 
@@ -134,7 +131,7 @@ Be aware that a parameter-id 0 identifying the virtual [root-group](#Root-Parame
 | Command   | ID   | Expected data | Comment   |
 |-----------|------|---------------|-----------|
 | info | 0x01 | [Info data](#info-data) | A client may send this command to identify itself to the server in which case the server answeres with its own InfoData. A server will only ever send this command in response. A client never answeres this command.
-| initialize | 0x02 | [Flexible value encoding](#Flexible-value-encoding) | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. A server will only ever send this command in response. A client never answeres this command.
+| initialize | 0x02 | [RCP Int](#RCP-Int) | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. A server will only ever send this command in response. A client never answeres this command.
 | update | 0x03 | [Parameter data](#Parameter-data) | Incremental update packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
 | updatevalue | 0x04 | [Update value data](#Update-value-data) | See [Update value](#Update-value). Valueupdate packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Update value](#Update-value) data.
 | remove | 0x05 | [Parameter Id](#Parameter-Id) | This is used to identify parameters for deletion.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id).
@@ -171,10 +168,10 @@ In case no optional option is present, InfoData needs to be terminated with 0x80
 | label | 0x21 (33)	| multilanguage string | "" | y | Human readable identifier.
 | description | 0x22 (34) | multilanguage string | "" | y | The description of the parameter.
 | tags | 0x23 (35)	|	[RCP String](#RCP-String) | "" | y | Space separated list of tags. (Tags containing spaces are not supported)
-| order | 0x24 (36)	|	[Flexible value encoding](#Flexible-value-encoding) | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters.
+| order | 0x24 (36)	|	[RCP Int](#RCP-Int) | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters.
 | parentid | 0x25 (37)	|	[Parameter Id](#Parameter-Id) | 0 | y | Specifies a ParameterGroup as parent. See [Parameter Group](#Parameter-Group).
 | widget | 0x26 (38) | [Widget data](RCPWidget.md) | default-widget (0x0001) | y | Specify the widget for this parameter. Senseful defaults are specified for different datatypes. See [Widget data](RCPWidget.md) for more information.
-| userdata | 0x27 (39) | [Flexible value encoding](#Flexible-value-encoding) size-prefixed array of bytes | - | y | A place for various user-data.
+| userdata | 0x27 (39) | [RCP Int](#RCP-Int) size-prefixed array of bytes | - | y | A place for various user-data.
 | userid | 0x28 (40) | [RCP String](#RCP-String) | "" | y | A custom user-id
 | readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value.
 | enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the visual representation of the parameter is disabled (grayed out). A not enabled parameter indicates a parameter currently not in use.
