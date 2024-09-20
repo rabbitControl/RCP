@@ -196,18 +196,17 @@ e.g. RGBA:
 ### Enum
 
 ##### Enum data:
-Enum data is a size-prefixed array of [RCP Int](RCPSpecification.md#RCP-Int)-indices representing the selection in the enum.  
-Size-prefix: [RCP Int](RCPSpecification.md#RCP-Int)
+[RCP Int](RCPSpecification.md#RCP-Int) size-prefixed array of [RCP Int](RCPSpecification.md#RCP-Int)-indices representing the selection in the enum.  
 
 e.g.: a selection of 2 indices (0 and 1):  
-`0x00 0x02 0x00 0x00 0x00 0x01`  
+`0x82 0x80 0x81`  
 <br />
 
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | default | 0x30 (48) | Enum data | 0 | y | default value, selection indices
-| entries | 0x31 (49) | [RCP Int](RCPSpecification.md#RCP-Int) size-prefixed array of [RCP language string](RCPSpecification.md#RCP-language-string) | 0 | y | list of enumerations
+| entries | 0x31 (49) | [RCP Int](RCPSpecification.md#RCP-Int) size-prefixed array of [RCP Language String](RCPSpecification.md#RCP-Language-String) | 0 | y | list of enumerations
 | minimum selection count | 0x32 (50) | [RCP Int](RCPSpecification.md#RCP-Int) | 0 | y | the minimum amount of allowed selected items (<= maximum selection count)
 | maximum selection count | 0x33 (51) | [RCP Int](RCPSpecification.md#RCP-Int) | 1 | y | the maximum amount of allowed selected items (>= minimum selection count)
 <br />  
@@ -259,8 +258,6 @@ e.g.:
 
 ##### Uri data:
 [RCP String](RCPSpecification.md#RCP-String)
-
-Size-prefixed UTF-8 string forming an URI
 
 filter definition: 
 - "dir": for choosing a directory
