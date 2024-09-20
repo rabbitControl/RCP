@@ -233,7 +233,7 @@ Number of bytes defined by the element-type and the structure.
 
 ### List
 
-##### List data:  
+##### List data (TBD):  
 A [RCP Int](RCPSpecification.md#RCP-Int) size-prefixed list of values for each dimension.
 
 e.g.:  
@@ -250,8 +250,8 @@ e.g.:
 | --------------|---------------------|-----------|-----------------|------------|---------------|
 | **elementtype** | - | TypeDefinition | - | n | TypeDefintion of array elements (all except array, list)
 | default | 0x30 (48) | List data | 0 | y | default value
-| minimum | 0x32 (50) | one-dimensional list of \<int32> | 0 | y | The minimum length of list per dimension. If minimum length of a dimension is not specified, then the minimum length is 0.
-| maximum | 0x33 (51) | one-dimensional list of \<int32> | 0 | y | The maximum length of list per dimension. If maximum length of a dimension is not specified, then the maximum length is the maximum value of int32.
+| minimum | 0x32 (50) | [RCP Int](RCPSpecification.md#RCP-Int) size-prefixed of [RCP Int](RCPSpecification.md#RCP-Int) | 0 | y | The minimum list-length per dimension.
+| maximum | 0x33 (51) | [RCP Int](RCPSpecification.md#RCP-Int) size-prefixed of [RCP Int](RCPSpecification.md#RCP-Int) | 0 | y | The maximum list-length per dimension.
 <br />  
 
 ### URI:
