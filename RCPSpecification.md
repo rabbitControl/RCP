@@ -102,7 +102,7 @@ All the languages are transmitted at once. We decided to favour this over a diff
 
 RCP wraps data into data packets with an optional timestamp. Data can be chained.
 
-     0               1              1/8
+     0               1               2
       7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...   7 6 5 4 3 2 1 0
      +-+-+-+---------+---------------+-----------------------+--------------+
      |T|R|R| Command |   Timestamp   | Command specific data |     Packet   |
@@ -131,7 +131,7 @@ Be aware that a parameter-id 0 identifying the virtual [root-group](#Root-Parame
 | Command   | ID   | Expected data | Comment   |
 |-----------|------|---------------|-----------|
 | info | 0x01 | [Info data](#info-data) | A client may send this command to identify itself to the server in which case the server answeres with its own InfoData. A server will only ever send this command in response. A client never answeres this command.
-| initialize | 0x02 | [RCP Int](#RCP-Int) | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. A server will only ever send this command in response. A client never answeres this command.
+| initialize | 0x02 | [Parameter Id](#Parameter-Id) | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. A server will only ever send this command in response. A client never answeres this command.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id).
 | update | 0x03 | [Parameter data](#Parameter-data) | Incremental update packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
 | updatevalue | 0x04 | [Update value data](#Update-value-data) | See [Update value](#Update-value). Valueupdate packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Update value](#Update-value) data.
 | remove | 0x05 | [Parameter Id](#Parameter-Id) | This is used to identify parameters for deletion.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id).
