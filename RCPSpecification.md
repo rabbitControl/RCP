@@ -124,13 +124,13 @@ Packets can not be chained because no packet-framing exists. Framing is assumed 
 
 ### Packet types
 
-| Type      | ID   | Expected data | Comment   |
-|-----------|------|---------------|-----------|
-| info | 0x01 | [Info data](#info-data) | A client may send this packet type to identify itself to the server in which case the server answeres with its own InfoData. A server will only ever send this packet type in response. A client never answeres this packet type.
-| initialize | 0x02 | [RCP Int](#RCP-Int) | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. After receiving all parameters the client is fully initialized.<br>A server will only ever send this packet type in response. A client never answeres this packet type.
-| update | 0x03 | [Parameter data](#Parameter-data) | Incremental update packets must only be sent to fully initialized clients. After being fully initialized clients can send update packets to the server.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
-| updatevalue | 0x04 | [Update value data](#Update-value-data) | Updatevalue packets must only be sent to fully initialized clients. After being fully initialized clients can send updatevalue packets to the server.<br>Data chaining: the data field can contain more than one [Update value data](#Update-value-data).
-| remove | 0x05 | [Parameter Id](#Parameter-Id) | This is used to identify parameters for deletion. This can only be sent from servers to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id).
+| Type      | ID   | Packet Data   | As Command | As Response | Comment   |
+|-----------|------|---------------|------------|-------------|-----------|
+| info | 0x01 | [Info data](#info-data) | from client | from server | A client may send this packet type to identify itself to the server in which case the server answeres with its own InfoData. A server will only ever send this packet type in response. A client never answeres this packet type.
+| initialize | 0x02 | [RCP Int](#RCP-Int) | from client | from server | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. After receiving all parameters the client is fully initialized.<br>A server will only ever send this packet type in response. A client never answeres this packet type.
+| update | 0x03 | [Parameter data](#Parameter-data) | from client<br>from server | - | Incremental update packets must only be sent to fully initialized clients. After being fully initialized clients can send update packets to the server.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
+| updatevalue | 0x04 | [Update value data](#Update-value-data) | from client<br>from server | - | Updatevalue packets must only be sent to fully initialized clients. After being fully initialized clients can send updatevalue packets to the server.<br>Data chaining: the data field can contain more than one [Update value data](#Update-value-data).
+| remove | 0x05 | [Parameter Id](#Parameter-Id) | from server | - | This is used to identify parameters for deletion. This can only be sent from servers to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id).
 
 
 ## Info Data
