@@ -105,29 +105,29 @@ Packets can not be chained because no packet-framing exists. Framing is assumed 
 
      0               1               2
       7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...   
-     +-+-+-+---------+---------------+-----------------------+
-     |T|R|R| Command |   Timestamp   | Command specific data |
-     |S|S|S|   (5)   |  (if TS is 1) | Command specific data |
-     | |V|V|         |      (64)     |  ...                  |
-     | |1|2|         |               |                       |
-     +-+-+-+---------+---------------+-----------------------|
+     +-+-+-+---------+---------------+--------------------+
+     |T|R|R|  Type   |   Timestamp   | Type specific data |
+     |S|S|S|  (5)    |  (if TS is 1) | Type specific data |
+     | |V|V|         |      (64)     |  ...               |
+     | |1|2|         |               |                    |
+     +-+-+-+---------+---------------+--------------------|
      
      
 
-- TS: Timestamp flag. If this flag is set the first 64 bit after the command is a timestamp.
+- TS: Timestamp flag. If this flag is set the first 64 bit after the type is a timestamp.
 - RSV1: Reserved for future use.
 - RSV2: Reserved for future use.
-- [Command](#command-table): The command defines what the packet data means.
+- [Type](#Packet-types): The type defines the packet data type.
 - Timestamp: A 64bit timestamp if the timestamp-flag is set.
-- Data: The data as defined by the command.  
+- Data: The data as defined by the packet type.  
 
 
-### Command table
+### Packet types
 
-| Command   | ID   | Expected data | Comment   |
+| Type      | ID   | Expected data | Comment   |
 |-----------|------|---------------|-----------|
-| info | 0x01 | [Info data](#info-data) | A client may send this command to identify itself to the server in which case the server answeres with its own InfoData. A server will only ever send this command in response. A client never answeres this command.
-| initialize | 0x02 | [RCP Int](#RCP-Int) | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. A server will only ever send this command in response. A client never answeres this command.<br>Data chaining: the data field can contain more than one [RCP Int](#RCP-Int).
+| info | 0x01 | [Info data](#info-data) | A client may send this packet type to identify itself to the server in which case the server answeres with its own InfoData. A server will only ever send this packet type in response. A client never answeres this packet type.
+| initialize | 0x02 | [RCP Int](#RCP-Int) | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. A server will only ever send this packet type in response. A client never answeres this packet type.<br>Data chaining: the data field can contain more than one [RCP Int](#RCP-Int).
 | update | 0x03 | [Parameter data](#Parameter-data) | Incremental update packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
 | updatevalue | 0x04 | [Update value data](#Update-value-data) | See [Update value](#Update-value). Valueupdate packets must only be sent to fully initialized clients.<br>Data chaining: the data field can contain more than one [Update value](#Update-value) data.
 | remove | 0x05 | [Parameter Id](#Parameter-Id) | This is used to identify parameters for deletion.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id).
