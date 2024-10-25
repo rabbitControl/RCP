@@ -101,15 +101,16 @@ All the languages are transmitted at once. We decided to favour this over a diff
 ## Packet
 
 RCP wraps data into data packets with an optional timestamp. Data can be chained.
+Packets can not be chained because no packet-framing exists. Framing is assumed to be done on the transport level.
 
      0               1               2
-      7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...   7 6 5 4 3 2 1 0
-     +-+-+-+---------+---------------+-----------------------+--------------+
-     |T|R|R| Command |   Timestamp   | Command specific data |     Packet   |
-     |S|S|S|   (5)   |  (if TS is 1) | Command specific data |   Terminator |
-     | |V|V|         |      (64)     |  ...                  |   (cmd spec) |
-     | |1|2|         |               |                       |      0x80    |
-     +-+-+-+---------+---------------+-----------------------|--------------+
+      7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...   
+     +-+-+-+---------+---------------+-----------------------+
+     |T|R|R| Command |   Timestamp   | Command specific data |
+     |S|S|S|   (5)   |  (if TS is 1) | Command specific data |
+     | |V|V|         |      (64)     |  ...                  |
+     | |1|2|         |               |                       |
+     +-+-+-+---------+---------------+-----------------------|
      
      
 
