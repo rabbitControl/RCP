@@ -120,11 +120,6 @@ Packets can not be chained because no packet-framing exists. Framing is assumed 
 - [Command](#command-table): The command defines what the packet data means.
 - Timestamp: A 64bit timestamp if the timestamp-flag is set.
 - Data: The data as defined by the command.  
-- Packet Terminator: 0x80 command specific: mandatory for commands: update, updatevalue and remove
-
-#### Packet terminator
-
-Be aware that a parameter-id 0 identifying the virtual [root-group](#Root-Parameter-Group) has the same value as the packet terminator. Hence configuring the root-group only works by sending a non-multi parameter-update packet.
 
 
 ### Command table
