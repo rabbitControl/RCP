@@ -28,41 +28,41 @@ The `Datatype Id` consits of 8 bits (one octet) where the most significant bit d
 
 ### Datatype table:
 
-| Datatype   | Datatype Id<br/>hex&nbsp;(dec)   | Length (bytes)   |
-| -----------|------------------|------------------|
-| custom type | 0x01 (1) | Defined by type definition. |
-| boolean | 0x10 (16) | 1 |
-| int8 | 0x11 (17) | 1 |
-| uint8 | 0x12 (18) | 1 |
-| int16 | 0x13	(19) | 2 |
-| uint16 | 0x14 (20) | 2 |
-| int32 | 0x15	(21) | 4 |
-| uint32 | 0x16	(22) | 4 |
-| int64 | 0x17 (23) | 8 |
-| uint64 | 0x18	(24) | 8 |
-| float32 | 0x19 (25) | 4 |
-| float64 | 0x1a (26) | 8 |
-| Vector2i32 | 0x1b (27) | 2 x 4 |
-| Vector2f32 | 0x1c (28) | 2 x 4 |
-| Vector3i32 | 0x1d (29) | 3 x 4 |
-| Vector3f32 | 0x1e (30) | 3 x 4 |
-| Vector4i32 | 0x1f (31) | 4 x 4 |
-| Vector4f32 | 0x20 (32) | 4 x 4 |
-| String | 0x21 (33) | [RCP String](RCPSpecification.md#RCP-String)
-| RGB | 0x22 (34) | 3 |
-| RGBA | 0x23 (35) | 4 |
-| RGB Float | 0x24 (36) | 3 x 4 |
-| RGBA Float | 0x25 (37) | 4 x 4 |
-| Enum | 0x26 (38) | Array of [RCP String](RCPSpecification.md#RCP-String) |
-| Array | 0x27 (39) | Defined by array-structure |
-| List | 0x28 (40) |
-| Bang | 0x29 (41) | 0 |
-| Group | 0x2a (42) | 0 |
-| URI | 0x2b (43) | [RCP String](RCPSpecification.md#RCP-String) |
-| IPv4 | 0x2c (44) | 4 |
-| IPv6 | 0x2d (45) | 16 |
-| Range | 0x2e (46) | 2 x number-type-size|
-| Image | 0x2f (47) | size-prefixed image-data|
+| Datatype   | Datatype Id<br/>hex&nbsp;(dec)   | Length (bytes)   | Since |
+| -----------|------------------|------------------|-------|
+| [Custom Type](#Custom-Type) | 0x01 (1) | Defined by type definition. | 1.0
+| [boolean](#Boolean) | 0x10 (16) | 1 | 1.0
+| [int8](#Numbers) | 0x11 (17) | 1 | 1.0
+| [uint8](#Numbers) | 0x12 (18) | 1 | 1.0
+| [int16](#Numbers) | 0x13	(19) | 2 | 1.0
+| [uint16](#Numbers) | 0x14 (20) | 2 | 1.0
+| [int32](#Numbers) | 0x15	(21) | 4 | 1.0
+| [uint32](#Numbers) | 0x16	(22) | 4 | 1.0
+| [int64](#Numbers) | 0x17 (23) | 8 | 1.0
+| [uint64](#Numbers) | 0x18	(24) | 8 | 1.0
+| [float32](#Numbers) | 0x19 (25) | 4 | 1.0
+| [float64](#Numbers) | 0x1a (26) | 8 | 1.0
+| [Vector2i32](#Numbers) | 0x1b (27) | 2 x 4 | 1.0
+| [Vector2f32](#Numbers) | 0x1c (28) | 2 x 4 | 1.0
+| [Vector3i32](#Numbers) | 0x1d (29) | 3 x 4 | 1.0
+| [Vector3f32](#Numbers) | 0x1e (30) | 3 x 4 | 1.0
+| [Vector4i32](#Numbers) | 0x1f (31) | 4 x 4 | 1.0
+| [Vector4f32](#Numbers) | 0x20 (32) | 4 x 4 | 1.0
+| [String](#String) | 0x21 (33) | [RCP String](RCPSpecification.md#RCP-String) | 1.0
+| [RGB](#Color:-RGB) | 0x22 (34) | 3 | 1.0
+| [RGBA](#Color:-RGBA) | 0x23 (35) | 4 | 1.0
+| [RGB Float](#Color:-RGB-Float) | 0x24 (36) | 3 x 4 | 1.0
+| [RGBA Float](#Color:-RGBA-Float) | 0x25 (37) | 4 x 4 | 1.0
+| [Enum](#Enum) | 0x26 (38) | Array of [RCP String](RCPSpecification.md#RCP-String) | 1.0
+| [Array](#Array) | 0x27 (39) | Defined by array-structure | 1.0
+| [List](#List) | 0x28 (40) | | -
+| Bang | 0x29 (41) | 0 | 1.0
+| Group | 0x2a (42) | 0 | 1.0
+| [URI](#URI) | 0x2b (43) | [RCP String](RCPSpecification.md#RCP-String) | 1.0
+| [IPv4](#IPv4) | 0x2c (44) | 4 | 1.0
+| [IPv6](#IPv6) | 0x2d (45) | 16 | 1.0
+| [Range](#Range) | 0x2e (46) | 2 x number-type-size | 1.0
+| [Image](#Image) | 0x2f (47) | size-prefixed image-data | 1.0
 <br />  
 
 ### Boolean:
