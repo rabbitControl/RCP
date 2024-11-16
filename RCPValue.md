@@ -49,10 +49,10 @@ The `Datatype Id` consits of 8 bits (one octet) where the most significant bit d
 | [Vector4i32](#Numbers) | 0x1f (31) | 4 x 4 | 1.0
 | [Vector4f32](#Numbers) | 0x20 (32) | 4 x 4 | 1.0
 | [String](#String) | 0x21 (33) | [RCP String](RCPSpecification.md#RCP-String) | 1.0
-| [RGB](#Color:-RGB) | 0x22 (34) | 3 | 1.0
-| [RGBA](#Color:-RGBA) | 0x23 (35) | 4 | 1.0
-| [RGB Float](#Color:-RGB-Float) | 0x24 (36) | 3 x 4 | 1.0
-| [RGBA Float](#Color:-RGBA-Float) | 0x25 (37) | 4 x 4 | 1.0
+| [RGB](#RGB) | 0x22 (34) | 3 | 1.0
+| [RGBA](#RGBA) | 0x23 (35) | 4 | 1.0
+| [RGB Float](#RGB-Float) | 0x24 (36) | 3 x 4 | 1.0
+| [RGBA Float](#RGBA-Float) | 0x25 (37) | 4 x 4 | 1.0
 | [Enum](#Enum) | 0x26 (38) | Array of [RCP String](RCPSpecification.md#RCP-String) | 1.0
 | [Array](#Array) | 0x27 (39) | Defined by array-structure | 1.0
 | [List](#List) | 0x28 (40) | | -
@@ -124,7 +124,7 @@ Range-data for a number of type \<int8>: `0x01 0x0a`
 <br />  
 
 
-### Color: RGB
+### RGB
 
 ##### Color data:
 3 bytes to encode the channels R, G, B  
@@ -141,7 +141,7 @@ e.g. RGB:
 <br />  
 
 
-### Color: RGBA
+### RGBA
 
 ##### Color data:
 4 bytes to encode the channels R, G, B, A  
@@ -159,7 +159,7 @@ e.g. RGBA:
 <br />  
 
 
-### Color: RGB Float
+### RGB Float
 
 ##### Color data:
 3 float32 (big-endian) to encode the channels R, G, B in the range of 0 .. 1  
@@ -176,7 +176,7 @@ e.g. RGBA:
 <br />  
 
 
-### Color: RGBA Float
+### RGBA Float
 
 ##### Color data:
 4 float32 (big-endian) to encode the channels R, G, B, A in the range of 0 .. 1  
