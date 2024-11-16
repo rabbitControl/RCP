@@ -124,42 +124,42 @@ Packets can not be chained because no packet-framing exists. Framing is assumed 
 
 ### Packet types
 
-| Type      | ID   | Packet Data   | As Command | As Response | Comment   |
-|-----------|------|---------------|------------|-------------|-----------|
-| info | 0x01 | [Info data](#info-data) | from client | from server | A client may send this packet type to identify itself to the server in which case the server answeres with its own InfoData. A server will only ever send this packet type in response. A client never answeres this packet type.
-| initialize | 0x02 | [RCP Int](#RCP-Int) | from client | from server | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. After receiving all parameters the client is fully initialized.<br>A server will only ever send this packet type in response. A client never answeres this packet type.
-| update | 0x03 | [Parameter data](#Parameter-data) | from client<br>from server | - | Incremental update packets must only be sent to fully initialized clients. After being fully initialized clients can send update packets to the server.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data).
-| updatevalue | 0x04 | [Update value data](#Update-value-data) | from client<br>from server | - | Updatevalue packets must only be sent to fully initialized clients. After being fully initialized clients can send updatevalue packets to the server.<br>Data chaining: the data field can contain more than one [Update value data](#Update-value-data).
-| remove | 0x05 | [Parameter Id](#Parameter-Id) | from server | - | This is used to identify parameters for deletion. This can only be sent from servers to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id).
+| Type      | ID   | Packet Data   | As Command | As Response | Comment   | Since   |
+|-----------|------|---------------|------------|-------------|-----------|---------|
+| info | 0x01 | [Info data](#info-data) | from client | from server | A client may send this packet type to identify itself to the server in which case the server answeres with its own InfoData. A server will only ever send this packet type in response. A client never answeres this packet type. | 1.0
+| initialize | 0x02 | [RCP Int](#RCP-Int) | from client | from server | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. After receiving all parameters the client is fully initialized.<br>A server will only ever send this packet type in response. A client never answeres this packet type. | 1.0
+| update | 0x03 | [Parameter data](#Parameter-data) | from client<br>from server | - | Incremental update packets must only be sent to fully initialized clients. After being fully initialized clients can send update packets to the server.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data). | 1.0
+| updatevalue | 0x04 | [Update value data](#Update-value-data) | from client<br>from server | - | Updatevalue packets must only be sent to fully initialized clients. After being fully initialized clients can send updatevalue packets to the server.<br>Data chaining: the data field can contain more than one [Update value data](#Update-value-data). | 1.0
+| remove | 0x05 | [Parameter Id](#Parameter-Id) | from server | - | This is used to identify parameters for deletion. This can only be sent from servers to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id). | 1.0
 
 
 ## Info Data
 
-| Name          | Option Id<br/>hex&nbsp;(dec)   | ValueType      | default value   | optional   | description   |
-| --------------|--------------|----------------|-----------------|------------|---------------|
-| **version**   | - | [RCP String](#RCP-String)    | - | n | String in [semver](https://semver.org/) format.
-| applicationid       | 0x1a	(26)   | [RCP String](#RCP-String)    | "" |y| Can be used to identify the server/client application.
-| applicationversion  | 0x1b	(27)   | [RCP String](#RCP-String)     | "" |y| version of application
+| Name          | Option Id<br/>hex&nbsp;(dec)   | ValueType      | Default value   | Optional   | Description   | Since   |
+| --------------|--------------|----------------|-----------------|------------|---------------|----------|
+| **version**   | - | [RCP String](#RCP-String)    | - | n | String in [semver](https://semver.org/) format. | 1.0<br>shall never change
+| applicationid       | 0x1a	(26)   | [RCP String](#RCP-String)    | "" |y| Can be used to identify the server/client application. | 1.0
+| applicationversion  | 0x1b	(27)   | [RCP String](#RCP-String)     | "" |y| version of application | 1.0
 
 In case no optional option is present, InfoData needs to be terminated with 0x80.
 
 ## Parameter Data
 
-| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   |
-| --------------|---------------------|-----------|-----------------|------------|---------------|
-| **id** | - | [Parameter Id](#Parameter-Id) | - | - | Unique parameter identifier. Also see "parentid".
-| **typedefinition** |	- | [Typedefinition](RCPValue.md) | - | n | Typedefinition of value.<br/>See: [Typedefinition](RCPValue.md)
-| value | 0x20 (32) | known from typedefinition | type-specific default | y |	The value. Byte-length is known from type.
-| label | 0x21 (33)	| [RCP Language String](#RCP-Language-String) | "" | y | Human readable identifier.
-| description | 0x22 (34) | [RCP Language String](#RCP-Language-String) | "" | y | The description of the parameter.
-| tags | 0x23 (35)	|	[RCP String](#RCP-String) | "" | y | Space separated list of tags. (Tags containing spaces are not supported)
-| order | 0x24 (36)	|	[RCP Int](#RCP-Int) | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters.
-| parentid | 0x25 (37)	|	[Parameter Id](#Parameter-Id) | 0 | y | Specifies a ParameterGroup as parent. See [Parameter Group](#Parameter-Group).
-| widget | 0x26 (38) | [Widget data](RCPWidget.md) | default-widget (0x0001) | y | Specify the widget for this parameter. Senseful defaults are specified for different datatypes. See [Widget data](RCPWidget.md) for more information.
-| userdata | 0x27 (39) | [RCP Int](#RCP-Int) size-prefixed array of bytes | - | y | A place for various user-data.
-| userid | 0x28 (40) | [RCP String](#RCP-String) | "" | y | A custom user-id
-| readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value.
-| enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the visual representation of the parameter is disabled (grayed out). A not enabled parameter indicates a parameter currently not in use.
+| Name          | Option Id<br/>hex&nbsp;(dec)   | Type      | Default value   | Optional   | Description   | Since |
+| --------------|---------------------|-----------|-----------------|------------|---------------|--------|
+| **id** | - | [Parameter Id](#Parameter-Id) | - | n | Unique parameter identifier. Also see "parentid". | 1.0
+| **typedefinition** |	- | [Typedefinition](RCPValue.md) | - | n | Typedefinition of value.<br/>See: [Typedefinition](RCPValue.md) | 1.0
+| value | 0x20 (32) | known from typedefinition | type-specific default | y |	The value. Byte-length is known from type. | 1.0
+| label | 0x21 (33)	| [RCP Language String](#RCP-Language-String) | "" | y | Human readable identifier. | 1.0
+| description | 0x22 (34) | [RCP Language String](#RCP-Language-String) | "" | y | The description of the parameter. | 1.0
+| tags | 0x23 (35)	|	[RCP String](#RCP-String) | "" | y | Space separated list of tags. (Tags containing spaces are not supported) | 1.0
+| order | 0x24 (36)	|	[RCP Int](#RCP-Int) | 0 | y | Allows to sort paramters. This is useful when using auto-layouts like a list of parameters. | 1.0
+| parentid | 0x25 (37)	|	[Parameter Id](#Parameter-Id) | 0 | y | Specifies a ParameterGroup as parent. See [Parameter Group](#Parameter-Group). | 1.0
+| widget | 0x26 (38) | [Widget data](RCPWidget.md) | default-widget (0x0001) | y | Specify the widget for this parameter. Senseful defaults are specified for different datatypes. See [Widget data](RCPWidget.md) for more information. | 1.0
+| userdata | 0x27 (39) | [RCP Int](#RCP-Int) size-prefixed array of bytes | - | y | A place for various user-data. | 1.0
+| userid | 0x28 (40) | [RCP String](#RCP-String) | "" | y | A custom user-id | 1.0
+| readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value. | 1.0
+| enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the visual representation of the parameter is disabled (grayed out). A not enabled parameter indicates a parameter currently not in use. | 1.0
 
 
 ## Parameter Group:
@@ -184,11 +184,11 @@ The root `Parameter Group` is a virtual group which does always exist. It define
 
 To optimize the update of a parameter value a special form is defined:
 
-| Name          | Type      | Value   | Optional   | Description   |
-| --------------|-----------|---------|------------|---------------|
-| **parameter id**  | [Parameter Id](#Parameter-Id)          | -         | n | The Parameter id.<br>A value of 0 is invalid (the virtual root-group does not have a value).
-| **mandatory part of datatype**   | Typedefinition | datatype-data | n | Mandatory part of the datatype without options.<br>Needed to be able to resolve this packet without additional lookup.
-| **value**         | type of datatype  | value-data | n | the value of type as defined in Datatype.
+| Name          | Type      | Value   | Optional   | Description   | Since |
+| --------------|-----------|---------|------------|---------------|-------|
+| **parameter id**  | [Parameter Id](#Parameter-Id)          | -         | n | The Parameter id.<br>A value of 0 is invalid (the virtual root-group does not have a value). | 1.0
+| **mandatory part of datatype**   | Typedefinition | datatype-data | n | Mandatory part of the datatype without options.<br>Needed to be able to resolve this packet without additional lookup. | 1.0
+| **value**         | type of datatype  | value-data | n | the value of type as defined in Datatype. | 1.0
 
 This reduces the amount of data to be sent when only updating the value especially when chaining parameter updates.
 
