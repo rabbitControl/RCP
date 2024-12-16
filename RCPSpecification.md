@@ -11,6 +11,13 @@
   - Button, Slider, Dial, etc.
   - Custom widget
 
+## Versioning
+
+[Versioning](Versioning.md)
+
+## Protocol Flow
+
+[Protocol Flow](Flow.md)
 
 ## Endianess
 
@@ -126,15 +133,17 @@ Packets can not be chained because no packet-framing exists. Framing is assumed 
 
 | Type      | ID   | Packet Data   | As Command | As Response | Comment   | Since   |
 |-----------|------|---------------|------------|-------------|-----------|---------|
-| info | 0x01 | [Info data](#info-data) | from client | from server | A client may send this packet type to identify itself to the server in which case the server answeres with its own InfoData. A server will only ever send this packet type in response. A client never answeres this packet type. | 1.0
-| initialize | 0x02 | [RCP Int](#RCP-Int) | from client | from server | A client sends "initialize" with a value of 0 to request all parameters from the server in which case the server answeres with a "initialize" containing the number of parameters it will send. This allows a client to draw a progress-bar while receiving the initial set of parameters. After receiving all parameters the client is fully initialized.<br>A server will only ever send this packet type in response. A client never answeres this packet type. | 1.0
-| update | 0x03 | [Parameter data](#Parameter-data) | from client<br>from server | - | Incremental update packets must only be sent to fully initialized clients. After being fully initialized clients can send update packets to the server.<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data). | 1.0
-| updatevalue | 0x04 | [Update value data](#Update-value-data) | from client<br>from server | - | Updatevalue packets must only be sent to fully initialized clients. After being fully initialized clients can send updatevalue packets to the server.<br>Data chaining: the data field can contain more than one [Update value data](#Update-value-data). | 1.0
-| remove | 0x05 | [Parameter Id](#Parameter-Id) | from server | - | This is used to identify parameters for deletion. This can only be sent from servers to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id). | 1.0
+| info | 0x01 | [Info data](#info-data) | from client | from server | See: [Version Handshake](Flow.md#version-handshake) | 1.0
+| initialize | 0x02 | [RCP Int](#RCP-Int) | from client | from server |  See: [Initialization](Flow.md#initialization)<br>A server will only ever send this packet type in response. A client never answeres this packet type. | 1.0
+| update | 0x03 | [Parameter data](#Parameter-data) | from client<br>from server | - | See: [Update](Flow.md#update)<br>Data chaining: the data field can contain more than one [Parameter Data](#parameter-data). | 1.0
+| updatevalue | 0x04 | [Update value data](#Update-value-data) | from client<br>from server | - | See: [Update](Flow.md#update)<br>Data chaining: the data field can contain more than one [Update value data](#Update-value-data). | 1.0
+| remove | 0x05 | [Parameter Id](#Parameter-Id) | from server | - | See: [Update](Flow.md#update)<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id). | 1.0
 
 ## RCP Version
 
 The RCP version consists of 2 bytes where the first byte is the major version and second byte is the minor version.
+
+See: [Versioning](Versioning.md)
 
 e.g.: 12 == Version 1.2
 
