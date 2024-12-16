@@ -132,12 +132,18 @@ Packets can not be chained because no packet-framing exists. Framing is assumed 
 | updatevalue | 0x04 | [Update value data](#Update-value-data) | from client<br>from server | - | Updatevalue packets must only be sent to fully initialized clients. After being fully initialized clients can send updatevalue packets to the server.<br>Data chaining: the data field can contain more than one [Update value data](#Update-value-data). | 1.0
 | remove | 0x05 | [Parameter Id](#Parameter-Id) | from server | - | This is used to identify parameters for deletion. This can only be sent from servers to fully initialized clients.<br>Data chaining: the data field can contain more than one [Parameter Id](#Parameter-Id). | 1.0
 
+## RCP Version
+
+The RCP version consists of 2 bytes where the first byte is the major version and second byte is the minor version.
+
+e.g.: 12 == Version 1.2
 
 ## Info Data
 
 | Name          | Option Id<br/>hex&nbsp;(dec)   | ValueType      | Default value   | Optional   | Description   | Since   |
 | --------------|--------------|----------------|-----------------|------------|---------------|----------|
-| **version**   | - | [RCP String](#RCP-String)    | - | n | String in [semver](https://semver.org/) format. | 1.0<br>shall never change
+| **version**   | - | [RCP Version](#RCP-Version)    | - | n | This is the version of the protocol implemented. | To ensure the handshake the definition of the RCP-Version must never change. 
+| **handshake-version**   | - | [RCP Version](#RCP-Version)    | - | n | Server send their runtime-version and clients their base-version. | To ensure the handshake the definition of the RCP-Version must never change. 
 | applicationid       | 0x1a	(26)   | [RCP String](#RCP-String)    | "" |y| Can be used to identify the server/client application. | 1.0
 | applicationversion  | 0x1b	(27)   | [RCP String](#RCP-String)     | "" |y| version of application | 1.0
 
