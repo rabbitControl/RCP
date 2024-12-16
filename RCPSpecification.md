@@ -147,7 +147,7 @@ e.g.: 12 == Version 1.2
 | applicationid       | 0x1a	(26)   | [RCP String](#RCP-String)    | "" |y| Can be used to identify the server/client application. | 1.0
 | applicationversion  | 0x1b	(27)   | [RCP String](#RCP-String)     | "" |y| version of application | 1.0
 
-In case no optional option is present, InfoData needs to be terminated with 0x80.
+In case no optional option is present, [Info Data](Info-Data) needs to be terminated with 0x80.
 
 ## Parameter Data
 
@@ -167,6 +167,7 @@ In case no optional option is present, InfoData needs to be terminated with 0x80
 | readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value. | 1.0
 | enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the visual representation of the parameter is disabled (grayed out). A not enabled parameter indicates a parameter currently not in use. | 1.0
 
+In case no optional option is present, [Parameter Data](Parameter-Data) needs to be terminated with 0x80.
 
 ## Parameter Group:
 
