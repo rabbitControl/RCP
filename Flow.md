@@ -25,7 +25,7 @@
 
 ## Update
 
-Incremental update packets must only be sent to fully initialized clients. After being fully initialized clients can send update packets to the server.
+Incremental update, updatevalue and remove packets must only be sent to fully initialized clients. After being fully initialized clients can send update packets to the server.
 
 10. Server and clients send update or update-value packets
 10. Servers may also remove Parameters with a remove-packet
