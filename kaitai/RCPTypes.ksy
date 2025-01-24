@@ -5,7 +5,7 @@ meta:
 
 enums:
 
-  command:
+  packet_types:
     0x01: info
     0x02: initialize
     0x03: update
@@ -220,3 +220,33 @@ enums:
   customwidget_options:
     0x56: widgetid
     0x57: config
+
+
+types:
+  rcp_version:
+    seq:
+      - id: major
+        type: u1
+      - id: minor
+        type: u1
+  packet:
+    seq:
+      - id: ts
+        type: b1
+        doc: Timestamp present
+      - id: rsv1
+        type: b1
+        doc: Reserved 1
+      - id: rsv2
+        type: b1
+        doc: Reserved 2
+      - id: packet_type
+        type: b5
+        enum: packet_types
+        doc: Packet Type
+      - id: timestamp
+        type: u8
+        if: ts
+      - id: data
+        type: u1
+        repeat: eos
