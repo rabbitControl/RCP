@@ -4,21 +4,17 @@ meta:
   endian: be
 
 enums:
-  packet_options:
-    0x11: timestamp
-    0x12: data
 
   command:
-    0x00: invalid
     0x01: info
     0x02: initialize
-    0x03: discover
-    0x04: update
-    0x05: remove
-    0x06: updatevalue
+    0x03: update
+    0x04: updatevalue
+    0x05: remove  
 
   infodata_options:
     0x1a: applicationid
+    0x1b: applicationversion
 
   parameter_options:
     0x20: value
@@ -31,6 +27,7 @@ enums:
     0x27: userdata
     0x28: userid
     0x29: readonly
+    0x30: enabled
 
   boolean_options:
     0x30: default
@@ -39,9 +36,15 @@ enums:
     0x30: default
     0x31: minimum
     0x32: maximum
-    0x33: multipleof
-    0x34: scale
-    0x35: unit
+    0x33: stepsize
+    0x34: unit
+
+  range_options:
+    0x30: default
+
+  string_options:
+    0x30: default
+    0x31: regular_expression
 
   vector_options:
     0x30: default
@@ -51,25 +54,27 @@ enums:
     0x34: scale
     0x35: unit
 
-  string_options:
-    0x30: default
-    0x31: regular_expression
 
-  color_options:
+  rgb_options:
+    0x30: default
+
+  rgba_options:
+    0x30: default
+
+  rgb_float_options:
+    0x30: default
+
+  rgba_float_options:
     0x30: default
 
   enum_options:
     0x30: default
     0x31: entries
-    0x32: multiselect
+    0x32: minimum_selection_count
+    0x33: maximum_selection_count
 
   array_options:
     0x30: default
-
-  list_options:
-    0x30: default
-    0x31: minimum
-    0x32: maximum
 
   uri_options:
     0x30: default
@@ -82,13 +87,13 @@ enums:
   ipv6_options:
     0x30: default
 
+  image_options:
+    0x30: default
+
   customtype_options:
     0x30: default
-    0x31: uuid
+    0x31: typeid
     0x32: config
-
-  range_options:
-    0x30: default
 
   datatype:
     0x01: customtype
@@ -112,120 +117,106 @@ enums:
     0x21: string
     0x22: rgb
     0x23: rgba
-    0x24: enum
-    0x25: array
-    0x26: list
-    0x27: bang
-    0x28: group # parameter group
+    0x24: rgb_float
+    0x25: rgba_float
+    0x26: enum
+    0x27: array
+    0x28: bang
+    0x29: group # parameter group
     0x2a: uri
     0x2b: ipv4
     0x2c: ipv6
     0x2d: range
     0x2e: image
 
-  number_scale:
-    0x00: linear
-    0x01: logarithmic
-    0x02: exp2
-
   widget_options:
-    0x50: enabled
     0x51: label_visible
     0x52: value_visible
     0x53: needs_confirmation
-
-  label_position:
-    0x01: left
-    0x02: right
-    0x03: top
-    0x04: bottom
-    0x05: center
+    0x54: userdata
 
   widgettype:
     0x0001: default
     0x0002: custom
     0x0010: info
     0x0011: textbox
-    0x0012: bang
-    0x0013: press
-    0x0014: toggle
-    0x0015: numberbox
-    0x0016: dial
-    0x0017: slider
-    0x0018: slider2d
-    0x0019: range
-    0x001a: dropdown
-    0x001b: radiobutton
-    0x001c: colorbox
-    0x001d: table
-    0x001e: filechooser
-    0x001f: directorychooser
+    0x0012: button
+    0x0013: switch
+    0x0014: checkbox
+    0x0015: press
+    0x0016: numberbox
+    0x0017: dial
+    0x0018: slider
+    0x0019: slider2d
+    0x001a: range
+    0x001b: dropdown
+    0x001c: radiobutton
+    0x001d: colorchooser
+    0x001e: table
+    0x001f: uri
     0x0020: ip
-    0x8000: list
-    0x8001: listpage
-    0x8002: tabs
+    0x0021: image
+    0x4000: list
+    0x4001: tabs
 
 
-  textbox_options:
+  button_widget_options:
+    0x56: button_label
+    0x57: trigger_on_up  
+
+  switch_widget_options:
+    0x56: switch_label_on
+    0x57: switch_label_off
+
+  checkbox_widget_options:
+    0x56: indeterminate
+
+  press_widget_options:
+    0x56: press_label_on
+    0x57: press_label_of
+
+  textbox_widget_options:
     0x56: multiline
-    0x57: wordwrap
-    0x58: password
+    0x57: password
+    0x58: placeholder
 
-  numberbox_options:
+  numberbox_widget_options:
     0x56: precision
-    0x57: format
-    0x58: stepsize
-    0x59: cyclic
+    0x57: stepsize_multiplier
+    0x58: cyclic
+    0x59: nan_meaning
 
-  numberbox_format:
-    0x01: dec
-    0x02: hex
-    0x03: bin
+  dial_widget_options:
+    0x56: precision
+    0x57: stepsize_multiplier
+    0x58: cyclic
+    0x59: nan_meaning
 
-  slider_options:
-    0x56: horizontal
+  slider_widget_options:
+    0x56: precision
+    0x57: stepsize_multiplier
+    0x58: horizontal
+    0x59: nan_meaning
+    0x5a: trackfill_mode
 
-  dial_options:
-    0x56: cyclic
+  trackfill_mode:
+    0x00: none
+    0x01: left
+    0x02: center
+    0x03: right
+
+  range_widget_options:
+    0x56: precision
+    0x57: stepsize_multiplier
+    0x58: nan_meaning
+
+  uri_widget_options:
+    0x56: placeholder
+    0x57: button_label
+
+  image_widget_options:
+    0x56: overlay_text
 
   customwidget_options:
-    0x56: uuid
+    0x56: widgetid
     0x57: config
-
-  client_status:
-    0x00: disconnected
-    0x01: connected
-    0x02: version_missmatch
-    0x03: ok
-
-types:
-  tiny_string:
-    seq:
-      - id: my_len
-        type: u1
-      - id: data
-        type: str
-        size: my_len
-        encoding: UTF-8
-  short_string:
-    seq:
-      - id: my_len
-        type: u2
-      - id: data
-        type: str
-        size: my_len
-        encoding: UTF-8
-  long_string:
-    seq:
-      - id: my_len
-        type: u4
-      - id: data
-        type: str
-        size: my_len
-        encoding: UTF-8
-  userdata:
-    seq:
-      - id: my_len
-        type: u4
-      - id: data
-        size: my_len
