@@ -36,24 +36,23 @@ The `Widget Id` is a 2-byte value where the most significant bit determines whet
 | Info | 0x0010 (16) | all | Only shows the label and value. Group parameters are collapsable. This is the fallback widget for all widgets the client does not implement. | 1.0
 | Textbox | 0x0011 (17) | *string | A text-input. Default widget for string. | 1.0
 | Button | 0x0012 (18) | *bang | A Button | 1.0
-| Switch | 0x0014 (20) | *boolean | A switch supporting following states: off, on. Switches the value on each press to its opposite state. | 1.0
+| Switch | 0x0013 (19) | *boolean | A switch supporting following states: off, on. Switches the value on each press to its opposite state. | 1.0
 | Checkbox | 0x0014 (20) | boolean | A checkbox supporting following states: off, on, indeterminate. Toggles the value on each press between true and false and unsets the indeterminate state option if it was set. | 1.0
-| Press | 0x0013 (19) | boolean | On press sends 1, on release sends 0. | 1.0
-| Numberbox | 0x0015 (21) | *number without min/max, number with min/max | A numberbox or spinner. | 1.0
-| Dial | 0x0016 (22) | number | | 1.0
-| Slider | 0x0017 (23) | *number with min/max | | 1.0
-| Slider2d | 0x0018 (24) | vector2 with min/max | X/Y single touch field interface | 1.0
-| Range | 0x0019 (25) | *range | A range-slider | 1.0
-| Dropdown | 0x001a (26) | *enum | A drop-down list of options | 1.0
-| Radiobutton | 0x001b (27) | enum | | 1.0
-| Colorchooser | 0x001c (28) | *color | | 1.0
-| Table | 0x001d (29) | *array / list | | 1.0
-| URI | 0x001e (30) | *uri | | 1.0
+| Press | 0x0015 (21) | boolean | On press sends 1, on release sends 0. | 1.0
+| Numberbox | 0x0016 (22) | *number without min/max, number with min/max | A numberbox or spinner. | 1.0
+| Dial | 0x0017 (23) | number | | 1.0
+| Slider | 0x0018 (24) | *number with min/max | | 1.0
+| Slider2d | 0x0019 (25) | vector2 with min/max | X/Y single touch field interface | 1.0
+| Range | 0x001a (26) | *range | A range-slider | 1.0
+| Dropdown | 0x001b (27) | *enum | A drop-down list of options | 1.0
+| Radiobutton | 0x001c (28) | enum | | 1.0
+| Colorchooser | 0x001d (29) | *color | | 1.0
+| Table | 0x001e (30) | *array / list | | 1.0
+| URI | 0x001f (31) | *uri | | 1.0
 | IP | 0x0020 (32) | *IPv4 / IPv6 | | 1.0
 | Image | 0x0021 (33) | *Image | | 1.0
 | List | 0x4000 (32768) | *group | Layouting Widget for Groups | 1.0
-| Listpage | 0x4001 (32769) | group | Layouting Widget for Groups | 1.0
-| Tabs | 0x4002 (32770)| group | Layouting Widget for Groups | 1.0
+| Tabs | 0x4001 (32770)| group | Layouting Widget for Groups | 1.0
 <br />
 
 
