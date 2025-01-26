@@ -229,6 +229,21 @@ types:
         type: u1
       - id: minor
         type: u1
+
+  rcp_int_part:
+    seq:
+      - id: term
+        type: b1
+      - id: data
+        type: b7
+
+  rcp_int:
+    seq:
+      - id: rcpint
+        type: rcp_int_part        
+        repeat: until
+        repeat-until: _.term or rcpint.size == 4
+
   packet:
     seq:
       - id: ts
