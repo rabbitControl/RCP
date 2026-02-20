@@ -20,12 +20,18 @@
   
 6. A client sends an initialize-packet with a value of 0 to request all parameters from the server
 6. The server answers with a initialize-packet containing the number of parameters it will send (This allows a client to draw a progress-bar while receiving the initial set of parameters.)
-6. The server sends update packets with all the requested parameters
-6. After receiving all parameters the client is fully initialized
+6. The server sends update packets for all parameters it announced.
+6. After receiving all parameters the client is fully initialized and starts to accepts value updates and remove packets.
+	- A client may time out if receiving of all announced parameters takes too long.
 
 ## Update
 
-Incremental update, updatevalue and remove packets must only be sent to fully initialized clients. After being fully initialized clients can send update packets to the server.
+Incremental update, updatevalue and remove packets must only be sent to fully initialized clients. After being fully initialized clients can send update and updatevalue packets to the server.
 
 10. Server and clients send update or update-value packets
 10. Servers may also remove Parameters with a remove-packet
+
+## Adding Parameters
+
+12. Servers must send an update packet to fully describe a parameter prior to sending updatevalue packets
+13. A client ignores updatevalue packets for parameters it does not know
