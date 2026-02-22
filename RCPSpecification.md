@@ -110,12 +110,12 @@ All the languages are transmitted at once. We decided to favour this over a diff
 RCP wraps data into data packets with an optional timestamp. Data can be chained.
 Packets can not be chained because no packet-framing exists. Framing is assumed to be done on the transport level.
 
-     0               1               2
-      7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 ...   
+     0               1              2/9
+      7 6 5 4 3 2 1 0 7 6 5 .... 2 1 0 7 6 5 4 3 2 1 0 7 ...   
      +-+-+-+---------+---------------+--------------------+
      |T|R|R|  Type   |   Timestamp   | Type specific data |
      |S|S|S|  (5)    |  (if TS is 1) | Type specific data |
-     | |V|V|         |      (64)     |  ...               |
+     | |V|V|         |    (64 bit)   |  ...               |
      | |1|2|         |               |                    |
      +-+-+-+---------+---------------+--------------------|
      
