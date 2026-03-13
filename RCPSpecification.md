@@ -104,6 +104,11 @@ All the languages are transmitted at once. We decided to favour this over a diff
   - The list is terminated with a 0-byte.
   - Additionally to the [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) codes we define a special code for no specific language: `any` which is used as default language.
 
+e.g.:
+
+`a, n, y, RcpInt(5), H, e, l, l, o, 0`  
+`a, n, y, RcpInt(5), H, e, l, l, o, d, e, u, RcpInt(5), H, a, l, l, o, s, p, a, RcpInt(4), H, o, l, a, 0`
+
 
 ## Packet
 
