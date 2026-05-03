@@ -27,7 +27,7 @@ enums:
     0x27: userdata
     0x28: userid
     0x29: readonly
-    0x30: enabled
+    0x2a: enabled
 
   boolean_options:
     0x30: default

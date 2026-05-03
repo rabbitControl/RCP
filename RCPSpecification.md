@@ -179,7 +179,7 @@ In case no optional option is present, [Info Data](Info-Data) needs to be termin
 | userdata | 0x27 (39) | [RCP Int](#RCP-Int) size-prefixed array of bytes | - | y | A place for various user-data. | 1.0
 | userid | 0x28 (40) | [RCP String](#RCP-String) | "" | y | A custom user-id | 1.0
 | readonly | 0x29 (41) | byte | 0 (false) | y | If the parameter is read-only a server does not accept remote updates. On a client the widget is disabled showing the current value. | 1.0
-| enabled | 0x30 (42) | byte | 1 (true) | y | If not enabled the visual representation of the parameter is disabled (grayed out). A not enabled parameter indicates a parameter currently not in use. | 1.0
+| enabled | 0x2a (42) | byte | 1 (true) | y | If not enabled the visual representation of the parameter is disabled (grayed out). A not enabled parameter indicates a parameter currently not in use. | 1.0
 
 In case no optional option is present, [Parameter Data](Parameter-Data) needs to be terminated with 0x80.
 
