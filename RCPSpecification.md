@@ -100,14 +100,17 @@ RCP supports multiple languages by using RCP language string. A `RCP language st
 
 All the languages are transmitted at once. We decided to favour this over a different approach where languages would need to be declared and translations would need to be fetched when switching a language in a frontend.
 
-  - A terminated list of [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code (3-bytes in ascii) followed by an [RCP String](#RCP-String).
-  - The list is terminated with a 0-byte.
+  - A terminated list of [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language-code (3-bytes in ascii) followed by an [RCP String](#RCP-String).  
   - Additionally to the [ISO 639-3](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) codes we define a special code for no specific language: `any` which is used as default language.
+  - The list is terminated with a 0-byte.
+    - The 0-byte terminator can also be the first byte which means no language is defined.
 
-e.g.:
-
+e.g.:  
 `a, n, y, RcpInt(5), H, e, l, l, o, 0`  
 `a, n, y, RcpInt(5), H, e, l, l, o, d, e, u, RcpInt(5), H, a, l, l, o, s, p, a, RcpInt(4), H, o, l, a, 0`
+
+No Language:  
+`0`
 
 
 ## Packet
