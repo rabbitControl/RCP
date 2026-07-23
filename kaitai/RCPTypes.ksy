@@ -173,7 +173,7 @@ enums:
 
   press_widget_options:
     0x56: press_label_on
-    0x57: press_label_of
+    0x57: press_label_off
 
   textbox_widget_options:
     0x56: multiline
