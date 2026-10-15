@@ -1,0 +1,14 @@
+{
+"protocol": {
+	"major": 1,
+	"minor": 0
+},
+"handshake": {
+	"major": 1,
+	"minor": 0
+},
+"application_id": "app id",
+"application_version": "app version",
+"valid": true,
+"data": [7, 1, 0, 1, 0, 26, 134, 97, 112, 112, 32, 105, 100, 155, 139, 97, 112, 112, 32, 118, 101, 114, 115, 105, 111, 110]
+}

@@ -1,0 +1,14 @@
+{
+"parameter": {
+"id": 1,
+"datatype": 33,
+"datatype_name": "STRING",
+"type_options": {
+	"default": "default string"
+},
+"value": "string value",
+"label": "test"
+},
+"valid": true,
+"data": [9, 129, 33, 176, 142, 100, 101, 102, 97, 117, 108, 116, 32, 115, 116, 114, 105, 110, 103, 32, 140, 115, 116, 114, 105, 110, 103, 32, 118, 97, 108, 117, 101, 161, 97, 110, 121, 132, 116, 101, 115, 116, 0]
+}

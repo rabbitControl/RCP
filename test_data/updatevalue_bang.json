@@ -1,0 +1,9 @@
+{
+"parameter": {
+"id": 1,
+"datatype": 40,
+"datatype_name": "BANG"
+},
+"valid": true,
+"data": [10, 129, 40]
+}

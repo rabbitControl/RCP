@@ -1,0 +1,15 @@
+{
+"parameter": {
+"id": 3,
+"datatype": 1,
+"datatype_name": "CUSTOMTYPE",
+"type_options": {
+	"typeid": 23,
+	"config": [5, 6, 7]
+},
+"value": [49, 50, 51],
+"label": "test"
+},
+"valid": true,
+"data": [9, 131, 1, 131, 49, 151, 178, 131, 5, 6, 7, 32, 49, 50, 51, 161, 97, 110, 121, 132, 116, 101, 115, 116, 0]
+}

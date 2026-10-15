@@ -1,0 +1,10 @@
+{
+"parameter": {
+"id": 3,
+"datatype": 1,
+"datatype_name": "CUSTOMTYPE",
+"value": [6, 0, 0, 0]
+},
+"valid": true,
+"data": [10, 131, 1, 132, 6, 0, 0, 0]
+}

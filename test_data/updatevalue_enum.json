@@ -1,0 +1,10 @@
+{
+"parameter": {
+"id": 1,
+"datatype": 38,
+"datatype_name": "ENUM",
+"value": 1
+},
+"valid": true,
+"data": [10, 129, 38, 129, 129]
+}

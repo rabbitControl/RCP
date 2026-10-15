@@ -1,0 +1,14 @@
+{
+"parameter": {
+"id": 1,
+"datatype": 16,
+"datatype_name": "BOOLEAN",
+"type_options": {
+	"default": 1
+},
+"value": false,
+"label": "test"
+},
+"valid": true,
+"data": [9, 129, 16, 176, 1, 32, 0, 161, 97, 110, 121, 132, 116, 101, 115, 116, 0]
+}

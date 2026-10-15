@@ -1,0 +1,10 @@
+{
+"parameter": {
+"id": 1,
+"datatype": 40,
+"datatype_name": "BANG",
+"label": "test"
+},
+"valid": true,
+"data": [9, 129, 168, 161, 97, 110, 121, 132, 116, 101, 115, 116, 0]
+}
