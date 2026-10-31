@@ -5,7 +5,7 @@
 1. Client sends a info-packet
 1. Server receives info-packet
 1. Server sends info-packet to client
-1. Server checks if its runtime-version is between client rcp-version and base-version (inclusive)
+1. Server checks if its handshake-version is between client rcp-version and client-handshake-version (inclusive)
 	1. Version ok -> wait for [Initialization](#Initialization)
 	1. Version mismatch:
 		1. Server is strict -> close connection
